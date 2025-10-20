@@ -10,11 +10,11 @@ public class BookClub {
 	private ArrayList<User> participants;
 	private ArrayList<Poll> polls;
 	private ArrayList<Meeting> meetings;
-	private static int numBookclubsCreated = 0;
+	private static int numBookClubsCreated = 0;
 	
 	public BookClub(Creator creator, String name) {
 		
-		this.id = ++numBookclubsCreated;
+		this.id = ++numBookClubsCreated;
 		this.creator = creator;
 		this.name = name;
 		

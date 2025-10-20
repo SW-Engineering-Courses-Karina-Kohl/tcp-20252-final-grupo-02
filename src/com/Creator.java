@@ -4,6 +4,6 @@ import java.util.ArrayList;
 
 public class Creator {
 	
-	private ArrayList<BookClub> createdBookclubs;
+	private ArrayList<BookClub> createdBookClubs;
 
 }

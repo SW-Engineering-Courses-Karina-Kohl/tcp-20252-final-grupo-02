@@ -9,7 +9,7 @@ public class User {
 	private String surname;
 	private String email;
 	private String password;
-	private ArrayList<BookClub> joinedBookclubs;
+	private ArrayList<BookClub> joinedBookClubs;
 	private static final int MAX_BOOKCLUBS_PER_USER = 20;
 	private static int numUsersCreated = 0;
 	
