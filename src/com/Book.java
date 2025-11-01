@@ -9,6 +9,7 @@ public class Book {
 	private int releaseYear;
 	private int numPages;
 	private String genre;
+	
 	private static int numBooksCreated = 0;
 	
 	public Book(String title, String author, long isbn, int releaseYear, int numPages, String genre) {
@@ -65,7 +66,7 @@ public class Book {
 		
 	}
 	
-	public static int getNumBooksRegistered() {
+	public static int getNumBooksCreated() {
 		
 		return numBooksCreated;
 		
