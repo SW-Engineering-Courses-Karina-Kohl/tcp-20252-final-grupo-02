@@ -13,6 +13,8 @@ public class BookClub {
 	
 	private static int numBookClubsCreated = 0;
 	
+	private static ArrayList<BookClub> bookClubs;
+	
 	public BookClub(Creator creator, String name) {
 		
 		this.id = ++numBookClubsCreated;
@@ -63,6 +65,24 @@ public class BookClub {
 	public static int getNumBookClubsCreated() {
 		
 		return numBookClubsCreated;
+		
+	}
+	
+	public static ArrayList<BookClub> getBookClubs() {
+		
+		return bookClubs;
+		
+	}
+	
+	public static void addBookClub(BookClub newBookClub) {
+		
+		bookClubs.add(newBookClub);
+		
+	}
+	
+	public static void removeBookClub(BookClub selectedBookClub) {
+		
+		bookClubs.remove(selectedBookClub);
 		
 	}
 

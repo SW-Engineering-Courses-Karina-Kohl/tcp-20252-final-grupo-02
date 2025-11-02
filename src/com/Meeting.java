@@ -14,6 +14,8 @@ public class Meeting {
 	
 	private static int numMeetingsCreated = 0;
 	
+	private static ArrayList<Meeting> meetings;
+	
 	public Meeting(Creator creator, String type, Date date, String location) {
 		
 		this.id = ++numMeetingsCreated;
@@ -64,6 +66,24 @@ public class Meeting {
 	public static int getNumMeetingsCreated() {
 		
 		return numMeetingsCreated;
+		
+	}
+	
+	public static ArrayList<Meeting> getMeetings() {
+		
+		return meetings;
+		
+	}
+	
+	public static void addMeeting(Meeting newMeeting) {
+		
+		meetings.add(newMeeting);
+		
+	}
+	
+	public static void removeMeeting(Meeting selectedMeeting) {
+		
+		meetings.remove(selectedMeeting);
 		
 	}
 

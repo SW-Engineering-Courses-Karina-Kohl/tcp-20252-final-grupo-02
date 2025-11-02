@@ -13,6 +13,8 @@ public class User {
 	
 	private static int numUsersCreated = 0;
 	
+	private static ArrayList<User> users;
+	
 	// private static final int MAX_BOOKCLUBS_PER_USER = 20;
 	
 	public User(String name, String surname, String email, String password) {
@@ -67,5 +69,31 @@ public class User {
 		return numUsersCreated;
 		
 	}
+	
+	public static ArrayList<User> getUsers() {
+		
+		return users;
+		
+	}
+	
+	public static void addUser(User newUser) {
+		
+		users.add(newUser);
+		
+	}
+	
+	public static void removeUser(User selectedUser) {
+		
+		users.remove(selectedUser);
+		
+	}
+	
+	/*
+	
+	public User findUser(String email) {
+		
+	}
+	
+	*/
 
 }

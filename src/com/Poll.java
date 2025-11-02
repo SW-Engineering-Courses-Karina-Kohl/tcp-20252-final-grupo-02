@@ -14,6 +14,8 @@ public class Poll {
 	
 	private static int numPollsCreated = 0;
 	
+	private static ArrayList<Poll> polls;
+	
 	public Poll(Date closingDate) {
 		
 		this.id = ++numPollsCreated;
@@ -64,6 +66,24 @@ public class Poll {
 	public static int getNumPollsCreated() {
 		
 		return numPollsCreated;
+		
+	}
+	
+	public static ArrayList<Poll> getPolls() {
+		
+		return polls;
+		
+	}
+	
+	public static void addPoll(Poll newPoll) {
+		
+		polls.add(newPoll);
+		
+	}
+	
+	public static void removePoll(Poll selectedPoll) {
+		
+		polls.remove(selectedPoll);
 		
 	}
 

@@ -1,5 +1,7 @@
 package com;
 
+import java.util.ArrayList;
+
 public class Book {
 	
 	private int id;
@@ -11,6 +13,8 @@ public class Book {
 	private String genre;
 	
 	private static int numBooksCreated = 0;
+	
+	private static ArrayList<Book> books = new ArrayList<Book>();
 	
 	public Book(String title, String author, long isbn, int releaseYear, int numPages, String genre) {
 		
@@ -71,5 +75,31 @@ public class Book {
 		return numBooksCreated;
 		
 	}
+	
+	public static ArrayList<Book> getBooks() {
+		
+		return books;
+		
+	}
+	
+	public static void addBook(Book newBook) {
+		
+		books.add(newBook);
+		
+	}
+	
+	public static void removeBook(Book selectedBook) {
+		
+		books.remove(selectedBook);
+		
+	}
+	
+	/*
+	
+	public Book findBook(String title) {
+		
+	}
+	
+	*/
 	
 }
