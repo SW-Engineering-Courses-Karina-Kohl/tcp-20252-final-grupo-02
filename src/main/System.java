@@ -1,6 +1,6 @@
-package com;
+package main;
 
-public class Main {
+public class System {
 	
 	static void main(String[] args) {
 		

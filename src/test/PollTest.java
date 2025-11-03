@@ -1,4 +1,4 @@
-package tests;
+package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,20 +6,20 @@ import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 
-import com.Poll;
+import main.Poll;
 
 public class PollTest {
 
 	@Test
-	public void testBuilderPoll() {
+	public void testConstructor() {
 		
-		Date expectedClosingDate = new Date();
+		Date closingDate = new Date();
 		
-		Poll newPoll = new Poll(expectedClosingDate);
+		Poll newPoll = new Poll(closingDate);
 		
 		assertEquals(1, newPoll.getId());
 		assertNotNull(newPoll.getOpeningDate());
-		assertEquals(expectedClosingDate, newPoll.getClosingDate());
+		assertEquals(closingDate, newPoll.getClosingDate());
 		assertTrue(newPoll.getStatus());
 		assertEquals(0, newPoll.getVotes().size());
 		assertEquals(0, newPoll.getVoters().size());

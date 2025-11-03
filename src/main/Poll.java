@@ -1,4 +1,4 @@
-package com;
+package main;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,7 +14,7 @@ public class Poll {
 	
 	private static int numPollsCreated = 0;
 	
-	private static ArrayList<Poll> polls;
+	private static ArrayList<Poll> polls = new ArrayList<Poll>();
 	
 	public Poll(Date closingDate) {
 		
@@ -75,15 +75,15 @@ public class Poll {
 		
 	}
 	
-	public static void addPoll(Poll newPoll) {
+	public static void createPoll(Poll newPoll) {
 		
 		polls.add(newPoll);
 		
 	}
 	
-	public static void removePoll(Poll selectedPoll) {
+	public static void deletePoll(Poll poll) {
 		
-		polls.remove(selectedPoll);
+		polls.remove(poll);
 		
 	}
 

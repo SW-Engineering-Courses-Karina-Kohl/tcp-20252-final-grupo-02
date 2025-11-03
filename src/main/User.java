@@ -1,4 +1,4 @@
-package com;
+package main;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ public class User {
 	
 	private static int numUsersCreated = 0;
 	
-	private static ArrayList<User> users;
+	private static ArrayList<User> users = new ArrayList<User>();
 	
 	// private static final int MAX_BOOKCLUBS_PER_USER = 20;
 	
@@ -40,9 +40,21 @@ public class User {
 		
 	}
 	
+	public void setName(String newName) {
+		
+		this.name = newName;
+		
+	}
+	
 	public String getSurname() {
 		
 		return this.surname;
+		
+	}
+	
+	public void setSurname(String newSurname) {
+		
+		this.surname = newSurname;
 		
 	}
 	
@@ -52,9 +64,21 @@ public class User {
 		
 	}
 	
+	public void setEmail(String newEmail) {
+		
+		this.email = newEmail;
+		
+	}
+	
 	public String getPassword() {
 		
 		return this.password;
+		
+	}
+	
+	public void setPassword(String newPassword) {
+		
+		this.password = newPassword;
 		
 	}
 	
@@ -76,15 +100,15 @@ public class User {
 		
 	}
 	
-	public static void addUser(User newUser) {
+	public static void createUser(User newUser) {
 		
 		users.add(newUser);
 		
 	}
 	
-	public static void removeUser(User selectedUser) {
+	public static void deleteUser(User user) {
 		
-		users.remove(selectedUser);
+		users.remove(user);
 		
 	}
 	

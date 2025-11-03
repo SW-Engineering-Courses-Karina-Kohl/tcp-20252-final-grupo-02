@@ -1,4 +1,4 @@
-package com;
+package main;
 
 import java.util.ArrayList;
 
@@ -11,6 +11,7 @@ public class Book {
 	private int releaseYear;
 	private int numPages;
 	private String genre;
+	private String publisher;
 	
 	private static int numBooksCreated = 0;
 	
@@ -40,9 +41,21 @@ public class Book {
 		
 	}
 	
+	public void setTitle(String newTitle) {
+		
+		this.title = newTitle;
+		
+	}
+	
 	public String getAuthor() {
 		
 		return this.author;
+		
+	}
+	
+	public void setAuthor(String newAuthor) {
+		
+		this.author = newAuthor;
 		
 	}
 	
@@ -52,9 +65,21 @@ public class Book {
 		
 	}
 	
+	public void setIsbn(long newIsbn) {
+		
+		this.isbn = newIsbn;
+		
+	}
+	
 	public int getReleaseYear() {
 		
 		return this.releaseYear;
+		
+	}
+	
+	public void setReleaseYear(int newReleaseYear) {
+		
+		this.releaseYear = newReleaseYear;
 		
 	}
 	
@@ -64,9 +89,33 @@ public class Book {
 		
 	}
 	
+	public void setNumPages(int newNumPages) {
+		
+		this.numPages = newNumPages;
+		
+	}
+	
 	public String getGenre() {
 		
 		return this.genre;
+		
+	}
+	
+	public void setGenre(String newGenre) {
+		
+		this.genre = newGenre;
+		
+	}
+	
+	public String getPublisher() {
+		
+		return this.publisher;
+		
+	}
+	
+	public void setPublisher(String newPublisher) {
+		
+		this.publisher = newPublisher;
 		
 	}
 	
@@ -82,15 +131,15 @@ public class Book {
 		
 	}
 	
-	public static void addBook(Book newBook) {
+	public static void createBook(Book newBook) {
 		
 		books.add(newBook);
 		
 	}
 	
-	public static void removeBook(Book selectedBook) {
+	public static void deleteBook(Book book) {
 		
-		books.remove(selectedBook);
+		books.remove(book);
 		
 	}
 	
