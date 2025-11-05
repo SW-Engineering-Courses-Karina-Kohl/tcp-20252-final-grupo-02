@@ -1,4 +1,4 @@
-package com;
+package Control;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
