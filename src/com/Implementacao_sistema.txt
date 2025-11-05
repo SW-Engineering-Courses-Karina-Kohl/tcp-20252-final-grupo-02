@@ -1,0 +1,19 @@
+Adicione esse codigo na main para testar o cadastro de usuarios em sistema.
+
+package com;
+
+public class Main {
+
+	public static void main(String[] args) {
+	
+		Sistema sistema = new Sistema();
+
+	
+		sistema.registerUser("Usuario1", "esponja", "email@gmail.com", "132313", "123", "123");
+		sistema.registerUser("Usuario2", "estrela", "email2@gmail.com", "111111", "123", "123");
+
+		sistema.readUsers();
+		sistema.printUsers();
+	}
+
+}
