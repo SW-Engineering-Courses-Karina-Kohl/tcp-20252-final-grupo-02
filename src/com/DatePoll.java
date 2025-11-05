@@ -13,4 +13,10 @@ public class DatePoll extends Poll {
 		
 	}
 
+	@Override
+	public void vote(User user, int optionIndex) {
+    	super.vote(user, optionIndex);
+    	System.out.println("Usuário votou na data: " + dateOptions.get(optionIndex));
+}
+
 }

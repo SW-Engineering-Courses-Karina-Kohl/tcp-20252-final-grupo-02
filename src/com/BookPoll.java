@@ -13,4 +13,10 @@ public class BookPoll extends Poll {
 		
 	}
 
-}
+
+	@Override
+	public void vote (User user, int optionIndex) {
+		super.vote(user, optionIndex);
+		System.out.println("Voto registrado no livro: " + bookOptions.get(optionIndex).getTitle());
+	}
+}	
