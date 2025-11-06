@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Sistema {
     
@@ -20,10 +19,15 @@ public class Sistema {
     public boolean registerUser(String name, String surname, String email, String cpf, 
     String password, String passwordConfirmation) {
         
-        // Se quiserem acho que é uma boa adicionar essa funcionalidades:
+       
         // Verificacao de senha
-        if(!(password.equals(passwordConfirmation))) {
+        /*if(!(password.equals(passwordConfirmation))) {
             System.out.println("Password and confirmation do not match.");    
+            return false;
+        }*/
+
+        if(procuraPorEmail(email)) {
+            System.out.println("Email already registered.");
             return false;
         }
 
@@ -32,8 +36,7 @@ public class Sistema {
         
         User newUser = new User(name, surname, email, cpf, password);
         users.add(newUser);
-
-        // Escrita de usuario em CSV
+        
 
         try (PrintWriter writer = new PrintWriter(new FileWriter("users.txt", true))) {
             writer.println(name + "," + surname + "," + email + "," + cpf + "," + password);
@@ -50,13 +53,10 @@ public class Sistema {
 
 
 
-
-
-
     public ArrayList<User> readUsers() {
         File f = new File("users.txt");
         if (!f.exists()) {
-            System.out.println("Users file not found.");
+            System.out.println("Users file not found. Creating users file.");
             return users;
         }
 
@@ -90,6 +90,19 @@ public class Sistema {
             System.out.println(u);
         }
     }
+
+
+    public boolean procuraPorEmail(String email) {
+        ArrayList<User> array = readUsers();
+        for (User u: array) {
+            if (u.getEmail().equals(email)) {
+                System.out.println("User found: " + u);
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 
 }
