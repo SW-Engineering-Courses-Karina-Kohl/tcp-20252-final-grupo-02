@@ -1,6 +1,4 @@
-package main;
-
-import java.util.ArrayList;
+package com;
 
 public class Book {
 	
@@ -15,9 +13,7 @@ public class Book {
 	
 	private static int numBooksCreated = 0;
 	
-	private static ArrayList<Book> books = new ArrayList<Book>();
-	
-	public Book(String title, String author, long isbn, int releaseYear, int numPages, String genre) {
+	public Book(String title, String author, long isbn, int releaseYear, int numPages, String genre, String publisher) {
 		
 		this.id = ++numBooksCreated;
 		this.title = title;
@@ -26,6 +22,7 @@ public class Book {
 		this.releaseYear = releaseYear;
 		this.numPages = numPages;
 		this.genre = genre;
+		this.publisher = publisher;
 		
 	}
 	
@@ -122,24 +119,6 @@ public class Book {
 	public static int getNumBooksCreated() {
 		
 		return numBooksCreated;
-		
-	}
-	
-	public static ArrayList<Book> getBooks() {
-		
-		return books;
-		
-	}
-	
-	public static void createBook(Book newBook) {
-		
-		books.add(newBook);
-		
-	}
-	
-	public static void deleteBook(Book book) {
-		
-		books.remove(book);
 		
 	}
 	

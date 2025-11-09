@@ -1,4 +1,4 @@
-package main;
+package com;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,8 +13,6 @@ public class Meeting {
 	private String location;
 	
 	private static int numMeetingsCreated = 0;
-	
-	private static ArrayList<Meeting> meetings = new ArrayList<Meeting>();
 	
 	public Meeting(Creator creator, String type, Date date, String location) {
 		
@@ -66,24 +64,6 @@ public class Meeting {
 	public static int getNumMeetingsCreated() {
 		
 		return numMeetingsCreated;
-		
-	}
-	
-	public static ArrayList<Meeting> getMeetings() {
-		
-		return meetings;
-		
-	}
-	
-	public static void createMeeting(Meeting newMeeting) {
-		
-		meetings.add(newMeeting);
-		
-	}
-	
-	public static void deleteMeeting(Meeting meeting) {
-		
-		meetings.remove(meeting);
 		
 	}
 

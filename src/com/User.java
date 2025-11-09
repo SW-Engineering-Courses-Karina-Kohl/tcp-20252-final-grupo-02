@@ -1,4 +1,4 @@
-package main;
+package com;
 
 import java.util.ArrayList;
 
@@ -12,8 +12,6 @@ public class User {
 	private ArrayList<BookClub> joinedBookClubs;
 	
 	private static int numUsersCreated = 0;
-	
-	private static ArrayList<User> users = new ArrayList<User>();
 	
 	// private static final int MAX_BOOKCLUBS_PER_USER = 20;
 	
@@ -91,24 +89,6 @@ public class User {
 	public static int getNumUsersCreated() {
 		
 		return numUsersCreated;
-		
-	}
-	
-	public static ArrayList<User> getUsers() {
-		
-		return users;
-		
-	}
-	
-	public static void createUser(User newUser) {
-		
-		users.add(newUser);
-		
-	}
-	
-	public static void deleteUser(User user) {
-		
-		users.remove(user);
 		
 	}
 	

@@ -1,4 +1,4 @@
-package main;
+package com;
 
 import java.util.ArrayList;
 
@@ -12,8 +12,6 @@ public class BookClub {
 	private ArrayList<Meeting> meetings;
 	
 	private static int numBookClubsCreated = 0;
-	
-	private static ArrayList<BookClub> bookClubs = new ArrayList<BookClub>();
 	
 	public BookClub(Creator creator, String name) {
 		
@@ -71,24 +69,6 @@ public class BookClub {
 	public static int getNumBookClubsCreated() {
 		
 		return numBookClubsCreated;
-		
-	}
-	
-	public static ArrayList<BookClub> getBookClubs() {
-		
-		return bookClubs;
-		
-	}
-	
-	public static void createBookClub(BookClub newBookClub) {
-		
-		bookClubs.add(newBookClub);
-		
-	}
-	
-	public static void deleteBookClub(BookClub bookClub) {
-		
-		bookClubs.remove(bookClub);
 		
 	}
 	

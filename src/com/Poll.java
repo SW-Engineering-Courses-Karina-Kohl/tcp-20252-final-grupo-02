@@ -1,9 +1,9 @@
-package main;
+package com;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Poll {
+public abstract class Poll {
 	
 	private int id;
 	private Date openingDate;
@@ -13,8 +13,6 @@ public class Poll {
 	private ArrayList<User> voters;
 	
 	private static int numPollsCreated = 0;
-	
-	private static ArrayList<Poll> polls = new ArrayList<Poll>();
 	
 	public Poll(Date closingDate) {
 		
@@ -66,24 +64,6 @@ public class Poll {
 	public static int getNumPollsCreated() {
 		
 		return numPollsCreated;
-		
-	}
-	
-	public static ArrayList<Poll> getPolls() {
-		
-		return polls;
-		
-	}
-	
-	public static void createPoll(Poll newPoll) {
-		
-		polls.add(newPoll);
-		
-	}
-	
-	public static void deletePoll(Poll poll) {
-		
-		polls.remove(poll);
 		
 	}
 
