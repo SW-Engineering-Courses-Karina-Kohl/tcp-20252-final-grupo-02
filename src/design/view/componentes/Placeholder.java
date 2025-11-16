@@ -5,7 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Placeholder {
-    public static void apply(JTextField field, String text) {
+    public static void applyPlaceholder(JTextField field, String text) {
         field.setText(text);
         field.setForeground(Color.GRAY);
 
