@@ -6,37 +6,50 @@ import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.List;
+
+import design.view.LoginScreen;
+import design.view.RegistrationScreen;
 
 public class Sistema {
     
+    private RegistrationScreen regScreen;
     private ArrayList<User> users;
 
-    public Sistema() {
+    public Sistema(RegistrationScreen regScreen) {
         this.users = new ArrayList<>();
+        this.regScreen = regScreen;
+        initController();
     }
 
+    private void initController() {
+        regScreen.btnCadastrar.addActionListener(e -> registerUser(regScreen));
+    }
 
-    public boolean registerUser(String name, String surname, String email, String cpf, 
-    String password, String passwordConfirmation) {
+    public void registerUser(RegistrationScreen regScreen) {
+
+        String nome = regScreen.txtNome.getText();
+        String sobrenome = regScreen.txtSobrenome.getText();
+        String cpf = regScreen.txtCpf.getText();
+        String password = new String(regScreen.txtSenha.getPassword());
+        String passwordConfirmation = new String(regScreen.txtConfirmarSenha.getPassword());
+        String email = regScreen.txtEmail.getText();
         
         // Se quiserem acho que é uma boa adicionar essa funcionalidades:
         // Verificacao de senha
         if(!(password.equals(passwordConfirmation))) {
             System.out.println("Password and confirmation do not match.");    
-            return false;
         }
 
         // Criar verificacao de email e cpf unicos
         // ...
         
-        User newUser = new User(name, surname, email, cpf, password);
+        User newUser = new User(nome, sobrenome, email, cpf, password);
         users.add(newUser);
 
         // Escrita de usuario em CSV
 
         try (PrintWriter writer = new PrintWriter(new FileWriter("users.txt", true))) {
-            writer.println(name + "," + surname + "," + email + "," + cpf + "," + password);
+            writer.println(nome + "," + sobrenome + "," + email + "," + cpf + "," + password);
         }
 
          catch (IOException e) {
@@ -44,9 +57,11 @@ public class Sistema {
         }
 
     System.out.println("User registered successfully.");
-
-    return true;
-    }
+    regScreen.dispose();
+    LoginScreen loginScreen = new LoginScreen();
+    LoginController loginController = new LoginController(loginScreen);
+    loginScreen.setVisible(true);
+}
 
 
 
@@ -54,7 +69,7 @@ public class Sistema {
 
 
     public ArrayList<User> readUsers() {
-        File f = new File("users.txt");
+        File f = new File("users.csv");
         if (!f.exists()) {
             System.out.println("Users file not found.");
             return users;

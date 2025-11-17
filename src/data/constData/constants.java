@@ -39,4 +39,9 @@ public class constants {
 
     public static final String FONT_PATH = "src/design/font/Excalifont-Regular.otf";
     public static final String LOADING_GIF_PATH = "src/design/view/assets/loading.gif";
+
+    public static final int BUTTON_WIDTH = 150;
+    public static final int BUTTON_HEIGHT = 40;
+    public static final int DIMENSION_FIELD_WIDTH = 350;
+    public static final int DIMENSION_FIELD_HEIGHT = 40;
 }

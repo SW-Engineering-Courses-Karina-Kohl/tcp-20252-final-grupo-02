@@ -3,12 +3,16 @@ package design.view;
 import javax.swing.*;
 import java.awt.*;
 
-import static design.view.componentes.Placeholder.applyPlaceholder;
+import design.view.componentes.TextField;
+import design.view.componentes.PasswordField;
+import design.view.componentes.ButtonComponent;
 import data.constData.constants;
 
 public class LoginScreen extends JFrame {
 
     public JButton btnEntrar;
+    public JButton btnCadastrar;
+    public JButton btnEsqueceuSenha;
     public JPasswordField txtSenha;
     public JTextField txtEmailCpf;
 
@@ -28,32 +32,22 @@ public class LoginScreen extends JFrame {
         JLabel lblEmailCpf = new JLabel("DIGITE SEU E-MAIL OU CPF");
         lblEmailCpf.setAlignmentX(Component.CENTER_ALIGNMENT);
         // 2. Campo de Texto "E-mail ou CPF"
-        txtEmailCpf = new JTextField(20);
-        applyPlaceholder(txtEmailCpf, "E-mail ou CPF");
-        txtEmailCpf.setBackground(constants.YELLOW); // Cor de fundo
-        txtEmailCpf.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        txtEmailCpf.setMaximumSize(new Dimension(300, 40));
+        txtEmailCpf = new TextField("E-mail ou CPF");
 
         // 3. label
         JLabel lblSenha = new JLabel("DIGITE SUA SENHA");
         lblSenha.setAlignmentX(Component.CENTER_ALIGNMENT);
         // 4. Campo de Senha
-        txtSenha = new JPasswordField();
-        applyPlaceholder(txtSenha, "*********");
-        txtSenha.setBackground(constants.YELLOW); // Cor de fundo
-        txtSenha.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        txtSenha.setMaximumSize(new Dimension(300, 40));
-
+        txtSenha = new PasswordField("*********");
+       
         // 5. Botão "ENTRAR"
-        btnEntrar = new JButton("ENTRAR");
-        configurarBotao(btnEntrar);
+        btnEntrar = new ButtonComponent("ENTRAR");
 
         // 6. Botão "CADASTRAR"
-        JButton btnCadastrar = new JButton("CADASTRAR");
-        configurarBotao(btnCadastrar);
+        btnCadastrar = new ButtonComponent("CADASTRAR");
 
         // 7.label
-        JButton btnEsqueceuSenha = new JButton("ESQUECEU SUA SENHA");
+        btnEsqueceuSenha = new JButton("ESQUECEU SUA SENHA");
         btnEsqueceuSenha.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnEsqueceuSenha.setFont(new Font("Excalifont", Font.PLAIN, 12));
         btnEsqueceuSenha.setBorderPainted(false); // Remove a borda
@@ -79,16 +73,5 @@ public class LoginScreen extends JFrame {
 
         add(login);
 
-    }
-
-    // Método auxiliar para configurar a aparência dos botões
-    private void configurarBotao(JButton botao) {
-        botao.setBackground(constants.BLUE);
-        botao.setForeground(constants.BLACK);
-        botao.setFocusPainted(false);
-        botao.setOpaque(true); // Necessário para a cor de fundo funcionar em alguns SOs
-        botao.setAlignmentX(Component.CENTER_ALIGNMENT);
-        botao.setMaximumSize(new Dimension(200, 40));
-        botao.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 }
