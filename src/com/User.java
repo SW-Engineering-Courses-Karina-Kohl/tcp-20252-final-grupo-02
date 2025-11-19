@@ -90,8 +90,6 @@ public class User {
 		
 	}
 
-
-
 	
 	public ArrayList<BookClub> getJoinedBookClubs() {
 		
