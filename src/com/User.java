@@ -12,14 +12,12 @@ public class User {
 	private ArrayList<BookClub> joinedBookClubs;
 	
 	private static int numUsersCreated = 0;
-	
-	private static ArrayList<User> users = new ArrayList<User>();
-	
+		
 	// private static final int MAX_BOOKCLUBS_PER_USER = 20;
 
 
 	
-	public User(String name, String surname, String email, String cpf, String password) {
+	public User(String name, String surname, String email, String password) {
 		
 		this.id = ++numUsersCreated;
 		this.name = name;
@@ -34,13 +32,16 @@ public class User {
 // Converte o objeto para uma String legivel	
 @Override
 	public String toString() {
-		return String.format("User{id=%d, name='%s', surname='%s', email='%s'}", id, name, surname, email, password);
+		return String.format("User{id=%d, name='%s', surname='%s', email='%s'}", id, name, surname, email);
 	}
 
 
+	public String toCsvLine() {
+    	return name + "," + surname + "," + email + "," + password;
+	}
 
 
-public int getId() {
+	public int getId() {
 		
 		return this.id;
 		
@@ -82,17 +83,15 @@ public int getId() {
 		
 	}
 	
-	public String getPassword() {
-		
-		return this.password;
-		
-	}
 	
 	public void setPassword(String newPassword) {
 		
 		this.password = newPassword;
 		
 	}
+
+
+
 	
 	public ArrayList<BookClub> getJoinedBookClubs() {
 		
@@ -106,22 +105,7 @@ public int getId() {
 		
 	}
 	
-	public static ArrayList<User> getUsers() {
-		
-		return users;
-		
-	}
 	
-	public static void createUser(User newUser) {
-		
-		users.add(newUser);
-		
-	}
-	
-	public static void deleteUser(User user) {
-		
-		users.remove(user);
 
-	}
 
 }
