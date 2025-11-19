@@ -18,6 +18,7 @@ public class PasswordField extends JPasswordField {
 
         setBackground(constants.YELLOW); 
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        // setBorder(BorderFactory.createLineBorder(constants.BLACK, 1));
         setMaximumSize(new Dimension(constants.DIMENSION_FIELD_WIDTH, constants.DIMENSION_FIELD_HEIGHT));
         setPreferredSize(new Dimension(constants.DIMENSION_FIELD_WIDTH, constants.DIMENSION_FIELD_HEIGHT));
 

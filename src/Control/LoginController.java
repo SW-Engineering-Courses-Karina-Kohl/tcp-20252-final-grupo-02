@@ -2,6 +2,8 @@ package Control;
 
 import design.view.LoginScreen;
 import design.view.RegistrationScreen;
+import design.view.ResetPasswordScreen;
+import design.view.ResetPasswordScreen1;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -20,6 +22,7 @@ public class LoginController {
     private void initController() {
         loginScreen.btnEntrar.addActionListener(e -> handleLogin());
         loginScreen.btnCadastrar.addActionListener(e -> handleRegister());
+        loginScreen.btnEsqueceuSenha.addActionListener(e -> handleReset());
     }
 
     private void handleLogin() {
@@ -38,6 +41,14 @@ public class LoginController {
         loginScreen.dispose();
         registrationScreen.setVisible(true);
         Sistema registerUser = new Sistema(registrationScreen);
+    }
+
+    private void handleReset() {
+        ResetPasswordScreen resetScreen = new ResetPasswordScreen();
+        ResetPasswordScreen1 resetScreen1 = new ResetPasswordScreen1();
+        loginScreen.dispose();
+        ResetPasswordController resetController = new ResetPasswordController(resetScreen, resetScreen1);
+        resetScreen.setVisible(true);
     }
 
     private boolean authenticateUser(String emailCpf, String senhaDigitada) {

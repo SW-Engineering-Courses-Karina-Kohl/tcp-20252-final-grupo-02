@@ -24,7 +24,7 @@ public class Main {
             LoadingScreen loadingScreen = new LoadingScreen();
             loadingScreen.setVisible(true);
 
-            javax.swing.Timer timer = new javax.swing.Timer (1000, e -> {
+            javax.swing.Timer timer = new javax.swing.Timer (2000, e -> {
                 // Depois de 2s, abra a próxima tela
 				loadingScreen.dispose();
                 LoginScreen loginScreen = new LoginScreen();

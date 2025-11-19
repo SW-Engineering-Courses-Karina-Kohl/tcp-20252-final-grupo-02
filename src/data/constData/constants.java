@@ -17,6 +17,7 @@ public class constants {
     public static final Color RED = new Color(255, 201, 201); // #ffc9c9
     public static final Color GREEN = new Color(178, 242, 187); // #b2f2bb
     public static final Color BLUE = new Color(165, 216, 255); // #a5d8ff
+    public static final Color DARK_BLUE = new Color(129, 170, 201); // #81aac9
     public static final Color BLACK = new Color(50, 50, 50); // #323232
 
     // Configurações de tamanho da Janela Principal com base na tela do usuário

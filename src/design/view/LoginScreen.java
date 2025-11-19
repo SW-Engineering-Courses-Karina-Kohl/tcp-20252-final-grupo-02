@@ -23,9 +23,9 @@ public class LoginScreen extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        JPanel login = new JPanel();
-        login.setLayout(new BoxLayout(login, BoxLayout.Y_AXIS));
-        login.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        JPanel loginPanel = new JPanel();
+        loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.Y_AXIS));
+        loginPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         // --- Componentes ---
         // label
@@ -55,23 +55,23 @@ public class LoginScreen extends JFrame {
         btnEsqueceuSenha.setBackground(Color.WHITE);
 
         // --- Adicionando componentes ao Painel Principal ---
-        login.add(Box.createVerticalGlue());
-        login.add(lblEmailCpf);
-        login.add(Box.createRigidArea(new Dimension(0, 5)));
-        login.add(txtEmailCpf);
-        login.add(Box.createRigidArea(new Dimension(0, 15)));
-        login.add(lblSenha);
-        login.add(Box.createRigidArea(new Dimension(0, 5)));
-        login.add(txtSenha);
-        login.add(Box.createRigidArea(new Dimension(0, 20)));
-        login.add(btnEntrar);
-        login.add(Box.createRigidArea(new Dimension(0, 10)));
-        login.add(btnCadastrar);
-        login.add(Box.createRigidArea(new Dimension(0, 15)));
-        login.add(btnEsqueceuSenha);
-        login.add(Box.createVerticalGlue());
+        loginPanel.add(Box.createVerticalGlue());
+        loginPanel.add(lblEmailCpf);
+        loginPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+        loginPanel.add(txtEmailCpf);
+        loginPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+        loginPanel.add(lblSenha);
+        loginPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+        loginPanel.add(txtSenha);
+        loginPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        loginPanel.add(btnEntrar);
+        loginPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        loginPanel.add(btnCadastrar);
+        loginPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+        loginPanel.add(btnEsqueceuSenha);
+        loginPanel.add(Box.createVerticalGlue());
 
-        add(login);
+        add(loginPanel);
 
     }
 }
