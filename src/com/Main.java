@@ -1,10 +1,140 @@
 package com;
 
+import java.util.ArrayList;
+import org.tinylog.Logger;
+
 public class Main {
 
-	public static void main(String[] args) {
+	private ArrayList<Book> books = new ArrayList<Book>();
+	private ArrayList<BookClub> bookClubs = new ArrayList<BookClub>();
+	private ArrayList<Meeting> meetings = new ArrayList<Meeting>();
+	private ArrayList<Poll> polls = new ArrayList<Poll>();
+	private ArrayList<User> users = new ArrayList<User>();
 	
+	public ArrayList<Book> getBooks() {
 		
+		Logger.info("Lista de livros retornada com sucesso");
+		
+		return books;
+		
+	}
+	
+	public void createBook(Book newBook) {
+		
+		books.add(newBook);
+		
+		Logger.info("Livro criado com sucesso");
+		
+	}
+	
+	public void deleteBook(Book book) {
+		
+		books.remove(book);
+		
+		Logger.info("Livro excluído com sucesso");
+		
+	}
+	
+	public ArrayList<BookClub> getBookClubs() {
+		
+		Logger.info("Lista de clubes do livro retornada com sucesso");
+		
+		return bookClubs;
+		
+	}
+	
+	public void createBookClub(BookClub newBookClub) {
+		
+		bookClubs.add(newBookClub);
+		
+		Logger.info("Clube do livro criado com sucesso");
+		
+	}
+	
+	public void deleteBookClub(BookClub bookClub) {
+		
+		bookClubs.remove(bookClub);
+		
+		Logger.info("Clube do livro excluído com sucesso");
+		
+	}
+	
+	public ArrayList<Meeting> getMeetings() {
+		
+		Logger.info("Lista de encontros retornada com sucesso");
+		
+		return meetings;
+		
+	}
+	
+	public void createMeeting(Meeting newMeeting) {
+		
+		meetings.add(newMeeting);
+		
+		Logger.info("Encontro criado com sucesso");
+		
+	}
+	
+	public void deleteMeeting(Meeting meeting) {
+		
+		meetings.remove(meeting);
+		
+		Logger.info("Encontro excluído com sucesso");
+		
+	}
+
+	public ArrayList<Poll> getPolls() {
+		
+		Logger.info("Lista de votações retornada com sucesso");
+		
+		return polls;
+		
+	}
+	
+	public void createPoll(Poll newPoll) {
+		
+		polls.add(newPoll);
+		
+		Logger.info("Votação criada com sucesso");
+		
+	}
+	
+	public void deletePoll(Poll poll) {
+		
+		polls.remove(poll);
+		
+		Logger.info("Votação excluída com sucesso");
+		
+	}
+	
+	public ArrayList<User> getUsers() {
+		
+		Logger.info("Lista de usuários retornada com sucesso");
+		
+		return users;
+		
+	}
+	
+	public void createUser(User newUser) {
+		
+		users.add(newUser);
+		
+		Logger.info("Usuário criado com sucesso");
+		
+	}
+	
+	public void deleteUser(User user) {
+		
+		users.remove(user);
+		
+		Logger.info("Usuário excluído com sucesso");
+		
+	}
+	
+	public static void main(String[] args) {
+
+		Logger.info("Teste de diretório");
+
 	}
 
 }
