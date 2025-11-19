@@ -7,6 +7,7 @@ public class User {
 	private int id;
 	private String name;
 	private String surname;
+	private String cpf;
 	private String email;
 	private String password;
 	private ArrayList<BookClub> joinedBookClubs;
@@ -15,11 +16,12 @@ public class User {
 	
 	// private static final int MAX_BOOKCLUBS_PER_USER = 20;
 	
-	public User(String name, String surname, String email, String password) {
+	public User(String name, String surname, String cpf, String email, String password) {
 		
 		this.id = ++numUsersCreated;
 		this.name = name;
 		this.surname = surname;
+		this.cpf = cpf;
 		this.email = email;
 		this.password = password;
 		this.joinedBookClubs = new ArrayList<BookClub>();
@@ -53,6 +55,18 @@ public class User {
 	public void setSurname(String newSurname) {
 		
 		this.surname = newSurname;
+		
+	}
+	
+	public String getCpf() {
+		
+		return this.cpf;
+		
+	}
+	
+	public void setCpf(String newCpf) {
+		
+		this.cpf = newCpf;
 		
 	}
 	

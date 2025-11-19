@@ -1,10 +1,14 @@
-package design.view.componentes;
+package design.view.components;
 
 import javax.swing.*;
+
+import data.Constants;
+
 import java.awt.*;
-import data.constData.constants;
 
 public class CardComponent extends JPanel {
+	
+	private static final long serialVersionUID = 1L;
 
     private JLabel lblGroup;
     private JLabel lblInfo;
@@ -14,7 +18,7 @@ public class CardComponent extends JPanel {
     public CardComponent() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createEmptyBorder(15, 15, 5, 15));
-        setBackground(constants.GREEN);
+        setBackground(Constants.GREEN);
         setMaximumSize(new Dimension(300, 150));
         setPreferredSize(new Dimension(300, 150));
         setOpaque(true);
@@ -44,11 +48,11 @@ public class CardComponent extends JPanel {
         lblFormat.setText(format);
 
         if (info.toLowerCase().contains("encerrado")) {
-            setBackground(constants.RED);
+            setBackground(Constants.RED);
         } else if (info.toLowerCase().contains("pending vote")) {
-            setBackground(constants.YELLOW);
+            setBackground(Constants.YELLOW);
         } else {
-            setBackground(constants.GREEN);
+            setBackground(Constants.GREEN);
         }
 
         setOpaque(true);

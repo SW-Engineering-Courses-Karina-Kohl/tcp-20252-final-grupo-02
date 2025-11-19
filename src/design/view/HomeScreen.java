@@ -6,14 +6,16 @@ import java.util.List;
 
 import data.CardData;
 import data.CardFilter;
-import data.constData.constants;
-import design.view.componentes.CardComponent;
+import data.Constants;
+import design.view.components.CardComponent;
 
 public class HomeScreen extends JFrame {
 
+	private static final long serialVersionUID = 1L;
+	
     public HomeScreen() {
         setTitle("Home Screen");
-        setSize(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT);
+        setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -25,7 +27,7 @@ public class HomeScreen extends JFrame {
 
         CardFilter cardFilter = new CardFilter();
 
-        List<CardData> firstCards = cardFilter.getFilteredCards(constants.CSV_PATHS[0]);
+        List<CardData> firstCards = cardFilter.getFilteredCards(Constants.CSV_PATHS[0]);
 
         JPanel firstCardPanel = new JPanel();
         firstCardPanel.setLayout(new GridLayout(0, 2, 10, 10)); // Uma coluna, varias linhas
@@ -56,7 +58,7 @@ public class HomeScreen extends JFrame {
 
         // ============================================================
         
-        List<CardData> secondCards = cardFilter.getFilteredCards(constants.CSV_PATHS[1]);
+        List<CardData> secondCards = cardFilter.getFilteredCards(Constants.CSV_PATHS[1]);
 
         JPanel secondCardPanel = new JPanel();
         secondCardPanel.setLayout(new GridLayout(0, 2, 20, 20)); // 2 colunas, sem scroll lateral
@@ -73,7 +75,7 @@ public class HomeScreen extends JFrame {
         secondScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         secondScrollPane.setBorder(BorderFactory.createTitledBorder("Feed Geral"));
 
-        secondScrollPane.setPreferredSize(new Dimension(0, constants.SCREEN_HEIGHT - 300));
+        secondScrollPane.setPreferredSize(new Dimension(0, Constants.SCREEN_HEIGHT - 300));
 
         mainContainer.add(secondScrollPane);
 

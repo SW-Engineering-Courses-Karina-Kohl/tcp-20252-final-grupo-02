@@ -1,4 +1,4 @@
-package Control;
+package com;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import design.view.LoginScreen;
 import design.view.RegistrationScreen;
 
-public class Sistema {
+public class AppSystem {
     
     private RegistrationScreen regScreen;
     private ArrayList<User> users;
 
-    public Sistema(RegistrationScreen regScreen) {
+    public AppSystem(RegistrationScreen regScreen) {
         this.users = new ArrayList<>();
         this.regScreen = regScreen;
         initController();
@@ -48,7 +48,7 @@ public class Sistema {
 
         // Escrita de usuario em CSV
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter("users.txt", true))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("src/data/files/Users.csv", true))) {
             writer.println(nome + "," + sobrenome + "," + email + "," + cpf + "," + password);
         }
 

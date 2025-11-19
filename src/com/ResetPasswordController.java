@@ -1,4 +1,4 @@
-package Control;
+package com;
 
 import design.view.ResetPasswordScreen;
 import design.view.ResetPasswordScreen1;

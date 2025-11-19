@@ -13,7 +13,7 @@ public class BookClubTest {
 	@Test
 	public void testConstructor() {
 		
-		Creator newCreator = new Creator("Matheus", "Candiotto", "matheus.candiotto@ufrgs.br", "SenhaMuitoSegura");
+		Creator newCreator = new Creator("Matheus", "Candiotto", "012345678-90", "matheus.candiotto@ufrgs.br", "SenhaMuitoSegura");
 		
 		String name = "Clube do Livro do Instituto de Informática da UFRGS";
 		
@@ -31,7 +31,7 @@ public class BookClubTest {
 	@Test
 	public void testCreateBookClub() {
 		
-		Creator newCreator = new Creator("Matheus", "Candiotto", "matheus.candiotto@ufrgs.br", "SenhaMuitoSegura");
+		Creator newCreator = new Creator("Matheus", "Candiotto", "012345678-90", "matheus.candiotto@ufrgs.br", "SenhaMuitoSegura");
 		
 		String name = "Clube do Livro do Instituto de Informática da UFRGS";
 		
@@ -48,7 +48,7 @@ public class BookClubTest {
 	@Test
 	public void testDeleteBookClub() {
 		
-		Creator newCreator = new Creator("Matheus", "Candiotto", "matheus.candiotto@ufrgs.br", "SenhaMuitoSegura");
+		Creator newCreator = new Creator("Matheus", "Candiotto", "012345678-90", "matheus.candiotto@ufrgs.br", "SenhaMuitoSegura");
 		
 		String name = "Clube do Livro do Instituto de Informática da UFRGS";
 		

@@ -1,15 +1,19 @@
 package design.view;
 
 import javax.swing.*;
+
+import data.Constants;
+
 import java.awt.*;
 
-import design.view.componentes.TextField;
-import design.view.componentes.PasswordField;
-import design.view.componentes.ButtonComponent;
-import data.constData.constants;
+import design.view.components.ButtonComponent;
+import design.view.components.PasswordField;
+import design.view.components.TextField;
 
 public class RegistrationScreen extends JFrame {
 
+	private static final long serialVersionUID = 1L;
+	
     public JButton btnCadastrar;
     public JButton btnVoltar;
     public JTextField txtNome;
@@ -21,7 +25,7 @@ public class RegistrationScreen extends JFrame {
 
     public RegistrationScreen() {
         setTitle("Registration Screen");
-        setSize(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT);
+        setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 

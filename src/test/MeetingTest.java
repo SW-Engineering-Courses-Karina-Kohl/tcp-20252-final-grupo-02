@@ -15,7 +15,7 @@ public class MeetingTest {
 	@Test
 	public void testConstructor() {
 		
-		Creator newCreator = new Creator("Matheus", "Candiotto", "matheus.candiotto@ufrgs.br", "SenhaMuitoSegura");
+		Creator newCreator = new Creator("Matheus", "Candiotto", "012345678-90", "matheus.candiotto@ufrgs.br", "SenhaMuitoSegura");
 		
 		String type = "Presencial";
 		Date date = new Date();
@@ -35,7 +35,7 @@ public class MeetingTest {
 	@Test
 	public void testCreateMeeting() {
 		
-		Creator newCreator = new Creator("Matheus", "Candiotto", "matheus.candiotto@ufrgs.br", "SenhaMuitoSegura");
+		Creator newCreator = new Creator("Matheus", "Candiotto", "012345678-90", "matheus.candiotto@ufrgs.br", "SenhaMuitoSegura");
 		
 		String type = "Presencial";
 		Date date = new Date();
@@ -54,7 +54,7 @@ public class MeetingTest {
 	@Test
 	public void testDeleteMeeting() {
 		
-		Creator newCreator = new Creator("Matheus", "Candiotto", "matheus.candiotto@ufrgs.br", "SenhaMuitoSegura");
+		Creator newCreator = new Creator("Matheus", "Candiotto", "012345678-90", "matheus.candiotto@ufrgs.br", "SenhaMuitoSegura");
 		
 		String type = "Presencial";
 		Date date = new Date();

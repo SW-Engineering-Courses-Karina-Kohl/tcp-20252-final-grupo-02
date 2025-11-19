@@ -1,20 +1,25 @@
 package design.view;
 
 import javax.swing.*;
+
+import data.Constants;
+
 import java.awt.*;
 
-import data.constData.constants;
-import design.view.componentes.ButtonComponent;
-import design.view.componentes.TextField;
+import design.view.components.ButtonComponent;
+import design.view.components.TextField;
 
 public class ResetPasswordScreen1 extends JFrame {
-    public JTextField txtPassword;
+
+	private static final long serialVersionUID = 1L;
+	
+	public JTextField txtPassword;
     public JTextField txtConfirmPassword;
     public JButton btnCadastrar;
 
     public ResetPasswordScreen1() {
         setTitle("Reset Password Screen");
-        setSize(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT);
+        setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
