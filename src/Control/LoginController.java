@@ -1,5 +1,6 @@
 package Control;
 
+import design.view.HomeScreen;
 import design.view.LoginScreen;
 import design.view.RegistrationScreen;
 import design.view.ResetPasswordScreen;
@@ -71,8 +72,10 @@ public class LoginController {
             if ((emailCpf.equals(email) || emailCpf.equals(cpf)) &&
                 senhaDigitada.equals(senha)) {
 
-                JOptionPane.showMessageDialog(loginScreen, "Login successful!");
+                //JOptionPane.showMessageDialog(loginScreen, "Login successful!");
                 loginScreen.dispose();
+                HomeScreen homeScreen = new HomeScreen();
+                homeScreen.setVisible(true);
                 return true;
             }
         }

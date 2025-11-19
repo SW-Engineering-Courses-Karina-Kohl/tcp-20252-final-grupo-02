@@ -40,6 +40,10 @@ public class constants {
 
     public static final String FONT_PATH = "src/design/font/Excalifont-Regular.otf";
     public static final String LOADING_GIF_PATH = "src/design/view/assets/loading.gif";
+    public static final String[] CSV_PATHS = {
+        "src/data/files/HomeContent.csv",
+        "src/data/files/UserContent.csv"
+    };
 
     public static final int BUTTON_WIDTH = 150;
     public static final int BUTTON_HEIGHT = 40;
