@@ -23,7 +23,10 @@ public class User {
     	this.name = name;
     	this.surname = surname;
     	this.email = email;
+		this.cpf = cpf;
     	this.password = password;
+		this.joinedBookClubs = new ArrayList<BookClub>();
+
 }
 
 	

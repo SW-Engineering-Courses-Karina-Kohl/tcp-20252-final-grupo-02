@@ -18,7 +18,7 @@ public class UserTest {
 		String email = "matheus.candiotto@ufrgs.br";
 		String password = "SenhaMuitoSegura";
 		
-		User newUser = new User(name, surname, cpf, email, password);
+		User newUser = new User(name, surname, email, cpf, password);
 		
 		assertEquals(User.getNumUsersCreated(), newUser.getId());
 		assertEquals(name, newUser.getName());
