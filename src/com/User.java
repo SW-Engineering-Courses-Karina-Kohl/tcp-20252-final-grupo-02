@@ -8,6 +8,7 @@ public class User {
 	private String name;
 	private String surname;
 	private String email;
+	private String cpf;
 	private String password;
 	private ArrayList<BookClub> joinedBookClubs;
 	
@@ -16,36 +17,40 @@ public class User {
 	// private static final int MAX_BOOKCLUBS_PER_USER = 20;
 
 
+	public User(String name, String surname, String email, String cpf, String password) {
+    	this.id = ++numUsersCreated;
+    	this.name = name;
+    	this.surname = surname;
+    	this.email = email;
+    	this.password = password;
+}
+
 	
-	public User(String name, String surname, String email, String password) {
+	public User(int id, String name, String surname, String email, String cpf, String password) {
 		
-		this.id = ++numUsersCreated;
+		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
+		this.cpf = cpf;
 		this.password = password;
 		this.joinedBookClubs = new ArrayList<BookClub>();
 		
-	}
-
-
-// Converte o objeto para uma String legivel	
-@Override
-	public String toString() {
-		return String.format("User{id=%d, name='%s', surname='%s', email='%s'}", id, name, surname, email);
-	}
-
-
-	public String toCsvLine() {
-    	return name + "," + surname + "," + email + "," + password;
+			if (id > numUsersCreated) 
+        	numUsersCreated = id;
 	}
 
 
 	public int getId() {
 		
 		return this.id;
-		
 	}
+
+	public int setId(int newId) {
+		
+		return this.id = newId;
+		
+	}	
 	
 	public String getName() {
 		
@@ -103,7 +108,16 @@ public class User {
 		
 	}
 	
-	
+	// Converte o objeto para uma String legivel	
+@Override
+	public String toString() {
+		return String.format("User{id=%d, name='%s', surname='%s', email='%s', cpf='%d'}", id, name, surname, email, cpf);
+	}
+
+
+	public String toCsvLine() {
+    	return id + "," + name + "," + surname + "," + email + "," + cpf + "," + password;
+	}
 
 
 }

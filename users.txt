@@ -1,2 +1,0 @@
-Usuario1,esponja,email@gmail.com,abc
-Usuario2,estrela,email2@gmail.com,123

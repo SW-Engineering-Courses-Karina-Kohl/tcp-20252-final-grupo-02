@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class AppSystem {
     
     private ArrayList<User> users;
+    private ArrayList<Book> books;
 
     public AppSystem() {
         this.users = new ArrayList<>();
@@ -18,7 +19,60 @@ public class AppSystem {
     }
 
 
-    public boolean registerUser(String name, String surname, String email, 
+
+
+
+// Funções para usuário 
+
+    public ArrayList<User> readUsers() {
+        File f = new File("users.txt");
+        //Garante que a lista de usuários está vazia antes de ler
+        users.clear();
+        if (!f.exists()) {
+            System.out.println("Users file not found. Creating users file.");
+            return users;
+        }
+
+        
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(f))) {
+            String line = "";
+            while ((line = reader.readLine()) != null) {
+                
+                // Esse -1 preserva campos vazios
+                String[] parts = line.split(",", -1);
+                int id = Integer.parseInt(parts[0].trim());
+                String name = parts[1];
+                String surname = parts[2];
+                String email = parts[3];
+                String cpf = parts[4];
+                String password = parts[5];
+
+                User u = new User(id, name, surname, email, cpf, password);
+                users.add(u);
+            }
+        } catch (IOException e) {
+            System.out.println("Error at reading users: " + e.getMessage());
+        }
+
+        System.out.println("Total users: " + users.size());
+        return users;
+    }
+
+
+
+    public User findUserByEmail(String email) {
+    for (User u : users) {
+        if (u.getEmail().equals(email)) {
+            return u;
+        }
+    }
+    return null;
+}
+
+
+    
+    public boolean registerUser(String name, String surname, String email, String cpf,
     String password, String passwordConfirmation) {
         
        
@@ -33,12 +87,12 @@ public class AppSystem {
             return false;
         }
         
-        User newUser = new User(name, surname, email, password);
+        User newUser = new User(name, surname, email, cpf, password);
         users.add(newUser);
         
 
         try (PrintWriter writer = new PrintWriter(new FileWriter("users.txt", true))) {
-            writer.println(name + "," + surname + "," + email + "," + password);
+            writer.println(newUser.getId() + "," + name + "," + surname + "," + email + "," + cpf + "," + password);
         }
 
          catch (IOException e) {
@@ -49,56 +103,12 @@ public class AppSystem {
 
     return true;
     }
-
-
-
-    public ArrayList<User> readUsers() {
-        File f = new File("users.txt");
-        if (!f.exists()) {
-            System.out.println("Users file not found. Creating users file.");
-            return users;
-        }
-
-        users.clear();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(f))) {
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-                
-                // Esse -1 preserva campos vazios
-                String[] parts = line.split(",", -1);
-                String name = parts[0];
-                String surname = parts[1];
-                String email = parts[2];
-                String password = parts[3];
-
-                User u = new User(name, surname, email, password);
-                users.add(u);
-            }
-        } catch (IOException e) {
-            System.out.println("Error at reading users: " + e.getMessage());
-        }
-
-        System.out.println("Total users: " + users.size());
-        return users;
-    }
-
-
     public void printUsers() {
         for (User u : users) {
             System.out.println(u);
         }
     }
 
-
-public User findUserByEmail(String email) {
-    for (User u : users) {
-        if (u.getEmail().equals(email)) {
-            return u;
-        }
-    }
-    return null;
-}
 
 
     public boolean alterPassword(String email, String newPassword, String passwordConfirmation) {
@@ -134,6 +144,12 @@ public User findUserByEmail(String email) {
         System.out.println("Senha atualizada com sucesso.");
         return true;
     }
+
+
+
+
+    
+    
 }
 
 
