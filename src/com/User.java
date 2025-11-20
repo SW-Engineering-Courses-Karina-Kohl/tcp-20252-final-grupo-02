@@ -11,6 +11,7 @@ public class User {
 	private String cpf;
 	private String password;
 	private ArrayList<BookClub> joinedBookClubs;
+
 	
 	private static int numUsersCreated = 0;
 		
@@ -31,21 +32,24 @@ public class User {
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
+		this.cpf = cpf;
 		this.email = email;
 		this.cpf = cpf;
 		this.password = password;
 		this.joinedBookClubs = new ArrayList<BookClub>();
 		
-			if (id > numUsersCreated) 
+		if (id > numUsersCreated) 
         	numUsersCreated = id;
 	}
-
 
 	public int getId() {
 		
 		return this.id;
+		
+
 	}
 
+	
 	public int setId(int newId) {
 		
 		return this.id = newId;
@@ -88,7 +92,27 @@ public class User {
 		
 	}
 	
+
+	public String getCpf() {
+		
+		return this.cpf;
+		
+	}
 	
+	public void setCpf(String newCpf) {
+		
+		this.cpf = newCpf;
+		
+	}
+
+
+	public String getPassword() {
+		
+		return this.password;
+		
+	}
+
+
 	public void setPassword(String newPassword) {
 		
 		this.password = newPassword;
@@ -102,18 +126,20 @@ public class User {
 		
 	}
 	
+
 	public static int getNumUsersCreated() {
 		
 		return numUsersCreated;
 		
 	}
-	
+
 	// Converte o objeto para uma String legivel	
 @Override
 	public String toString() {
 		return String.format("User{id=%d, name='%s', surname='%s', email='%s', cpf='%d'}", id, name, surname, email, cpf);
-	}
 
+	}
+	
 
 	public String toCsvLine() {
     	return id + "," + name + "," + surname + "," + email + "," + cpf + "," + password;

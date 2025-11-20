@@ -9,10 +9,11 @@ public class Book {
 	private int releaseYear;
 	private int numPages;
 	private String genre;
+
+	
 	private static int numBooksCreated = 0;
 	
 	public Book(String title, String author, String isbn, int releaseYear, int numPages, String genre) {
-		
 		this.id = ++numBooksCreated;
 		this.title = title;
 		this.author = author;
@@ -20,21 +21,20 @@ public class Book {
 		this.releaseYear = releaseYear;
 		this.numPages = numPages;
 		this.genre = genre;
-		
 	}
 
 		public Book(int id, String title, String author, String isbn, int releaseYear, int numPages, String genre) {
 		
-		this.id = id;
-		this.title = title;
-		this.author = author;
-		this.isbn = isbn;
-		this.releaseYear = releaseYear;
-		this.numPages = numPages;
-		this.genre = genre;
+			this.id = id;
+			this.title = title;
+			this.author = author;
+			this.isbn = isbn;
+			this.releaseYear = releaseYear;
+			this.numPages = numPages;
+			this.genre = genre;
 
-		if( id > numBooksCreated) 
-			numBooksCreated = id;
+			if( id > numBooksCreated) 
+				numBooksCreated = id;
 		
 	}
 	
@@ -64,6 +64,7 @@ public class Book {
 		this.title = newTitle;
 		
 	}
+
 	public String getAuthor() {
 		
 		return this.author;
@@ -76,17 +77,20 @@ public class Book {
 		
 	}
 	
+
 	public String getIsbn() {
-		
 		return this.isbn;
-		
 	}
+
+
 
 	public void setIsbn(String newIsbn) {
 		
 		this.isbn = newIsbn;
 		
 	}
+	
+
 	
 	public int getReleaseYear() {
 		
@@ -100,6 +104,9 @@ public class Book {
 		
 	}
 	
+
+
+	
 	public int getNumPages() {
 		
 		return this.numPages;
@@ -111,6 +118,8 @@ public class Book {
 		this.numPages = newNumPages;
 		
 	}
+	
+
 	
 	public String getGenre() {
 		
@@ -124,10 +133,9 @@ public class Book {
 		
 	}
 
-
-
 	
-	public static int getNumBooksRegistered() {
+	
+	public static int getNumBooksCreated() {
 		
 		return numBooksCreated;
 	}
@@ -138,7 +146,9 @@ public class Book {
 		return String.format("Book{id=%d, title=%s, author=%s, isbn=%s, releaseYear=%d, numpages=%d, genre=%s}", id, title, author, isbn, releaseYear, numPages, genre);
 	}
 	
+
 	public String toCsvLine() {
     	return id + "," + title + "," + author + "," + isbn + "," + releaseYear + "," + numPages + "," + genre;
 	}
+
 }

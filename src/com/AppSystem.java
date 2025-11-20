@@ -7,24 +7,37 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 
+
+
+import design.view.LoginScreen;
+import design.view.RegistrationScreen;
+
 public class AppSystem {
     
+    private RegistrationScreen regScreen;
     private ArrayList<User> users;
     private ArrayList<Book> books;
 
-    public AppSystem() {
+    public AppSystem(RegistrationScreen regScreen) {
         this.users = new ArrayList<>();
-        this.books = new ArrayList<>();
+        this.regScreen = regScreen;
+        initController();
         // Carrega os usuários toda vez que o programa é iniciado
          readUsers();
          readBooks();
     }
 
-
+    
 
 
 
 // Funções para usuário 
+
+    private void initController() {
+        regScreen.btnCadastrar.addActionListener(e -> registerUser(regScreen));
+    }
+
+
 
     public ArrayList<User> readUsers() {
         File f = new File("users.txt");
@@ -34,13 +47,9 @@ public class AppSystem {
             System.out.println("Users file not found. Creating users file.");
             return users;
         }
-
-        
-
         try (BufferedReader reader = new BufferedReader(new FileReader(f))) {
             String line = "";
-            while ((line = reader.readLine()) != null) {
-                
+            while ((line = reader.readLine()) != null) {                
                 // Esse -1 preserva campos vazios
                 String[] parts = line.split(",", -1);
                 int id = Integer.parseInt(parts[0].trim());
@@ -64,37 +73,40 @@ public class AppSystem {
 
 
     public User findUserByEmail(String email) {
-    for (User u : users) {
-        if (u.getEmail().equals(email)) {
-            return u;
+        for (User u : users) {
+            if (u.getEmail().equals(email)) {
+                return u;
+            }
         }
+        return null;    
     }
-    return null;
-}
 
 
-    
-    public boolean registerUser(String name, String surname, String email, String cpf,
-    String password, String passwordConfirmation) {
+
+    public void registerUser(RegistrationScreen regScreen) {
+
+        String nome = regScreen.txtNome.getText();
+        String sobrenome = regScreen.txtSobrenome.getText();
+        String cpf = regScreen.txtCpf.getText();
+        String password = new String(regScreen.txtSenha.getPassword());
+        String passwordConfirmation = new String(regScreen.txtConfirmarSenha.getPassword());
+        String email = regScreen.txtEmail.getText();
         
-       
 
         if(!(password.equals(passwordConfirmation))) {
             System.out.println("Password and confirmation do not match.");    
-            return false;
         }
 
         if(findUserByEmail(email) != null) {
             System.out.println("Email already registered.");
-            return false;
+            return;
         }
         
-        User newUser = new User(name, surname, email, cpf, password);
+        User newUser = new User(nome, sobrenome, email, cpf, password);
         users.add(newUser);
-        
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter("users.txt", true))) {
-            writer.println(newUser.getId() + "," + name + "," + surname + "," + email + "," + cpf + "," + password);
+        try (PrintWriter writer = new PrintWriter(new FileWriter("src/data/files/Users.csv", true))) {
+            writer.println(newUser.getId() + "," + nome + "," + sobrenome + "," + email + "," + cpf + "," + password);
         }
 
          catch (IOException e) {
@@ -102,9 +114,14 @@ public class AppSystem {
         }
 
     System.out.println("User registered successfully.");
+    regScreen.dispose();
+    LoginScreen loginScreen = new LoginScreen();
+    LoginController loginController = new LoginController(loginScreen);
+    loginScreen.setVisible(true);
+}
 
-    return true;
-    }
+
+
     public void printUsers() {
         for (User u : users) {
             System.out.println(u);
