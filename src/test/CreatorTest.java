@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import com.Creator;
-import com.Main;
+import com.AppSystem;
 
 public class CreatorTest {
 
@@ -42,11 +42,11 @@ public class CreatorTest {
 		
 		Creator newCreator = new Creator(name, surname, cpf, email, password);
 		
-		Main main = new Main();
+		AppSystem appSystem = new AppSystem();
 		
-		main.createUser(newCreator);
+		appSystem.createUser(newCreator);
 		
-		assertEquals(1, main.getUsers().size());
+		assertEquals(1, appSystem.getUsers().size());
 		
 	}
 	
@@ -61,12 +61,11 @@ public class CreatorTest {
 		
 		Creator newCreator = new Creator(name, surname, cpf, email, password);
 		
-		Main main = new Main();
+		AppSystem appSystem = new AppSystem();		
+		appSystem.createUser(newCreator);
+		appSystem.deleteUser(newCreator);
 		
-		main.createUser(newCreator);
-		main.deleteUser(newCreator);
-		
-		assertEquals(0, main.getUsers().size());
+		assertEquals(0, appSystem.getUsers().size());
 		
 	}
 
