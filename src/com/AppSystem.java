@@ -305,7 +305,7 @@ public ArrayList<Book> getBooks() {
     // Funções para livros 
     public Book findBookByIsbn(String isbn) {
         for (Book b : books) {
-            if (b.getTitle().equals(isbn)) {
+            if (b.getIsbn().equals(isbn)) {
                 return b;
             }
         }

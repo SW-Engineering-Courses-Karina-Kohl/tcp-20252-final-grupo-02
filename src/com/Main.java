@@ -20,6 +20,13 @@ public class Main {
 
         applyCustomFont();
 
+		
+		AppSystem appSystem = new AppSystem();
+
+		appSystem.readBooks();
+		appSystem.readUsers();
+
+
         SwingUtilities.invokeLater(() -> {
         	
             LoadingScreen loadingScreen = new LoadingScreen();
