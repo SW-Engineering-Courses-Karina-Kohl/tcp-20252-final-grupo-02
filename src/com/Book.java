@@ -22,6 +22,21 @@ public class Book {
 		this.genre = genre;
 		
 	}
+
+		public Book(int id, String title, String author, String isbn, int releaseYear, int numPages, String genre) {
+		
+		this.id = id;
+		this.title = title;
+		this.author = author;
+		this.isbn = isbn;
+		this.releaseYear = releaseYear;
+		this.numPages = numPages;
+		this.genre = genre;
+
+		if( id > numBooksCreated) 
+			numBooksCreated = id;
+		
+	}
 	
 
 
