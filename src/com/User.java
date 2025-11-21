@@ -7,32 +7,57 @@ public class User {
 	private int id;
 	private String name;
 	private String surname;
-	private String cpf;
 	private String email;
+	private String cpf;
 	private String password;
 	private ArrayList<BookClub> joinedBookClubs;
+
 	
 	private static int numUsersCreated = 0;
-	
-	// private static final int MAX_BOOKCLUBS_PER_USER = 20;
-	
-	public User(String name, String surname, String cpf, String email, String password) {
 		
-		this.id = ++numUsersCreated;
+	// private static final int MAX_BOOKCLUBS_PER_USER = 20;
+
+
+	public User(String name, String surname, String email, String cpf, String password) {
+    	this.id = ++numUsersCreated;
+    	this.name = name;
+    	this.surname = surname;
+    	this.email = email;
+		this.cpf = cpf;
+    	this.password = password;
+		this.joinedBookClubs = new ArrayList<BookClub>();
+
+}
+
+	
+	public User(int id, String name, String surname, String email, String cpf, String password) {
+		
+		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.cpf = cpf;
 		this.email = email;
+		this.cpf = cpf;
 		this.password = password;
 		this.joinedBookClubs = new ArrayList<BookClub>();
 		
+		if (id > numUsersCreated) 
+        	numUsersCreated = id;
 	}
-	
+
 	public int getId() {
 		
 		return this.id;
 		
+
 	}
+
+	
+	public int setId(int newId) {
+		
+		return this.id = newId;
+		
+	}	
 	
 	public String getName() {
 		
@@ -58,18 +83,6 @@ public class User {
 		
 	}
 	
-	public String getCpf() {
-		
-		return this.cpf;
-		
-	}
-	
-	public void setCpf(String newCpf) {
-		
-		this.cpf = newCpf;
-		
-	}
-	
 	public String getEmail() {
 		
 		return this.email;
@@ -82,17 +95,33 @@ public class User {
 		
 	}
 	
+
+	public String getCpf() {
+		
+		return this.cpf;
+		
+	}
+	
+	public void setCpf(String newCpf) {
+		
+		this.cpf = newCpf;
+		
+	}
+
+
 	public String getPassword() {
 		
 		return this.password;
 		
 	}
-	
+
+
 	public void setPassword(String newPassword) {
 		
 		this.password = newPassword;
 		
 	}
+
 	
 	public ArrayList<BookClub> getJoinedBookClubs() {
 		
@@ -100,18 +129,24 @@ public class User {
 		
 	}
 	
+
 	public static int getNumUsersCreated() {
 		
 		return numUsersCreated;
 		
 	}
-	
-	/*
-	
-	public User findUser(String email) {
-		
+
+	// Converte o objeto para uma String legivel	
+@Override
+	public String toString() {
+		return String.format("User{id=%d, name='%s', surname='%s', email='%s', cpf='%d'}", id, name, surname, email, cpf);
+
 	}
 	
-	*/
+
+	public String toCsvLine() {
+    	return id + "," + name + "," + surname + "," + email + "," + cpf + "," + password;
+	}
+
 
 }

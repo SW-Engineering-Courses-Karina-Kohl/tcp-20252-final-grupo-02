@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import com.BookClub;
 import com.Creator;
-import com.Main;
+import com.AppSystem;
 
 public class BookClubTest {
 	
@@ -26,6 +26,7 @@ public class BookClubTest {
 		assertEquals(0, newBookClub.getPolls().size());
 		assertEquals(0, newBookClub.getMeetings().size());
 		
+		
 	}
 
 	@Test
@@ -37,11 +38,11 @@ public class BookClubTest {
 		
 		BookClub newBookClub = new BookClub(newCreator, name);
 		
-		Main main = new Main();
+		AppSystem appSystem = new AppSystem();
 		
-		main.createBookClub(newBookClub);
+		appSystem.createBookClub(newBookClub);
 		
-		assertEquals(1, main.getBookClubs().size());
+		assertEquals(1, appSystem.getBookClubs().size());
 		
 	}
 	
@@ -54,12 +55,12 @@ public class BookClubTest {
 		
 		BookClub newBookClub = new BookClub(newCreator, name);
 		
-		Main main = new Main();
+		AppSystem appSystem = new AppSystem();
 		
-		main.createBookClub(newBookClub);
-		main.deleteBookClub(newBookClub);
+		appSystem.createBookClub(newBookClub);
+		appSystem.deleteBookClub(newBookClub);
 		
-		assertEquals(0, main.getBookClubs().size());
+		assertEquals(0, appSystem.getBookClubs().size());
 		
 	}
 

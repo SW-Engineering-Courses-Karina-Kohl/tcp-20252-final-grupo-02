@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import com.AppSystem;
 import com.Book;
-import com.Main;
 
 public class BookTest {
 	
@@ -14,13 +14,13 @@ public class BookTest {
 		
 		String title = "Admirável Mundo Novo";
 		String author = "Aldous Huxley";
-		long isbn = 9788525056009L;
+		String isbn = "9788-2505-0090";
 		int releaseYear = 2014;
 		int numPages = 312;
 		String genre = "Ficção científica";
-		String publisher = "Biblioteca Azul";
+
 			
-		Book newBook = new Book(title, author, isbn, releaseYear, numPages, genre, publisher);	
+		Book newBook = new Book(title, author, isbn, releaseYear, numPages, genre);	
 		
 		assertEquals(Book.getNumBooksCreated(), newBook.getId());
 		assertEquals(title, newBook.getTitle());
@@ -29,7 +29,6 @@ public class BookTest {
 		assertEquals(releaseYear, newBook.getReleaseYear());
 		assertEquals(numPages, newBook.getNumPages());
 		assertEquals(genre, newBook.getGenre());
-		assertEquals(publisher, newBook.getPublisher());
 		
 	}
 	
@@ -38,19 +37,19 @@ public class BookTest {
 		
 		String title = "Admirável Mundo Novo";
 		String author = "Aldous Huxley";
-		long isbn = 9788525056009L;
+		String isbn = "2885-2505-6009";
 		int releaseYear = 2014;
 		int numPages = 312;
 		String genre = "Ficção científica";
-		String publisher = "Biblioteca Azul";
+
 			
-		Book newBook = new Book(title, author, isbn, releaseYear, numPages, genre, publisher);	
+		Book newBook = new Book(title, author, isbn, releaseYear, numPages, genre);	
 		
-		Main main = new Main();
+		AppSystem appSystem = new AppSystem();
 		
-		main.createBook(newBook);
+		appSystem.createBook(newBook);
 		
-		assertEquals(1, main.getBooks().size());
+		assertEquals(1, appSystem.getBooks().size());
 		
 	}
 	
@@ -59,20 +58,19 @@ public class BookTest {
 		
 		String title = "Admirável Mundo Novo";
 		String author = "Aldous Huxley";
-		long isbn = 9788525056009L;
+		String isbn = "2005-2505-6000";
 		int releaseYear = 2014;
 		int numPages = 312;
 		String genre = "Ficção científica";
-		String publisher = "Biblioteca Azul";
 			
-		Book newBook = new Book(title, author, isbn, releaseYear, numPages, genre, publisher);	
+		Book newBook = new Book(title, author, isbn, releaseYear, numPages, genre);	
 		
-		Main main = new Main();
+		AppSystem appSystem = new AppSystem();
 		
-		main.createBook(newBook);
-		main.deleteBook(newBook);
+		appSystem.createBook(newBook);
+		appSystem.deleteBook(newBook);
 		
-		assertEquals(0, main.getBooks().size());
+		assertEquals(0, appSystem.getBooks().size());
 		
 	}
 
