@@ -6,6 +6,7 @@ import java.awt.*;
 import design.view.componentes.TextField;
 import design.view.componentes.PasswordField;
 import design.view.componentes.ButtonComponent;
+import design.view.componentes.BackButtonComponent;
 import data.constData.constants;
 
 public class RegistrationScreen extends JFrame {
@@ -18,16 +19,19 @@ public class RegistrationScreen extends JFrame {
     public JPasswordField txtConfirmarSenha;
     public JTextField txtEmail;
     public JTextField txtCpf;
+    public JButton btnBackButton;
 
     public RegistrationScreen() {
         setTitle("Registration Screen");
         setSize(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setLayout(null); 
 
         JPanel main = new JPanel();
         main.setLayout(new BorderLayout());
         main.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60));
+        main.setBounds(0,-constants.BACK_BUTTON_SIZE,getWidth(), getHeight());
         main.setOpaque(false);
 
         // painel central que terá os campos
@@ -99,7 +103,7 @@ public class RegistrationScreen extends JFrame {
         gbc.gridx = 0;
         center.add(txtSenha, gbc);
 
-        gbc.gridx = 1;
+        gbc.gridx = 1;  
         center.add(txtConfirmarSenha, gbc);
         // botão centralizado embaixo
         btnCadastrar = new ButtonComponent("CADASTRAR");
@@ -108,10 +112,14 @@ public class RegistrationScreen extends JFrame {
         buttonRow.setOpaque(false);
         buttonRow.add(btnCadastrar);
 
-        // monta tudo
         main.add(center, BorderLayout.CENTER);
         main.add(buttonRow, BorderLayout.SOUTH);
 
         add(main);
+
+        btnBackButton = new BackButtonComponent();
+        // System.out.println(constants.BACK_BUTTON_BOUND_X);
+        btnBackButton.setBounds(constants.BACK_BUTTON_BOUND_X, constants.BACK_BUTTON_BOUND_Y, constants.BACK_BUTTON_SIZE,constants.BACK_BUTTON_SIZE); // posição absoluta
+        add(btnBackButton);
     }
 }

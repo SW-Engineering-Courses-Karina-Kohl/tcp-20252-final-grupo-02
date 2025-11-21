@@ -6,10 +6,15 @@ import java.util.List;
 
 import data.CardData;
 import data.CardFilter;
+import design.view.componentes.ButtonComponent;
 import data.constData.constants;
 import design.view.componentes.CardComponent;
 
 public class HomeScreen extends JFrame {
+
+    public JButton btnMyGroups;
+    public JButton btnShowMyGroups;
+    public JButton btnEnterGroup;
 
     public HomeScreen() {
         setTitle("Home Screen");
@@ -22,13 +27,13 @@ public class HomeScreen extends JFrame {
         mainContainer.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         // ============================================================
-
         CardFilter cardFilter = new CardFilter();
 
         List<CardData> firstCards = cardFilter.getFilteredCards(constants.CSV_PATHS[0]);
 
         JPanel firstCardPanel = new JPanel();
         firstCardPanel.setLayout(new GridLayout(0, 2, 10, 10)); // Uma coluna, varias linhas
+        firstCardPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 
         for (CardData cardData : firstCards) {
             CardComponent card = new CardComponent();
@@ -55,11 +60,33 @@ public class HomeScreen extends JFrame {
         mainContainer.add(Box.createRigidArea(new Dimension(0, 10)));
 
         // ============================================================
-        
+        JPanel buttonsContainer = new JPanel();
+        buttonsContainer.setLayout(new BoxLayout(buttonsContainer, BoxLayout.Y_AXIS));
+        buttonsContainer.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        buttonsContainer.setPreferredSize(new Dimension(200, 0));
+        buttonsContainer.setMaximumSize(new Dimension(200, Integer.MAX_VALUE));
+        buttonsContainer.setMinimumSize(new Dimension(200, 0));
+
+        btnMyGroups = new ButtonComponent("MEUS GRUPOS");
+        btnMyGroups.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnShowMyGroups = new ButtonComponent("VER GRUPOS");
+        btnShowMyGroups.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnEnterGroup = new ButtonComponent("ENTRAR");
+        btnEnterGroup.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        buttonsContainer.add(Box.createVerticalGlue()); 
+        buttonsContainer.add(btnMyGroups);
+        buttonsContainer.add(Box.createRigidArea(new Dimension(0, 10)));
+        buttonsContainer.add(btnShowMyGroups);
+        buttonsContainer.add(Box.createRigidArea(new Dimension(0, 10)));
+        buttonsContainer.add(btnEnterGroup);
+        buttonsContainer.add(Box.createVerticalGlue());
+
         List<CardData> secondCards = cardFilter.getFilteredCards(constants.CSV_PATHS[1]);
 
         JPanel secondCardPanel = new JPanel();
         secondCardPanel.setLayout(new GridLayout(0, 2, 20, 20)); // 2 colunas, sem scroll lateral
+        secondCardPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 
         for (CardData cardData : secondCards) {
             CardComponent card = new CardComponent();
@@ -75,8 +102,11 @@ public class HomeScreen extends JFrame {
 
         secondScrollPane.setPreferredSize(new Dimension(0, constants.SCREEN_HEIGHT - 300));
 
-        mainContainer.add(secondScrollPane);
+        JPanel secondContainer = new JPanel(new BorderLayout(10, 10));
+        secondContainer.add(secondScrollPane, BorderLayout.CENTER);
+        secondContainer.add(buttonsContainer, BorderLayout.EAST);
 
+        mainContainer.add(secondContainer);
         add(mainContainer);
     }
 

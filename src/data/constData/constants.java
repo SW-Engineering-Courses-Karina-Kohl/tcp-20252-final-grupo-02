@@ -33,6 +33,7 @@ public class constants {
 
         SCREEN_WIDTH = (int) Math.round(screenSize.width * 0.8);
         SCREEN_HEIGHT = (int) Math.round(screenSize.height * 0.8);
+        BACK_BUTTON_BOUND_X = SCREEN_WIDTH - 90;
 
         LOAGING_WIDTH = (int) Math.round(SCREEN_WIDTH * 0.4);
         LOAGING_HEIGHT = (int) Math.round(SCREEN_WIDTH * 0.4);
@@ -47,6 +48,11 @@ public class constants {
 
     public static final int BUTTON_WIDTH = 150;
     public static final int BUTTON_HEIGHT = 40;
+    public static final int CARD_WIDTH = 300;
+    public static final int CARD_HEIGHT = 150;
     public static final int DIMENSION_FIELD_WIDTH = 350;
     public static final int DIMENSION_FIELD_HEIGHT = 40;
+    public static final int BACK_BUTTON_SIZE = 40;
+    public static final int BACK_BUTTON_BOUND_X;
+    public static final int BACK_BUTTON_BOUND_Y = 60;
 }

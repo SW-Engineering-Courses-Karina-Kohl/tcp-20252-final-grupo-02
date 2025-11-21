@@ -1,4 +1,5 @@
 
+import design.view.FeedScreen;
 import design.view.LoadingScreen;
 import design.view.LoginScreen;
 
@@ -21,6 +22,10 @@ public class Main {
         applyCustomFont();
 
         SwingUtilities.invokeLater(() -> {
+
+            // FeedScreen feedScreen = new FeedScreen();
+            // feedScreen.setVisible(true);
+
             LoadingScreen loadingScreen = new LoadingScreen();
             loadingScreen.setVisible(true);
 

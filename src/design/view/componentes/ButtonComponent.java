@@ -1,8 +1,6 @@
 package design.view.componentes;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
-
 import data.constData.constants;
 
 import java.awt.*;

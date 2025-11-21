@@ -22,6 +22,12 @@ public class Sistema {
     }
 
     private void initController() {
+        regScreen.btnBackButton.addActionListener(e -> {
+            regScreen.dispose();
+            LoginScreen loginScreen = new LoginScreen();
+            LoginController loginController = new LoginController(loginScreen);
+            loginScreen.setVisible(true);
+        });
         regScreen.btnCadastrar.addActionListener(e -> registerUser(regScreen));
     }
 
@@ -62,10 +68,6 @@ public class Sistema {
     LoginController loginController = new LoginController(loginScreen);
     loginScreen.setVisible(true);
 }
-
-
-
-
 
 
     public ArrayList<User> readUsers() {

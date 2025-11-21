@@ -75,6 +75,7 @@ public class LoginController {
                 //JOptionPane.showMessageDialog(loginScreen, "Login successful!");
                 loginScreen.dispose();
                 HomeScreen homeScreen = new HomeScreen();
+                HomeController homeController = new HomeController(homeScreen);
                 homeScreen.setVisible(true);
                 return true;
             }
