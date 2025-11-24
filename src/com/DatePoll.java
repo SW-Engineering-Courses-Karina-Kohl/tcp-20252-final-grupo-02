@@ -5,18 +5,20 @@ import java.util.Date;
 
 public class DatePoll extends Poll {
 
-	private ArrayList<Date> dateOptions;
-	
-	public DatePoll(Date closingDate) {
-		
-		super(closingDate);
-		
-	}
+    private ArrayList<Date> dateOptions;
 
-	@Override
-	public void vote(User user, int optionIndex) {
-    	super.vote(user, optionIndex);
-    	System.out.println("Usuário votou na data: " + dateOptions.get(optionIndex));
-}
+    public DatePoll(Date closingDate, ArrayList<Date> options) {
+        super(closingDate);
+        this.dateOptions = options;
+    }
 
+    @Override
+    public void vote(User user, int optionIndex) {
+        super.vote(user, optionIndex);
+        System.out.println("Voto registrado na data: " + dateOptions.get(optionIndex));
+    }
+
+    public ArrayList<Date> getDateOptions() {
+        return this.dateOptions;
+    }
 }
