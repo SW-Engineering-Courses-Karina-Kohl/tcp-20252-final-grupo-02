@@ -3,14 +3,16 @@ package design.view;
 import javax.swing.*;
 import java.awt.*;
 
-import design.view.componentes.TextField;
-import design.view.componentes.PasswordField;
-import design.view.componentes.ButtonComponent;
-import design.view.componentes.BackButtonComponent;
-import data.constData.constants;
+import design.view.components.TextField;
+import design.view.components.PasswordField;
+import design.view.components.ButtonComponent;
+import design.view.components.BackButtonComponent;
+import data.Constants;
 
 public class RegistrationScreen extends JFrame {
 
+	private static final long serialVersionUID = 1L;
+	
     public JButton btnCadastrar;
     public JButton btnVoltar;
     public JTextField txtNome;
@@ -23,7 +25,7 @@ public class RegistrationScreen extends JFrame {
 
     public RegistrationScreen() {
         setTitle("Registration Screen");
-        setSize(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT);
+        setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         // setLayout(new BorderLayout());
@@ -31,7 +33,7 @@ public class RegistrationScreen extends JFrame {
         JPanel main = new JPanel();
         main.setLayout(new BorderLayout());
         main.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60));
-        main.setBounds(0, -constants.BACK_BUTTON_SIZE, getWidth(), getHeight());
+        main.setBounds(0, -Constants.BACK_BUTTON_SIZE, getWidth(), getHeight());
         main.setOpaque(false);
 
         // painel central que terá os campos
@@ -119,8 +121,8 @@ public class RegistrationScreen extends JFrame {
         add(main, BorderLayout.CENTER);
 
         btnBackButton = new BackButtonComponent();
-        btnBackButton.setSize(constants.BACK_BUTTON_SIZE, constants.BACK_BUTTON_SIZE);
-        btnBackButton.setLocation(constants.BACK_BUTTON_BOUND_X, constants.BACK_BUTTON_BOUND_Y);
+        btnBackButton.setSize(Constants.BACK_BUTTON_SIZE, Constants.BACK_BUTTON_SIZE);
+        btnBackButton.setLocation(Constants.BACK_BUTTON_BOUND_X, Constants.BACK_BUTTON_BOUND_Y);
 
         layered.add(btnBackButton, JLayeredPane.PALETTE_LAYER);
     }

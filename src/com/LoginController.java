@@ -1,4 +1,4 @@
-package Control;
+package com;
 
 import design.view.HomeScreen;
 import design.view.LoginScreen;
@@ -11,6 +11,8 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import javax.swing.JOptionPane;
+
+import data.Constants;
 
 public class LoginController {
     private LoginScreen loginScreen;
@@ -42,7 +44,7 @@ public class LoginController {
         loginScreen.dispose();
         // registrationScreen.setExtendedState(registrationScreen.MAXIMIZED_BOTH);
         registrationScreen.setVisible(true);
-        Sistema registerUser = new Sistema(registrationScreen);
+        AppSystem registerUser = new AppSystem(registrationScreen);
     }
 
     private void handleReset() {
@@ -54,9 +56,8 @@ public class LoginController {
     }
 
     private boolean authenticateUser(String emailCpf, String senhaDigitada) {
-    String path = "users.txt";
 
-    try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+    try (BufferedReader br = new BufferedReader(new FileReader("src/data/files/Users.csv"))) {
 
         String line;
         while ((line = br.readLine()) != null) {

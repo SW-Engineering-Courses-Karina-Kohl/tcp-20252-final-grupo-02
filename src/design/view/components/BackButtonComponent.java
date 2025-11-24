@@ -1,8 +1,8 @@
-package design.view.componentes;
+package design.view.components;
 
 import javax.swing.*;
 import java.awt.*;
-import data.constData.constants; // ajuste o import conforme o seu projeto
+import data.Constants;
 
 public class BackButtonComponent extends JButton {
 
@@ -14,9 +14,9 @@ public class BackButtonComponent extends JButton {
         setContentAreaFilled(false);
         setOpaque(false);
         setCursor(new Cursor(Cursor.HAND_CURSOR));
-        // setForeground(constants.BLACK);
-        setBackground(constants.RED);
-        setPreferredSize(new Dimension(constants.BACK_BUTTON_SIZE, constants.BACK_BUTTON_SIZE));
+        // setForeground(Constants.BLACK);
+        setBackground(Constants.RED);
+        setPreferredSize(new Dimension(Constants.BACK_BUTTON_SIZE, Constants.BACK_BUTTON_SIZE));
     }
 
     @Override
@@ -34,7 +34,7 @@ public class BackButtonComponent extends JButton {
         g2.fillOval(x, y, diameter, diameter);
 
         // BORDA PRETA
-        g2.setColor(constants.BLACK);
+        g2.setColor(Constants.BLACK);
         g2.setStroke(new BasicStroke(2));
         g2.drawOval(x, y, diameter, diameter);
 

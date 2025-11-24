@@ -1,4 +1,4 @@
-package data.constData;
+package data;
 
 import java.awt.*;
 
@@ -11,7 +11,7 @@ verde grupo votação encerrada e infos do grupo - #b2f2bb
 azul botoes - #a5d8ff 
 
  */
-public class constants {
+public class Constants {
 
     public static final Color YELLOW = new Color(255, 236, 153); // #ffec99
     public static final Color RED = new Color(255, 201, 201); // #ffc9c9

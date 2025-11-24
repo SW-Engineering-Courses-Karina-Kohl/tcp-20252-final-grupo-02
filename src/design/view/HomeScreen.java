@@ -6,19 +6,20 @@ import java.util.List;
 
 import data.CardData;
 import data.CardFilter;
-import design.view.componentes.ButtonComponent;
-import data.constData.constants;
-import design.view.componentes.CardComponent;
+import design.view.components.ButtonComponent;
+import data.Constants;
+import design.view.components.CardComponent;
 
 public class HomeScreen extends JFrame {
 
+    private static final long serialVersionUID = 1L;
     public JButton btnMyGroups;
     public JButton btnShowMyGroups;
     public JButton btnEnterGroup;
-
+	
     public HomeScreen() {
         setTitle("Home Screen");
-        setSize(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT);
+        setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -29,7 +30,7 @@ public class HomeScreen extends JFrame {
         // ============================================================
         CardFilter cardFilter = new CardFilter();
 
-        List<CardData> firstCards = cardFilter.getFilteredCards(constants.CSV_PATHS[0]);
+        List<CardData> firstCards = cardFilter.getFilteredCards(Constants.CSV_PATHS[0]);
 
         JPanel firstCardPanel = new JPanel();
         firstCardPanel.setLayout(new GridLayout(0, 2, 10, 10)); // Uma coluna, varias linhas
@@ -63,9 +64,9 @@ public class HomeScreen extends JFrame {
         JPanel buttonsContainer = new JPanel();
         buttonsContainer.setLayout(new BoxLayout(buttonsContainer, BoxLayout.Y_AXIS));
         buttonsContainer.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        buttonsContainer.setPreferredSize(new Dimension(constants.BUTTON_WIDTH, 0));
-        buttonsContainer.setMaximumSize(new Dimension(constants.BUTTON_WIDTH, Integer.MAX_VALUE));
-        buttonsContainer.setMinimumSize(new Dimension(constants.BUTTON_WIDTH, 0));
+        buttonsContainer.setPreferredSize(new Dimension(Constants.BUTTON_WIDTH, 0));
+        buttonsContainer.setMaximumSize(new Dimension(Constants.BUTTON_WIDTH, Integer.MAX_VALUE));
+        buttonsContainer.setMinimumSize(new Dimension(Constants.BUTTON_WIDTH, 0));
 
         btnMyGroups = new ButtonComponent("MEUS GRUPOS");
         btnMyGroups.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -82,7 +83,7 @@ public class HomeScreen extends JFrame {
         buttonsContainer.add(btnEnterGroup);
         buttonsContainer.add(Box.createVerticalGlue());
 
-        List<CardData> secondCards = cardFilter.getFilteredCards(constants.CSV_PATHS[1]);
+        List<CardData> secondCards = cardFilter.getFilteredCards(Constants.CSV_PATHS[1]);
 
         JPanel secondCardPanel = new JPanel();
         secondCardPanel.setLayout(new GridLayout(0, 2, 20, 20)); // 2 colunas, sem scroll lateral
@@ -100,7 +101,7 @@ public class HomeScreen extends JFrame {
         secondScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         secondScrollPane.setBorder(BorderFactory.createTitledBorder("Feed Geral"));
 
-        secondScrollPane.setPreferredSize(new Dimension(0, constants.SCREEN_HEIGHT - 300));
+        secondScrollPane.setPreferredSize(new Dimension(0, Constants.SCREEN_HEIGHT - 300));
 
         JPanel secondContainer = new JPanel(new BorderLayout(10, 10));
         secondContainer.add(secondScrollPane, BorderLayout.CENTER);

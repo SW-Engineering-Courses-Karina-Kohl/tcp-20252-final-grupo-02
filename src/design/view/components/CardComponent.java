@@ -1,13 +1,15 @@
-package design.view.componentes;
+package design.view.components;
 
 import javax.swing.*;
 import java.awt.*;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import data.constData.constants;
+import data.Constants;
 
 public class CardComponent extends JPanel {
+	
+	private static final long serialVersionUID = 1L;
 
     private JLabel lblGroup;
     private JLabel lblInfo;
@@ -18,9 +20,9 @@ public class CardComponent extends JPanel {
     public CardComponent() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
-        setBackground(constants.GREEN);
-        setMaximumSize(new Dimension(constants.CARD_WIDTH, constants.CARD_HEIGHT));
-        setPreferredSize(new Dimension(constants.CARD_WIDTH, constants.CARD_HEIGHT));
+        setBackground(Constants.GREEN);
+        setMaximumSize(new Dimension(Constants.CARD_WIDTH, Constants.CARD_HEIGHT));
+        setPreferredSize(new Dimension(Constants.CARD_WIDTH, Constants.CARD_HEIGHT));
         setAlignmentY(CENTER_ALIGNMENT);
         setOpaque(true);
 
@@ -63,11 +65,11 @@ public class CardComponent extends JPanel {
         lblFormat.setText(format);
 
         if (info.toLowerCase().contains("encerrado")) {
-            setBackground(constants.RED);
+            setBackground(Constants.RED);
         } else if (info.toLowerCase().contains("pending vote")) {
-            setBackground(constants.YELLOW);
+            setBackground(Constants.YELLOW);
         } else {
-            setBackground(constants.GREEN);
+            setBackground(Constants.GREEN);
         }
 
         setOpaque(true);

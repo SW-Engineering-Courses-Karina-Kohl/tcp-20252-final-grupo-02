@@ -1,4 +1,4 @@
-package Control;
+package com;
 
 import javax.swing.JFrame;
 

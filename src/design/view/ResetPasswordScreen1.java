@@ -1,22 +1,26 @@
 package design.view;
 
 import javax.swing.*;
+
 import java.awt.*;
 
-import data.constData.constants;
-import design.view.componentes.ButtonComponent;
-import design.view.componentes.BackButtonComponent;
-import design.view.componentes.TextField;
+import data.Constants;
+import design.view.components.ButtonComponent;
+import design.view.components.BackButtonComponent;
+import design.view.components.TextField;
 
 public class ResetPasswordScreen1 extends JFrame {
-    public JTextField txtPassword;
+
+	private static final long serialVersionUID = 1L;
+	
+	public JTextField txtPassword;
     public JTextField txtConfirmPassword;
     public JButton btnCadastrar;
     public JButton btnBackButton;
 
     public ResetPasswordScreen1() {
         setTitle("Reset Password Screen");
-        setSize(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT);
+        setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         // setLayout(null); 
@@ -24,7 +28,7 @@ public class ResetPasswordScreen1 extends JFrame {
         JPanel resetPanel = new JPanel();
         resetPanel.setLayout(new BoxLayout(resetPanel, BoxLayout.Y_AXIS));
         resetPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        resetPanel.setBounds(0,-constants.BACK_BUTTON_SIZE,getWidth(), getHeight());
+        resetPanel.setBounds(0,-Constants.BACK_BUTTON_SIZE,getWidth(), getHeight());
         resetPanel.setOpaque(false);
 
         JLabel lblPassword = new JLabel("DIGITE A NOVA SENHA");
@@ -53,8 +57,8 @@ public class ResetPasswordScreen1 extends JFrame {
         add(resetPanel, BorderLayout.CENTER);
 
         btnBackButton = new BackButtonComponent();
-        btnBackButton.setSize(constants.BACK_BUTTON_SIZE, constants.BACK_BUTTON_SIZE);
-        btnBackButton.setLocation(constants.BACK_BUTTON_BOUND_X, constants.BACK_BUTTON_BOUND_Y);
+        btnBackButton.setSize(Constants.BACK_BUTTON_SIZE, Constants.BACK_BUTTON_SIZE);
+        btnBackButton.setLocation(Constants.BACK_BUTTON_BOUND_X, Constants.BACK_BUTTON_BOUND_Y);
 
         layered.add(btnBackButton, JLayeredPane.PALETTE_LAYER);
     }
