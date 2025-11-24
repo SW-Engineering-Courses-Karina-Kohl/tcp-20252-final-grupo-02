@@ -1,5 +1,4 @@
 
-import design.view.FeedScreen;
 import design.view.LoadingScreen;
 import design.view.LoginScreen;
 

@@ -63,9 +63,9 @@ public class HomeScreen extends JFrame {
         JPanel buttonsContainer = new JPanel();
         buttonsContainer.setLayout(new BoxLayout(buttonsContainer, BoxLayout.Y_AXIS));
         buttonsContainer.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        buttonsContainer.setPreferredSize(new Dimension(200, 0));
-        buttonsContainer.setMaximumSize(new Dimension(200, Integer.MAX_VALUE));
-        buttonsContainer.setMinimumSize(new Dimension(200, 0));
+        buttonsContainer.setPreferredSize(new Dimension(constants.BUTTON_WIDTH, 0));
+        buttonsContainer.setMaximumSize(new Dimension(constants.BUTTON_WIDTH, Integer.MAX_VALUE));
+        buttonsContainer.setMinimumSize(new Dimension(constants.BUTTON_WIDTH, 0));
 
         btnMyGroups = new ButtonComponent("MEUS GRUPOS");
         btnMyGroups.setAlignmentX(Component.CENTER_ALIGNMENT);

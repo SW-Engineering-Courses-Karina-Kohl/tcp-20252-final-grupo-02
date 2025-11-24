@@ -20,7 +20,7 @@ public class ResetPasswordScreen extends JFrame {
         setSize(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setLayout(null); 
+        // setLayout(null); 
 
         JPanel resetPanel = new JPanel();
         resetPanel.setLayout(new BoxLayout(resetPanel, BoxLayout.Y_AXIS));
@@ -42,12 +42,14 @@ public class ResetPasswordScreen extends JFrame {
         resetPanel.add(btnVerify);
         resetPanel.add(Box.createVerticalGlue());
 
-        add(resetPanel);
+        JLayeredPane layered = getLayeredPane();
+        add(resetPanel, BorderLayout.CENTER);
 
         btnBackButton = new BackButtonComponent();
-        // System.out.println(constants.BACK_BUTTON_BOUND_X);
-        btnBackButton.setBounds(constants.BACK_BUTTON_BOUND_X, constants.BACK_BUTTON_BOUND_Y, constants.BACK_BUTTON_SIZE,constants.BACK_BUTTON_SIZE); // posição absoluta
-        add(btnBackButton);
+        btnBackButton.setSize(constants.BACK_BUTTON_SIZE, constants.BACK_BUTTON_SIZE);
+        btnBackButton.setLocation(constants.BACK_BUTTON_BOUND_X, constants.BACK_BUTTON_BOUND_Y);
+
+        layered.add(btnBackButton, JLayeredPane.PALETTE_LAYER);
     }
     
 }

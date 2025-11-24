@@ -17,10 +17,11 @@ public class CardComponent extends JPanel {
 
     public CardComponent() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(BorderFactory.createEmptyBorder(15, 15, 5, 15));
+        setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         setBackground(constants.GREEN);
         setMaximumSize(new Dimension(constants.CARD_WIDTH, constants.CARD_HEIGHT));
         setPreferredSize(new Dimension(constants.CARD_WIDTH, constants.CARD_HEIGHT));
+        setAlignmentY(CENTER_ALIGNMENT);
         setOpaque(true);
 
         lblGroup = new JLabel("");

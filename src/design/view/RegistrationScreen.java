@@ -26,12 +26,12 @@ public class RegistrationScreen extends JFrame {
         setSize(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setLayout(null); 
+        // setLayout(new BorderLayout());
 
         JPanel main = new JPanel();
         main.setLayout(new BorderLayout());
         main.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60));
-        main.setBounds(0,-constants.BACK_BUTTON_SIZE,getWidth(), getHeight());
+        main.setBounds(0, -constants.BACK_BUTTON_SIZE, getWidth(), getHeight());
         main.setOpaque(false);
 
         // painel central que terá os campos
@@ -48,14 +48,14 @@ public class RegistrationScreen extends JFrame {
         JLabel lblNome = new JLabel("DIGITE SEU PRIMEIRO NOME");
         center.add(lblNome, gbc);
 
-        gbc.gridx = 1; // coluna direita do título (sobrenome)
+        gbc.gridx = 1; // coluna direita (sobrenome)
         JLabel lblSobrenome = new JLabel("DIGITE SEU SOBRENOME");
         center.add(lblSobrenome, gbc);
 
-        // Linha 1 - campos (linha 0 dos campos, abaixo dos labels)
+        // Linha 1 - campos
         txtNome = new TextField("NOME");
         txtSobrenome = new TextField("SOBRENOME");
-   
+
         gbc.gridy = 1;
         gbc.gridx = 0;
         gbc.anchor = GridBagConstraints.WEST;
@@ -103,7 +103,7 @@ public class RegistrationScreen extends JFrame {
         gbc.gridx = 0;
         center.add(txtSenha, gbc);
 
-        gbc.gridx = 1;  
+        gbc.gridx = 1;
         center.add(txtConfirmarSenha, gbc);
         // botão centralizado embaixo
         btnCadastrar = new ButtonComponent("CADASTRAR");
@@ -115,11 +115,13 @@ public class RegistrationScreen extends JFrame {
         main.add(center, BorderLayout.CENTER);
         main.add(buttonRow, BorderLayout.SOUTH);
 
-        add(main);
+        JLayeredPane layered = getLayeredPane();
+        add(main, BorderLayout.CENTER);
 
         btnBackButton = new BackButtonComponent();
-        // System.out.println(constants.BACK_BUTTON_BOUND_X);
-        btnBackButton.setBounds(constants.BACK_BUTTON_BOUND_X, constants.BACK_BUTTON_BOUND_Y, constants.BACK_BUTTON_SIZE,constants.BACK_BUTTON_SIZE); // posição absoluta
-        add(btnBackButton);
+        btnBackButton.setSize(constants.BACK_BUTTON_SIZE, constants.BACK_BUTTON_SIZE);
+        btnBackButton.setLocation(constants.BACK_BUTTON_BOUND_X, constants.BACK_BUTTON_BOUND_Y);
+
+        layered.add(btnBackButton, JLayeredPane.PALETTE_LAYER);
     }
 }

@@ -20,12 +20,12 @@ public class FeedScreen extends JFrame {
         setSize(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setLayout(null);
+        // setLayout(null);
 
         JPanel feedPanel = new JPanel();
         feedPanel.setLayout(new BoxLayout(feedPanel, BoxLayout.Y_AXIS));
-        feedPanel.setBorder(BorderFactory.createEmptyBorder(60, 5, 70, 20));
-        feedPanel.setBounds(0, 0, getWidth(), getHeight());
+        feedPanel.setBorder(BorderFactory.createEmptyBorder(60, 10, 10, 10));
+        feedPanel.setBounds(0, constants.BACK_BUTTON_BOUND_Y, getWidth(), getHeight());
         feedPanel.setOpaque(false);
 
         CardFilter cardFilter = new CardFilter();
@@ -43,26 +43,34 @@ public class FeedScreen extends JFrame {
 
             // Define a ação ao clicar no card (tirei da net)
             card.setOnCardClick(() -> {
-                System.out.println("Card clicado: " + card.getGroup());
-                System.out.println("Info: " + card.getInfo());
-                // logica para entrar no grupo
+                // System.out.println("Card clicado: " + card.getGroup());
+                // System.out.println("Info: " + card.getInfo());
+
+                JOptionPane.showConfirmDialog(
+                        null,
+                        "Deseja entrar no grupo " + card.getGroup() + " ?",
+                        "Confirmação",
+                        JOptionPane.YES_NO_OPTION
+                );
             });
         }
 
-        JScrollPane secondScrollPane = new JScrollPane(CardPanel);
-        secondScrollPane.getVerticalScrollBar().setUnitIncrement(16); // velocidade de scroll
-        secondScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        secondScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        secondScrollPane.setPreferredSize(new Dimension(0, 200));
-        secondScrollPane.setSize(constants.SCREEN_WIDTH - 50, constants.SCREEN_HEIGHT - 100);
-        secondScrollPane.setBorder(BorderFactory.createTitledBorder("Feed Geral"));
-        feedPanel.add(secondScrollPane);
+        JScrollPane ScrollPane = new JScrollPane(CardPanel);
+        ScrollPane.getVerticalScrollBar().setUnitIncrement(16); // velocidade de scroll
+        ScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        ScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        ScrollPane.setPreferredSize(new Dimension(0, 200));
+        ScrollPane.setSize(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT - 100);
+        ScrollPane.setBorder(BorderFactory.createTitledBorder("Feed Geral"));
+        feedPanel.add(ScrollPane);
 
-        add(feedPanel);
+        JLayeredPane layered = getLayeredPane();
+        add(feedPanel, BorderLayout.CENTER);
 
         btnBackButton = new BackButtonComponent();
-        btnBackButton.setBounds(constants.BACK_BUTTON_BOUND_X, 10, constants.BACK_BUTTON_SIZE, constants.BACK_BUTTON_SIZE);
-        // btnBackButton.setBounds(constants.BACK_BUTTON_BOUND_X, constants.BACK_BUTTON_BOUND_Y, constants.BACK_BUTTON_SIZE,constants.BACK_BUTTON_SIZE); // posição absoluta
-        add(btnBackButton);
+        btnBackButton.setSize(constants.BACK_BUTTON_SIZE, constants.BACK_BUTTON_SIZE);
+        btnBackButton.setLocation(constants.SCREEN_WIDTH - (constants.BACK_BUTTON_SIZE * 2), 0);
+
+        layered.add(btnBackButton, JLayeredPane.PALETTE_LAYER);
     }
 }
