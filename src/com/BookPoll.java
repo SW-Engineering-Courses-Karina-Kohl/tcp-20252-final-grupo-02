@@ -7,18 +7,20 @@ public class BookPoll extends Poll {
 
     private ArrayList<Book> bookOptions;
 
-    public BookPoll(Date closingDate, ArrayList<Book> options) {
+  public BookPoll(Date closingDate) {
         super(closingDate);
-        this.bookOptions = options;
+        this.bookOptions = new ArrayList<>();
     }
+
 
     @Override
     public void vote(User user, int optionIndex) {
-        super.vote(user, optionIndex);
+        super.registerVote(user, optionIndex);
         System.out.println("Voto registrado no livro: " + bookOptions.get(optionIndex).getTitle());
     }
 
-    public ArrayList<Book> getBookOptions() {
+
+    public ArrayList<Book> getOptions() {
         return this.bookOptions;
     }
 }

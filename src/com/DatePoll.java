@@ -7,18 +7,18 @@ public class DatePoll extends Poll {
 
     private ArrayList<Date> dateOptions;
 
-    public DatePoll(Date closingDate, ArrayList<Date> options) {
+     public DatePoll(Date closingDate) {
         super(closingDate);
-        this.dateOptions = options;
+        this.dateOptions = new ArrayList<>();
     }
 
     @Override
     public void vote(User user, int optionIndex) {
-        super.vote(user, optionIndex);
+        super.registerVote(user, optionIndex);
         System.out.println("Voto registrado na data: " + dateOptions.get(optionIndex));
     }
 
-    public ArrayList<Date> getDateOptions() {
+    public ArrayList<Date> getOptions() {
         return this.dateOptions;
     }
 }
