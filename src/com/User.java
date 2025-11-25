@@ -15,6 +15,10 @@ public class User {
 	
 	private static int numUsersCreated = 0;
 		
+	public static void setNumUsersCreated(int n) {
+    numUsersCreated = n;
+}
+
 	// private static final int MAX_BOOKCLUBS_PER_USER = 20;
 
 
@@ -35,14 +39,10 @@ public class User {
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
-		this.cpf = cpf;
 		this.email = email;
 		this.cpf = cpf;
 		this.password = password;
 		this.joinedBookClubs = new ArrayList<BookClub>();
-		
-		if (id > numUsersCreated) 
-        	numUsersCreated = id;
 	}
 
 	public int getId() {
@@ -139,7 +139,7 @@ public class User {
 	// Converte o objeto para uma String legivel	
 @Override
 	public String toString() {
-		return String.format("User{id=%d, name='%s', surname='%s', email='%s', cpf='%d'}", id, name, surname, email, cpf);
+		return String.format("User{id=%d, name='%s', surname='%s', email='%s', cpf='%s'}", id, name, surname, email, cpf);
 
 	}
 	

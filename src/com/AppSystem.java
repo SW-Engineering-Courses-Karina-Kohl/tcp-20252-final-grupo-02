@@ -6,10 +6,9 @@ import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
-
 import org.tinylog.Logger;
 
-import design.view.LoginScreen;
+
 import design.view.RegistrationScreen;
 
 public class AppSystem {
@@ -20,6 +19,7 @@ public class AppSystem {
 	private ArrayList<BookClub> bookClubs;
 	private ArrayList<Meeting> meetings;
 	private ArrayList<Poll> polls;
+    private UserService userService;
 
     public AppSystem(RegistrationScreen regScreen) {
         this.users = new ArrayList<User>();
@@ -28,10 +28,8 @@ public class AppSystem {
         this.meetings = new ArrayList<Meeting>();
         this.polls = new ArrayList<Poll>();
         this.regScreen = regScreen;
-        initController();
-        // Carrega os arrays com os arquivos toda vez que o programa é iniciado
-         readUsers();
-         readBooks();
+        this.userService = new UserService();
+ 
     }
 
     public AppSystem() {
@@ -40,6 +38,7 @@ public class AppSystem {
         this.bookClubs = new ArrayList<BookClub>();
         this.meetings = new ArrayList<Meeting>();
         this.polls = new ArrayList<Poll>();
+        this.userService = new UserService();
     }
 
 
@@ -171,99 +170,15 @@ public ArrayList<Book> getBooks() {
 
 // Funções para usuário 
 
-    private void initController() {
-        regScreen.btnCadastrar.addActionListener(e -> registerUser(regScreen));
-    }
 
 
 
-    public ArrayList<User> readUsers() {
-        File f = new File("users.txt");
-        //Garante que a lista de usuários está vazia antes de ler
-        users.clear();
-        if (!f.exists()) {
-            System.out.println("Users file not found. Creating users file.");
-            return users;
-        }
-        try (BufferedReader reader = new BufferedReader(new FileReader(f))) {
-            String line = "";
-            while ((line = reader.readLine()) != null) {                
-                // Esse -1 preserva campos vazios
-                String[] parts = line.split(",", -1);
-                int id = Integer.parseInt(parts[0].trim());
-                String name = parts[1];
-                String surname = parts[2];
-                String email = parts[3];
-                String cpf = parts[4];
-                String password = parts[5];
-
-                User u = new User(id, name, surname, email, cpf, password);
-                users.add(u);
-            }
-        } catch (IOException e) {
-            System.out.println("Error at reading users: " + e.getMessage());
-        }
-
-        System.out.println("Total users: " + users.size());
-        return users;
-    }
-
-
-
-    public User findUserByEmail(String email) {
-        for (User u : users) {
-            if (u.getEmail().equals(email)) {
-                return u;
-            }
-        }
-        return null;    
-    }
-
-
-
-    public void registerUser(RegistrationScreen regScreen) {
-
-        String nome = regScreen.txtNome.getText();
-        String sobrenome = regScreen.txtSobrenome.getText();
-        String cpf = regScreen.txtCpf.getText();
-        String password = new String(regScreen.txtSenha.getPassword());
-        String passwordConfirmation = new String(regScreen.txtConfirmarSenha.getPassword());
-        String email = regScreen.txtEmail.getText();
-        
-
-        if(!(password.equals(passwordConfirmation))) {
-            System.out.println("Password and confirmation do not match.");    
-        }
-
-        if(findUserByEmail(email) != null) {
-            System.out.println("Email already registered.");
-            return;
-        }
-        
-        User newUser = new User(nome, sobrenome, email, cpf, password);
-        users.add(newUser);
-
-        try (PrintWriter writer = new PrintWriter(new FileWriter("src/data/files/Users.csv", true))) {
-            writer.println(newUser.getId() + "," + nome + "," + sobrenome + "," + email + "," + cpf + "," + password);
-        }
-
-         catch (IOException e) {
-            System.out.println("Erro ao salvar usuário em CSV: " + e.getMessage());
-        }
-
-    System.out.println("User registered successfully.");
-    regScreen.dispose();
-    LoginScreen loginScreen = new LoginScreen();
-    LoginController loginController = new LoginController(loginScreen);
-    loginScreen.setVisible(true);
+    public boolean registerUser(String nome, String sobrenome, String email, String cpf, String senha, String confirmacao) {
+        return userService.registerUser(nome, sobrenome, email, cpf, senha, confirmacao);
 }
 
-
-
     public void printUsers() {
-        for (User u : users) {
-            System.out.println(u);
-        }
+        userService.printUsers();
     }
 
 
