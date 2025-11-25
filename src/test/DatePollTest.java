@@ -6,8 +6,8 @@ import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 
-import com.DatePoll;
 import com.AppSystem;
+import com.model.DatePoll;
 
 public class DatePollTest {
 

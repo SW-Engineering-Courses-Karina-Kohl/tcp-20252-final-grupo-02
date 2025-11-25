@@ -8,6 +8,12 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import org.tinylog.Logger;
 
+import com.model.Book;
+import com.model.BookClub;
+import com.model.Meeting;
+import com.model.Poll;
+import com.model.User;
+import com.service.*;
 
 import design.view.RegistrationScreen;
 
@@ -184,37 +190,7 @@ public ArrayList<Book> getBooks() {
 
 
     public boolean alterPassword(String email, String newPassword, String passwordConfirmation) {
-        if (!newPassword.equals(passwordConfirmation)) {
-            System.out.println("A nova senha e a confirmação não coincidem.");
-            return false;
-        }
-
-        boolean userFound = false;
-
-        for (User u : users) {
-            if (u.getEmail().equals(email)) {
-                u.setPassword(newPassword);
-                userFound = true;
-                break;
-            }
-        }
-
-        if (!userFound) {
-            System.out.println("Usuário com o email fornecido não encontrado.");
-            return false;
-        }
-
-        try (PrintWriter writer = new PrintWriter(new FileWriter("users.txt"))) {
-            for (User u : users) {
-                writer.println(u.toCsvLine());
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao atualizar a senha no arquivo CSV: " + e.getMessage());
-            return false;
-        }
-
-        System.out.println("Senha atualizada com sucesso.");
-        return true;
+        return userService.alterPassword(email, newPassword, passwordConfirmation);
     }
 
     // Funções para livros 

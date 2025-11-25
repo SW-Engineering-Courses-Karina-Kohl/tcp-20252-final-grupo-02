@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.Creator;
 import com.AppSystem;
+import com.model.Creator;
 
 public class CreatorTest {
 

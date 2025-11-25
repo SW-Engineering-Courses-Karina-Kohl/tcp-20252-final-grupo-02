@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.BookClub;
-import com.Creator;
+import com.model.BookClub;
+import com.model.Creator;
 import com.AppSystem;
 
 public class BookClubTest {

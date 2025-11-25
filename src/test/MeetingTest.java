@@ -6,9 +6,9 @@ import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 
-import com.Creator;
 import com.AppSystem;
-import com.Meeting;
+import com.model.Creator;
+import com.model.Meeting;
 
 public class MeetingTest {
 

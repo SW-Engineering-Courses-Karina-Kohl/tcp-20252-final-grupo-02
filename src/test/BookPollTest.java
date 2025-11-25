@@ -7,7 +7,7 @@ import java.util.Date;
 import org.junit.jupiter.api.Test;
 
 import com.AppSystem;
-import com.BookPoll;
+import com.model.BookPoll;
 
 
 public class BookPollTest {

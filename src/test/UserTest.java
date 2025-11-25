@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import com.AppSystem;
-import com.User;
+import com.model.User;
 
 public class UserTest {
 

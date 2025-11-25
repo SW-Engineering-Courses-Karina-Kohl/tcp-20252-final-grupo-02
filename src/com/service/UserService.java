@@ -1,17 +1,20 @@
-package com;
+package com.service;
 
 import java.io.*;
 import java.util.ArrayList;
+import com.model.User;
+import com.repository.UserRepository;
 import design.view.RegistrationScreen;
 
 public class UserService {
 
-    private static final String PATH = "users.txt";
+    private final UserRepository repo;
+    private final ArrayList<User> users;
 
-    private final ArrayList<User> users = new ArrayList<>();
 
     public UserService() {
-        loadAll();         
+        this.repo = new UserRepository();
+        this.users = repo.loadAll();
         syncIdCounter();   
     }
 
@@ -38,37 +41,11 @@ public class UserService {
     User novo = new User(nome, sobrenome, email, cpf, senha);
     users.add(novo);
 
-    saveAll();
+    repo.saveAll(users);
     return true;
 }
 
-    /* public boolean registerUserUI(String nome, String sobrenome, String email, String cpf,
-                            String senha, String confirmacao) {
-
-    if (nome.isBlank() || sobrenome.isBlank() || email.isBlank() || cpf.isBlank()
-            || senha.isBlank() || confirmacao.isBlank()) {
-        System.out.println("Há campos vazios.");
-        return false;
-    }
-
-    if (!senha.equals(confirmacao)) {
-        System.out.println("Password and confirmation do not match.");
-        return false;
-    }
-
-    if (findUserByEmail(email) != null) {
-        System.out.println("Email já cadastrado.");
-        return false;
-    }
-
-    User novo = new User(nome, sobrenome, email, cpf, senha);
-    users.add(novo);
-
-    saveAll();
-
-    return true;
-}   */
-
+   
     public User findUserByEmail(String email) {
         for (User u : users) {
             if (u.getEmail().equalsIgnoreCase(email)) return u;
@@ -90,35 +67,7 @@ public class UserService {
 }
 
 
-    private void loadAll() {
-        users.clear();
-        File f = new File(PATH);
-        if (!f.exists()) {
-            System.out.println("Users file not found. Creating users file.");
-            return;
-        }
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(f))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",", -1);
-                if (parts.length < 6) continue;
-
-                int id         = Integer.parseInt(parts[0].trim());
-                String name    = parts[1];
-                String surname = parts[2];
-                String email   = parts[3];
-                String cpf     = parts[4];
-                String pass    = parts[5];
-
-                users.add(new User(id, name, surname, email, cpf, pass));
-            }
-        } catch (IOException e) {
-            System.out.println("Error at reading users: " + e.getMessage());
-        }
-
-        System.out.println("Total users: " + users.size());
-    }
+    
 
     private void syncIdCounter() {
         int max = 0;
@@ -126,17 +75,9 @@ public class UserService {
         User.setNumUsersCreated(max);
     }
 
-    private void saveAll() {
-        try (PrintWriter w = new PrintWriter(new FileWriter(PATH))) {
-            for (User u : users) {
-                w.println(u.toCsvLine());
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao salvar users.txt: " + e.getMessage());
-        }
-    }
 
-        public ArrayList<User> readUsers() {
+
+    public ArrayList<User> readUsers() {
         File f = new File("users.txt");
         //Garante que a lista de usuários está vazia antes de ler
         users.clear();
@@ -173,6 +114,39 @@ public class UserService {
         }
     }
 
+        public boolean alterPassword(String email, String newPassword, String passwordConfirmation) {
+            if (!newPassword.equals(passwordConfirmation)) {
+                System.out.println("A nova senha e a confirmação não coincidem.");
+                return false;
+            }
+
+            boolean userFound = false;
+
+            for (User u : users) {
+                if (u.getEmail().equals(email)) {
+                    u.setPassword(newPassword);
+                    userFound = true;
+                    break;
+                }
+            }
+
+            if (!userFound) {
+                System.out.println("Usuário com o email fornecido não encontrado.");
+                return false;
+            }
+
+            try (PrintWriter writer = new PrintWriter(new FileWriter("users.txt"))) {
+                for (User u : users) {
+                    writer.println(u.toCsvLine());
+                }
+            } catch (IOException e) {
+                System.out.println("Erro ao atualizar a senha no arquivo CSV: " + e.getMessage());
+                return false;
+            }
+
+            System.out.println("Senha atualizada com sucesso.");
+            return true;
+        }
 
 
 }
