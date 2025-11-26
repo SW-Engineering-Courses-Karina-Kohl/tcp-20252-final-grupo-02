@@ -308,7 +308,7 @@ public class AppSystem {
         return true;
     }
 
-    // Funções para livros 
+    // Chamada de BookService 
     public ArrayList<Book> readBooks() {
         return bookService.getBooks();
     }

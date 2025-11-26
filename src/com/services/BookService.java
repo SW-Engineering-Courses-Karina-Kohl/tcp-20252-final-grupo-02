@@ -13,9 +13,7 @@ public class BookService {
         loadBooks();
     }
 
-    // -------------------------
-    // LEITURA DO ARQUIVO
-    // -------------------------
+
     public ArrayList<Book> loadBooks() {
 
         books.clear();
@@ -61,9 +59,7 @@ public class BookService {
         return books;
     }
 
-    // -------------------------
-    // FIND
-    // -------------------------
+
     public Book findBookByIsbn(String isbn) {
         for (Book b : books) {
             if (b.getIsbn().equals(isbn)) {
@@ -73,9 +69,6 @@ public class BookService {
         return null;
     }
 
-    // -------------------------
-    // REGISTER
-    // -------------------------
     public boolean registerBook(String title, String author, String isbn,
                                 int releaseYear, int numPages, String genre) {
 
@@ -106,18 +99,14 @@ public class BookService {
         return true;
     }
 
-    // -------------------------
-    // PRINT
-    // -------------------------
+ 
     public void printBooks() {
         for (Book b : books) {
             System.out.println(b);
         }
     }
 
-    // -------------------------
-    // GET LIST
-    // -------------------------
+    
     public ArrayList<Book> getBooks() {
         return books;
     }
