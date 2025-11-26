@@ -1,6 +1,6 @@
 
 <div align="center">
-  <img src="img/icon.png" width="15%"> <img src="img/logo.png" width="25%">
+  <img src="img/logo.png" width="50%"> 
 </div>
 
 ## Definição
