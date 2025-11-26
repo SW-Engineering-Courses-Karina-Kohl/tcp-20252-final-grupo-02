@@ -6,7 +6,6 @@ import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
 
-
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -19,7 +18,7 @@ import design.view.LoginScreen;
 public class Main {
 	
     public static void main(String[] args) {
-
+    	
         applyCustomFont();
 
 		AppSystem appSystem = new AppSystem();
