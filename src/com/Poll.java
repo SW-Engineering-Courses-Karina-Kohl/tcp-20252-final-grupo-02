@@ -2,6 +2,8 @@ package com;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.tinylog.Logger;
+
 public abstract class Poll {
 	
 	private int id;
@@ -71,12 +73,16 @@ public abstract class Poll {
 	protected void registerVote(User user, int optionIndex) {
        
         if (voters.contains(user)) {
-            System.out.println("Usuário já votou.");
+        	
+            Logger.error("Usuário já votou.");
+            
             return;
+            
         }
 
         votes.add(optionIndex);
         voters.add(user);
+        
     }
 
 }

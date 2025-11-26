@@ -13,43 +13,59 @@ public class PasswordField extends JPasswordField {
 	private static final long serialVersionUID = 1L;
 	
     private String placeholder;
-    private boolean showingPlaceholder = true;
+    private boolean isPlaceholderVisible = true;
 
     public PasswordField (String placeholder) {
+    	
         this.placeholder = placeholder;
 
         setBackground(Constants.YELLOW); 
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        // setBorder(BorderFactory.createLineBorder(constants.BLACK, 1));
         setMaximumSize(new Dimension(Constants.DIMENSION_FIELD_WIDTH, Constants.DIMENSION_FIELD_HEIGHT));
         setPreferredSize(new Dimension(Constants.DIMENSION_FIELD_WIDTH, Constants.DIMENSION_FIELD_HEIGHT));
 
-        setText(placeholder);
+        setText(this.placeholder);
         setForeground(Color.GRAY);
 
         addFocusListener(new FocusListener() {
-            @Override
+        	
+        	@Override
             public void focusGained(FocusEvent e) {
-                if (showingPlaceholder) {
+        		
+                if (isPlaceholderVisible) {
+                	
                     setText("");
                     setForeground(Color.BLACK);
-                    showingPlaceholder = false;
+                    isPlaceholderVisible = false;
+                    
                 }
+                
             }
 
             @Override
             public void focusLost(FocusEvent e) {
+            	
                 if (getText().isEmpty()) {
+                	
                     setText(placeholder);
                     setForeground(Color.GRAY);
-                    showingPlaceholder = true;
+                    isPlaceholderVisible = true;
+                    
                 }
+                
             }
+            
         });
+        
     }
 
     @Override
     public String getText() {
-        return showingPlaceholder ? "" : super.getText();
+    	
+    	if (isPlaceholderVisible) return "";
+
+    	return super.getText();
+        
     }
+    
 }

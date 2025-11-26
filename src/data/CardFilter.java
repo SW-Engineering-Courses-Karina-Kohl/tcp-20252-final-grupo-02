@@ -5,34 +5,43 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+import org.tinylog.Logger;
+
 public class CardFilter {
+	
+	private static final int ENTRIES_PER_LINE = 4;
 
     public List<CardData> getFilteredCards(String csvPath) {
 
         List<CardData> cards = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(csvPath))) {
+        try (BufferedReader buffer = new BufferedReader(new FileReader(csvPath))) {
+        	
             String line;
 
-            while ((line = br.readLine()) != null) {
-                // remove espaços ao redor para evitar erros
+            while ((line = buffer.readLine()) != null) {
+ 
                 String[] data = line.split(",");
 
-                if (data.length < 4) {
-                    continue; // ignora linhas incompletas
-                }
+                if (data.length < ENTRIES_PER_LINE) continue;
+          
                 String group = data[0].trim();
                 String info = data[1].trim();
                 String date = data[2].trim();
                 String format = data[3].trim();
 
                 cards.add(new CardData(group, info, date, format));
+                
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+        	
+        	Logger.error("Erro ao acessar o arquivo: " + exception.getStackTrace());
+            
         }
 
         return cards;
+        
     }
+    
 }

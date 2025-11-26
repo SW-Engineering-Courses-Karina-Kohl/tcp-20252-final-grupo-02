@@ -1,34 +1,43 @@
 package com;
 
+import design.view.VerifyUserInfo;
 import design.view.ResetPasswordScreen;
-import design.view.ResetPasswordScreen1;
 
 public class ResetPasswordController {
+	
+     private VerifyUserInfo verifyUserInfo;
      private ResetPasswordScreen resetPasswordScreen;
-     private ResetPasswordScreen1 resetPasswordScreen1;
 
-    public ResetPasswordController(ResetPasswordScreen resetPasswordScreen, ResetPasswordScreen1 resetPasswordScreen1) {
+     public ResetPasswordController(VerifyUserInfo verifyUserInfo, ResetPasswordScreen resetPasswordScreen) {
+    	 
+        this.verifyUserInfo = verifyUserInfo;
         this.resetPasswordScreen = resetPasswordScreen;
-        this.resetPasswordScreen1 = resetPasswordScreen1;
+        
         initController();
+        
     }
 
     private void initController() {
-        resetPasswordScreen.btnVerify.addActionListener(e -> handleVerify());
-        resetPasswordScreen1.btnCadastrar.addActionListener(e -> handleCadastrar());   
+    	
+        verifyUserInfo.btnVerifyUserInfo.addActionListener(e -> handleVerifyUserInfo());
+        resetPasswordScreen.btnChangePassword.addActionListener(e -> handleChangePassword());  
+        
     }
 
-    private void handleVerify() {
-        // Lógica para verificar o e-mail ou CPF
-        System.out.println("Verificando e-mail/CPF...");
-        resetPasswordScreen.dispose();
-        handleCadastrar();
+    private void handleVerifyUserInfo() {
+
+        verifyUserInfo.dispose();
+        
+        handleChangePassword();
+        
     }
 
-    private void handleCadastrar() {
-        // Lógica para cadastrar a nova senha
-        resetPasswordScreen.dispose();
-        resetPasswordScreen1.setVisible(true);
+    private void handleChangePassword() {
+    	
+        verifyUserInfo.dispose();
+        
+        resetPasswordScreen.setVisible(true);
+        
     }
 
 }

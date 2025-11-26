@@ -10,39 +10,48 @@ import design.view.components.ButtonComponent;
 import design.view.components.TextField;
 
 public class ResetPasswordScreen extends JFrame {
-	
+
 	private static final long serialVersionUID = 1L;
-
-    public JButton btnVerify;
-    public JTextField txtEmailCpf;
-
+	
+	public JButton btnChangePassword;
+	public JTextField txtConfirmPassword;
+	public JTextField txtPassword;
+    
     public ResetPasswordScreen() {
 
-        setTitle("Reset Password Screen");
+    	setTitle("Bookly - Recuperação de senha");
         setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        JPanel resetPanel = new JPanel();
-        resetPanel.setLayout(new BoxLayout(resetPanel, BoxLayout.Y_AXIS));
-        resetPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        JPanel resetPasswordPanel = new JPanel();
+        resetPasswordPanel.setLayout(new BoxLayout(resetPasswordPanel, BoxLayout.Y_AXIS));
+        resetPasswordPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-    
-        JLabel lblEmailCpf = new JLabel("DIGITE SEU E-MAIL OU CPF");
-        lblEmailCpf.setAlignmentX(Component.CENTER_ALIGNMENT);
-        txtEmailCpf = new TextField("E-MAIL OU CPF");
+        JLabel lblPassword = new JLabel("DIGITE A NOVA SENHA:");
+        lblPassword.setAlignmentX(Component.CENTER_ALIGNMENT);
+        txtPassword = new TextField("*******");
 
-        btnVerify = new ButtonComponent("VERIFICAR");
+        JLabel lblConfirmPassword = new JLabel("CONFIRME A NOVA SENHA:");
+        lblConfirmPassword.setAlignmentX(Component.CENTER_ALIGNMENT);
+        txtConfirmPassword = new TextField("*******");
 
-        resetPanel.add(Box.createVerticalGlue());
-        resetPanel.add(lblEmailCpf);
-        resetPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-        resetPanel.add(txtEmailCpf);
-        resetPanel.add(Box.createRigidArea(new Dimension(0, 35)));
-        resetPanel.add(btnVerify);
-        resetPanel.add(Box.createVerticalGlue());
+        btnChangePassword = new ButtonComponent("TROCAR SENHA");
 
-        add(resetPanel);
+        resetPasswordPanel.add(Box.createVerticalGlue());
+        resetPasswordPanel.add(lblPassword);
+        resetPasswordPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        resetPasswordPanel.add(txtPassword);
+        resetPasswordPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        resetPasswordPanel.add(lblConfirmPassword);
+        resetPasswordPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        resetPasswordPanel.add(txtConfirmPassword);
+        resetPasswordPanel.add(Box.createRigidArea(new Dimension(0, 35)));
+        resetPasswordPanel.add(btnChangePassword);
+        resetPasswordPanel.add(Box.createVerticalGlue());
+
+        add(resetPasswordPanel);
+        
     }
-    
+
 }

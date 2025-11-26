@@ -16,10 +16,9 @@ public class ButtonComponent extends JButton {
 
         setText(text);
         setBackground(Constants.BLUE);
-        // setForeground(constants.BLACK);
         setBorder(BorderFactory.createLineBorder(Constants.DARK_BLUE, 2, true));
         setBorderPainted(true);
-        setOpaque(true); // Necessário para a cor de fundo funcionar em alguns SOs
+        setOpaque(true);
         setAlignmentX(Component.CENTER_ALIGNMENT);
         setMaximumSize(new Dimension(Constants.BUTTON_WIDTH, Constants.BUTTON_HEIGHT));
         setPreferredSize(new Dimension(Constants.BUTTON_WIDTH, Constants.BUTTON_HEIGHT));

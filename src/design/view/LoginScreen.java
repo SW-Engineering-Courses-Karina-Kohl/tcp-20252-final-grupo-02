@@ -14,15 +14,15 @@ public class LoginScreen extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	
-    public JButton btnEntrar;
-    public JButton btnCadastrar;
-    public JButton btnEsqueceuSenha;
-    public JPasswordField txtSenha;
-    public JTextField txtEmailCpf;
+	public JButton btnForgotPassword;
+    public JButton btnLogin;
+    public JButton btnSignin;
+    public JPasswordField txtPassword;
+    public JTextField txtUserInfo;
 
     public LoginScreen() {
 
-        setTitle("Login Screen");
+        setTitle("Bookly - Login");
         setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -31,51 +31,42 @@ public class LoginScreen extends JFrame {
         loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.Y_AXIS));
         loginPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        // --- Componentes ---
-        // label
-        JLabel lblEmailCpf = new JLabel("DIGITE SEU E-MAIL OU CPF");
-        lblEmailCpf.setAlignmentX(Component.CENTER_ALIGNMENT);
-        // 2. Campo de Texto "E-mail ou CPF"
-        txtEmailCpf = new TextField("E-mail ou CPF");
+        JLabel lblUserInfo = new JLabel("DIGITE SEU E-MAIL OU CPF:");
+        lblUserInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
+        txtUserInfo = new TextField("E-mail ou CPF");
 
-        // 3. label
-        JLabel lblSenha = new JLabel("DIGITE SUA SENHA");
-        lblSenha.setAlignmentX(Component.CENTER_ALIGNMENT);
-        // 4. Campo de Senha
-        txtSenha = new PasswordField("*********");
+        JLabel lblPassword = new JLabel("DIGITE SUA SENHA:");
+        lblPassword.setAlignmentX(Component.CENTER_ALIGNMENT);
+        txtPassword = new PasswordField("********");
        
-        // 5. Botão "ENTRAR"
-        btnEntrar = new ButtonComponent("ENTRAR");
+        btnLogin = new ButtonComponent("ENTRAR");
+        btnSignin = new ButtonComponent("CADASTRAR");
 
-        // 6. Botão "CADASTRAR"
-        btnCadastrar = new ButtonComponent("CADASTRAR");
+        btnForgotPassword = new JButton("ESQUECEU SUA SENHA?");
+        btnForgotPassword.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnForgotPassword.setFont(new Font("Excalifont", Font.PLAIN, 12));
+        btnForgotPassword.setBorderPainted(false);
+        btnForgotPassword.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnForgotPassword.setBackground(Color.WHITE);
 
-        // 7.label
-        btnEsqueceuSenha = new JButton("ESQUECEU SUA SENHA");
-        btnEsqueceuSenha.setAlignmentX(Component.CENTER_ALIGNMENT);
-        btnEsqueceuSenha.setFont(new Font("Excalifont", Font.PLAIN, 12));
-        btnEsqueceuSenha.setBorderPainted(false); // Remove a borda
-        btnEsqueceuSenha.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnEsqueceuSenha.setBackground(Color.WHITE);
-
-        // --- Adicionando componentes ao Painel Principal ---
         loginPanel.add(Box.createVerticalGlue());
-        loginPanel.add(lblEmailCpf);
+        loginPanel.add(lblUserInfo);
         loginPanel.add(Box.createRigidArea(new Dimension(0, 5)));
-        loginPanel.add(txtEmailCpf);
+        loginPanel.add(txtUserInfo);
         loginPanel.add(Box.createRigidArea(new Dimension(0, 15)));
-        loginPanel.add(lblSenha);
+        loginPanel.add(lblPassword);
         loginPanel.add(Box.createRigidArea(new Dimension(0, 5)));
-        loginPanel.add(txtSenha);
+        loginPanel.add(txtPassword);
         loginPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-        loginPanel.add(btnEntrar);
+        loginPanel.add(btnLogin);
         loginPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        loginPanel.add(btnCadastrar);
+        loginPanel.add(btnSignin);
         loginPanel.add(Box.createRigidArea(new Dimension(0, 15)));
-        loginPanel.add(btnEsqueceuSenha);
+        loginPanel.add(btnForgotPassword);
         loginPanel.add(Box.createVerticalGlue());
 
         add(loginPanel);
 
     }
+    
 }

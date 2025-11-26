@@ -22,28 +22,32 @@ public class AppSystem {
 	private ArrayList<Poll> polls;
 
     public AppSystem(RegistrationScreen regScreen) {
+    	
         this.users = new ArrayList<User>();
         this.books = new ArrayList<Book>();
         this.bookClubs = new ArrayList<BookClub>();
         this.meetings = new ArrayList<Meeting>();
         this.polls = new ArrayList<Poll>();
+        
         this.regScreen = regScreen;
+        
         initController();
-        // Carrega os arrays com os arquivos toda vez que o programa é iniciado
-         readUsers();
-         readBooks();
+        readUsers();
+        readBooks();
+        
     }
 
     public AppSystem() {
+    	
         this.users = new ArrayList<User>();
         this.books = new ArrayList<Book>();
         this.bookClubs = new ArrayList<BookClub>();
         this.meetings = new ArrayList<Meeting>();
         this.polls = new ArrayList<Poll>();
+        
     }
 
-
-public ArrayList<Book> getBooks() {
+    public ArrayList<Book> getBooks() {
 		
 		Logger.info("Lista de livros retornada com sucesso");
 		
@@ -115,9 +119,6 @@ public ArrayList<Book> getBooks() {
 		
 	}
 
-
-
-
 	public ArrayList<Poll> getPolls() {
 		
 		Logger.info("Lista de votações retornada com sucesso");
@@ -165,31 +166,35 @@ public ArrayList<Book> getBooks() {
 		Logger.info("Usuário excluído com sucesso");
 		
 	}
-    
-
-
-
-// Funções para usuário 
 
     private void initController() {
-        regScreen.btnCadastrar.addActionListener(e -> registerUser(regScreen));
+    	
+        regScreen.btnSignin.addActionListener(e -> registerUser(regScreen));
+        
     }
 
-
-
     public ArrayList<User> readUsers() {
-        File f = new File("users.txt");
-        //Garante que a lista de usuários está vazia antes de ler
+    	
+        File usersFile = new File("src/data/files/Users.csv");
+        
         users.clear();
-        if (!f.exists()) {
-            System.out.println("Users file not found. Creating users file.");
+        
+        if (!usersFile.exists()) {
+        	
+            Logger.info("Arquivo de usuários não encontrado. Criando um novo arquivo...");
+            
             return users;
+            
         }
-        try (BufferedReader reader = new BufferedReader(new FileReader(f))) {
+        
+        try (BufferedReader reader = new BufferedReader(new FileReader(usersFile))) {
+        	
             String line = "";
-            while ((line = reader.readLine()) != null) {                
-                // Esse -1 preserva campos vazios
+            
+            while ((line = reader.readLine()) != null) {     
+            	
                 String[] parts = line.split(",", -1);
+                
                 int id = Integer.parseInt(parts[0].trim());
                 String name = parts[1];
                 String surname = parts[2];
@@ -197,141 +202,168 @@ public ArrayList<Book> getBooks() {
                 String cpf = parts[4];
                 String password = parts[5];
 
-                User u = new User(id, name, surname, email, cpf, password);
-                users.add(u);
+                User newUser = new User(id, name, surname, email, cpf, password);
+                
+                users.add(newUser);
+                
             }
-        } catch (IOException e) {
-            System.out.println("Error at reading users: " + e.getMessage());
+            
+        } catch (IOException exception) {
+        	
+            Logger.error("Erro ao ler o arquivo de usuários: " + exception.getMessage());
+            
         }
 
-        System.out.println("Total users: " + users.size());
+        Logger.info("Usuários encontrados: " + users.size());
+        
         return users;
+        
     }
-
-
 
     public User findUserByEmail(String email) {
-        for (User u : users) {
-            if (u.getEmail().equals(email)) {
-                return u;
-            }
-        }
-        return null;    
+    	
+        for (User user : users) if (user.getEmail().equals(email)) return user;
+
+        return null;   
+        
     }
-
-
 
     public void registerUser(RegistrationScreen regScreen) {
 
-        String nome = regScreen.txtNome.getText();
-        String sobrenome = regScreen.txtSobrenome.getText();
+        String name = regScreen.txtName.getText();
+        String surname = regScreen.txtSurname.getText();
         String cpf = regScreen.txtCpf.getText();
-        String password = new String(regScreen.txtSenha.getPassword());
-        String passwordConfirmation = new String(regScreen.txtConfirmarSenha.getPassword());
+        String password = new String(regScreen.txtPassword.getPassword());
+        String passwordConfirmation = new String(regScreen.txtConfirmPassword.getPassword());
         String email = regScreen.txtEmail.getText();
         
-
-        if(!(password.equals(passwordConfirmation))) {
-            System.out.println("Password and confirmation do not match.");    
+        if (!(password.equals(passwordConfirmation))) {
+        	
+        	Logger.error("As senhas não coincidem!");
+        	
+        	return;
+        	
         }
 
-        if(findUserByEmail(email) != null) {
-            System.out.println("Email already registered.");
+        if (findUserByEmail(email) != null) {
+        	
+            Logger.error("Endereço de e-mail já registrado!");
+            
             return;
+            
         }
         
-        User newUser = new User(nome, sobrenome, email, cpf, password);
+        User newUser = new User(name, surname, email, cpf, password);
         users.add(newUser);
 
         try (PrintWriter writer = new PrintWriter(new FileWriter("src/data/files/Users.csv", true))) {
-            writer.println(newUser.getId() + "," + nome + "," + sobrenome + "," + email + "," + cpf + "," + password);
+        	
+            writer.println(newUser.getId() + "," + name + "," + surname + "," + email + "," + cpf + "," + password);
+            
+        } catch (IOException e) {
+        	
+            Logger.error("Erro ao salvar usuário em arquivo: " + e.getMessage());
+            
         }
 
-         catch (IOException e) {
-            System.out.println("Erro ao salvar usuário em CSV: " + e.getMessage());
-        }
-
-    System.out.println("User registered successfully.");
-    regScreen.dispose();
-    LoginScreen loginScreen = new LoginScreen();
-    LoginController loginController = new LoginController(loginScreen);
-    loginScreen.setVisible(true);
-}
-
-
-
-    public void printUsers() {
-        for (User u : users) {
-            System.out.println(u);
-        }
+        Logger.info("Usuário registrado com sucesso!");
+        
+        regScreen.dispose();
+    
+        LoginScreen loginScreen = new LoginScreen();
+        loginScreen.setVisible(true);
+        
+        LoginController loginController = new LoginController(loginScreen);
+   
     }
 
-
-
-    public boolean alterPassword(String email, String newPassword, String passwordConfirmation) {
+    public void printAllUsers() {
+       
+    	for (User user : users) System.out.println(user);
+            
+    }
+    
+    public boolean changePassword(String email, String newPassword, String passwordConfirmation) {
+    	
         if (!newPassword.equals(passwordConfirmation)) {
-            System.out.println("A nova senha e a confirmação não coincidem.");
+        	
+            Logger.error("As senhas não coincidem!");
+            
             return false;
+            
         }
 
         boolean userFound = false;
 
-        for (User u : users) {
-            if (u.getEmail().equals(email)) {
-                u.setPassword(newPassword);
+        for (User user : users) {
+        	
+            if (user.getEmail().equals(email)) {
+            	
+                user.setPassword(newPassword);
                 userFound = true;
+                
                 break;
+                
             }
+            
         }
 
         if (!userFound) {
-            System.out.println("Usuário com o email fornecido não encontrado.");
+        	
+            Logger.error("Usuário não encontrado!");
+            
             return false;
+            
         }
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter("users.txt"))) {
-            for (User u : users) {
-                writer.println(u.toCsvLine());
-            }
+        try (PrintWriter writer = new PrintWriter(new FileWriter("src/data/files/Users.csv"))) {
+        	
+        	for (User u : users) writer.println(u.toCsvLine());
+               
         } catch (IOException e) {
-            System.out.println("Erro ao atualizar a senha no arquivo CSV: " + e.getMessage());
+        	
+            Logger.error("Erro ao atualizar a senha no arquivo CSV: " + e.getMessage());
+            
             return false;
+            
         }
-
-        System.out.println("Senha atualizada com sucesso.");
-        return true;
-    }
-
-    // Funções para livros 
-    public Book findBookByIsbn(String isbn) {
-        for (Book b : books) {
-            if (b.getIsbn().equals(isbn)) {
-                return b;
-            }
-        }
-        return null;
-    }
-
-
-
-        public ArrayList<Book> readBooks() {
-        File f = new File("books.txt");
         
-        // Garante que a lista de usuários está vazia antes de ler
+        return true;
+        
+    }
+
+    public Book findBookByIsbn(String isbn) {
+    	
+        for (Book book : books) {
+        	
+            if (book.getIsbn().equals(isbn)) return book;
+
+        }
+        
+        return null;
+        
+    }
+    
+    public ArrayList<Book> readBooks() {
+        
+    	File booksFile = new File("books.txt");
+        
         books.clear();
 
-        if (!f.exists()) {
-            System.out.println("Books file not found. Creating books file.");
+        if (!booksFile.exists()) {
+        	
+            Logger.info("Arquivo de livros não encontrado. Criando um novo arquivo...");
+            
             return books;
+            
         }
 
-
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(f))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(booksFile))) {
+        	
             String line = "";
+            
             while ((line = reader.readLine()) != null) {
                 
-                // Esse -1 preserva campos vazios
                 String[] parts = line.split(",", -1);
                 String id = parts[0];
                 String title = parts[1];
@@ -341,7 +373,7 @@ public ArrayList<Book> getBooks() {
                 String numPages = parts[5];   
                 String genre = parts[6];
 
-                Book b = new Book(
+                Book newBook = new Book(
                     Integer.parseInt(id.trim()),
                     title, 
                     author, 
@@ -351,57 +383,53 @@ public ArrayList<Book> getBooks() {
                     genre
                 );
                 
-                books.add(b);
+                books.add(newBook);
+                
             }
+            
         } catch (IOException e) {
-            System.out.println("Error at reading books: " + e.getMessage());
+        	
+            Logger.error("Erro ao ler o arquivo de livros: " + e.getMessage());
+            
         }
-
-        System.out.println("Total books: " + books.size());
-        return books;
-    }
-
-
-
-    public boolean registerBook(String title, String author, String isbn, int releaseYear, 
-        int numPages, String genre) {
         
-
-        if(findBookByIsbn(isbn) != null) {
-            System.out.println("Book with this ISBN already registered.");
+        return books;
+        
+    }
+    
+    public boolean registerBook(String title, String author, String isbn, int releaseYear, int numPages, String genre) {
+        
+        if (findBookByIsbn(isbn) != null) {
+        	
+            Logger.error("Livro com o mesmo ISBN informado já cadastrado!");
+            
             return false;
+            
         }
         
         Book newBook = new Book(title, author, isbn, releaseYear, numPages, genre);
-        books.add(newBook);
-        
+        books.add(newBook);    
 
         try (PrintWriter writer = new PrintWriter(new FileWriter("books.txt", true))) {
+        	
             writer.println(newBook.getId() + "," + title +  "," + author + "," + isbn + "," + releaseYear + "," + numPages + "," + genre);
+            
+        } catch (IOException e) {
+        	 
+            Logger.error("Erro ao salvar livro em arquivo: " + e.getMessage());
+            
         }
 
-         catch (IOException e) {
-            System.out.println("Erro ao salvar livro em CSV" + e.getMessage());
-        }
+        Logger.info("Livro registrado com sucesso!");
 
-    System.out.println("Livro registrado com sucesso.");
-
-    return true;
-    }
-    public void printBooks() {
-        for (Book b : books) {
-            System.out.println(b);
-        }
-    }
-
-
+        return true;
     
+    }
+    
+    public void printAllBooks() {
+    	
+        for (Book book : books) System.out.println(book);
+        
+    }
     
 }
-
-
-
-
-
-
-
