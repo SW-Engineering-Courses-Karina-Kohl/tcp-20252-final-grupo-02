@@ -1,6 +1,7 @@
-# Bookly
 
-![Logo](img/logo.png)
+<div align="center">
+  <img src="img/icon.png" width="15%"> <img src="img/logo.png" width="25%">
+</div>
 
 ## Definição
 
