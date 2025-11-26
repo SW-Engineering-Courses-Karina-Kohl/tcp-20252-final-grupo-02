@@ -6,8 +6,9 @@ import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 
+import com.AppSystem;
 import com.BookPoll;
-import com.Main;
+
 
 public class BookPollTest {
 
@@ -35,11 +36,10 @@ public class BookPollTest {
 		
 		BookPoll newBookPoll = new BookPoll(closingDate);
 		
-		Main main = new Main();
+		AppSystem appSystem = new AppSystem();		
+		appSystem.createPoll(newBookPoll);
 		
-		main.createPoll(newBookPoll);
-		
-		assertEquals(1, main.getPolls().size());
+		assertEquals(1, appSystem.getPolls().size());
 		
 	}
 	
@@ -50,12 +50,12 @@ public class BookPollTest {
 		
 		BookPoll newBookPoll = new BookPoll(closingDate);
 		
-		Main main = new Main();
+		AppSystem appSystem = new AppSystem();
 		
-		main.createPoll(newBookPoll);
-		main.deletePoll(newBookPoll);
+		appSystem.createPoll(newBookPoll);
+		appSystem.deletePoll(newBookPoll);
 		
-		assertEquals(0, main.getPolls().size());
+		assertEquals(0, appSystem.getPolls().size());
 		
 	}
 

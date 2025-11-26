@@ -4,21 +4,23 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class BookPoll extends Poll {
-	
-	private ArrayList<Book> options;
-	
-	public BookPoll(Date closingDate) {
-		
-		super(closingDate);
-		
-		this.options = new ArrayList<Book>();
-		
-	}
-	
-	public ArrayList<Book> getOptions() {
-		
-		return this.options;
-		
-	}
 
+    private ArrayList<Book> bookOptions;
+
+  public BookPoll(Date closingDate) {
+        super(closingDate);
+        this.bookOptions = new ArrayList<>();
+    }
+
+
+    @Override
+    public void vote(User user, int optionIndex) {
+        super.registerVote(user, optionIndex);
+        System.out.println("Voto registrado no livro: " + bookOptions.get(optionIndex).getTitle());
+    }
+
+
+    public ArrayList<Book> getOptions() {
+        return this.bookOptions;
+    }
 }

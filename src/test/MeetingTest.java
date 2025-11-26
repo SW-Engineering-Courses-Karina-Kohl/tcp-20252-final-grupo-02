@@ -7,7 +7,7 @@ import java.util.Date;
 import org.junit.jupiter.api.Test;
 
 import com.Creator;
-import com.Main;
+import com.AppSystem;
 import com.Meeting;
 
 public class MeetingTest {
@@ -15,7 +15,7 @@ public class MeetingTest {
 	@Test
 	public void testConstructor() {
 		
-		Creator newCreator = new Creator("Matheus", "Candiotto", "matheus.candiotto@ufrgs.br", "SenhaMuitoSegura");
+		Creator newCreator = new Creator("Matheus", "Candiotto", "012345678-90", "matheus.candiotto@ufrgs.br", "SenhaMuitoSegura");
 		
 		String type = "Presencial";
 		Date date = new Date();
@@ -35,7 +35,7 @@ public class MeetingTest {
 	@Test
 	public void testCreateMeeting() {
 		
-		Creator newCreator = new Creator("Matheus", "Candiotto", "matheus.candiotto@ufrgs.br", "SenhaMuitoSegura");
+		Creator newCreator = new Creator("Matheus", "Candiotto", "012345678-90", "matheus.candiotto@ufrgs.br", "SenhaMuitoSegura");
 		
 		String type = "Presencial";
 		Date date = new Date();
@@ -43,18 +43,18 @@ public class MeetingTest {
 		
 		Meeting newMeeting = new Meeting(newCreator, type, date, location);
 		
-		Main main = new Main();
+		AppSystem appSystem = new AppSystem();
 		
-		main.createMeeting(newMeeting);
+		appSystem.createMeeting(newMeeting);
 		
-		assertEquals(1, main.getMeetings().size());
+		assertEquals(1, appSystem.getMeetings().size());
 		
 	}
 	
 	@Test
 	public void testDeleteMeeting() {
 		
-		Creator newCreator = new Creator("Matheus", "Candiotto", "matheus.candiotto@ufrgs.br", "SenhaMuitoSegura");
+		Creator newCreator = new Creator("Matheus", "Candiotto", "012345678-90", "matheus.candiotto@ufrgs.br", "SenhaMuitoSegura");
 		
 		String type = "Presencial";
 		Date date = new Date();
@@ -62,12 +62,12 @@ public class MeetingTest {
 		
 		Meeting newMeeting = new Meeting(newCreator, type, date, location);
 		
-		Main main = new Main();
+		AppSystem appSystem = new AppSystem();
 		
-		main.createMeeting(newMeeting);
-		main.deleteMeeting(newMeeting);
+		appSystem.createMeeting(newMeeting);
+		appSystem.deleteMeeting(newMeeting);
 		
-		assertEquals(0, main.getMeetings().size());
+		assertEquals(0, appSystem.getMeetings().size());
 		
 	}
 

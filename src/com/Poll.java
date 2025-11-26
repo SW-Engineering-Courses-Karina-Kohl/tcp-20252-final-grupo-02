@@ -1,5 +1,4 @@
 package com;
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -66,5 +65,18 @@ public abstract class Poll {
 		return numPollsCreated;
 		
 	}
+
+	public abstract void vote(User user, int optionIndex);
+
+	protected void registerVote(User user, int optionIndex) {
+       
+        if (voters.contains(user)) {
+            System.out.println("Usuário já votou.");
+            return;
+        }
+
+        votes.add(optionIndex);
+        voters.add(user);
+    }
 
 }

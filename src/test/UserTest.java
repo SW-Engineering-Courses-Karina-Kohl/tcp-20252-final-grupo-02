@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.Main;
+import com.AppSystem;
 import com.User;
 
 public class UserTest {
@@ -14,14 +14,16 @@ public class UserTest {
 		
 		String name = "Matheus";
 		String surname = "Candiotto";
+		String cpf = "012345678-90";
 		String email = "matheus.candiotto@ufrgs.br";
 		String password = "SenhaMuitoSegura";
 		
-		User newUser = new User(name, surname, email, password);
+		User newUser = new User(name, surname, email, cpf, password);
 		
 		assertEquals(User.getNumUsersCreated(), newUser.getId());
 		assertEquals(name, newUser.getName());
 		assertEquals(surname, newUser.getSurname());
+		assertEquals(cpf, newUser.getCpf());
 		assertEquals(email, newUser.getEmail());
 		assertEquals(password, newUser.getPassword());
 		assertEquals(0, newUser.getJoinedBookClubs().size());
@@ -33,17 +35,17 @@ public class UserTest {
 		
 		String name = "Matheus";
 		String surname = "Candiotto";
+		String cpf = "012345678-90";
 		String email = "matheus.candiotto@ufrgs.br";
 		String password = "SenhaMuitoSegura";
 		
-		User newUser = new User(name, surname, email, password);
+		User newUser = new User(name, surname, cpf, email, password);
 		
-		Main main = new Main();
+		AppSystem appSystem = new AppSystem();		
+		appSystem.createUser(newUser);
 		
-		main.createUser(newUser);
-		
-		assertEquals(1, main.getUsers().size());
-		
+		assertEquals(1, appSystem.getUsers().size());
+	
 	}
 	
 	@Test
@@ -51,17 +53,18 @@ public class UserTest {
 		
 		String name = "Matheus";
 		String surname = "Candiotto";
+		String cpf = "012345678-90";
 		String email = "matheus.candiotto@ufrgs.br";
 		String password = "SenhaMuitoSegura";
 		
-		User newUser = new User(name, surname, email, password);
+		User newUser = new User(name, surname, cpf, email, password);
 		
-		Main main = new Main();
+		AppSystem appSystem = new AppSystem();
 		
-		main.createUser(newUser);
-		main.deleteUser(newUser);
+		appSystem.createUser(newUser);
+		appSystem.deleteUser(newUser);
 		
-		assertEquals(0, main.getUsers().size());
+		assertEquals(0, appSystem.getUsers().size());
 		
 	}
 
