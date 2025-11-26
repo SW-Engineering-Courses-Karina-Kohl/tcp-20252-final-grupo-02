@@ -7,6 +7,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 
+import com.LoginController;
+import com.User;
+
 import design.view.LoginScreen;
 import design.view.RegistrationScreen;
 
@@ -23,6 +26,7 @@ public class Sistema {
 
     private void initController() {
         regScreen.btnBackButton.addActionListener(e -> {
+            System.out.println("click");
             regScreen.dispose();
             LoginScreen loginScreen = new LoginScreen();
             LoginController loginController = new LoginController(loginScreen);
@@ -71,7 +75,7 @@ public class Sistema {
 
 
     public ArrayList<User> readUsers() {
-        File f = new File("users.csv");
+        File f = new File("src\\data\\files\\Users.csv");
         if (!f.exists()) {
             System.out.println("Users file not found.");
             return users;

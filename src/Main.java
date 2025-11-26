@@ -11,8 +11,8 @@ import java.io.IOException;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import Control.LoginController;
-import data.constData.constants;
+import com.LoginController;
+import data.Constants;
 
 public class Main {
 
@@ -46,7 +46,7 @@ public class Main {
     private static void applyCustomFont() {
         try {
             // Caminho da fonte relativa ao projeto
-            File fontFile = new File(constants.FONT_PATH);
+            File fontFile = new File(Constants.FONT_PATH);
 
             // Carrega a fonte
             Font customFont = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(16f);

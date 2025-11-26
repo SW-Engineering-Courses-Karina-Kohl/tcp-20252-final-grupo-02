@@ -6,10 +6,10 @@ import java.util.List;
 
 import data.CardData;
 import data.CardFilter;
-import design.view.componentes.BackButtonComponent;
-import design.view.componentes.ButtonComponent;
-import data.constData.constants;
-import design.view.componentes.CardComponent;
+import design.view.components.BackButtonComponent;
+import design.view.components.ButtonComponent;
+import data.Constants;
+import design.view.components.CardComponent;
 
 public class GroupUserScreen extends JFrame{
     
@@ -19,7 +19,7 @@ public class GroupUserScreen extends JFrame{
 
     public GroupUserScreen(){
         setTitle("Group User Screen");
-        setSize(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT);
+        setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         // setLayout(null);
@@ -31,7 +31,7 @@ public class GroupUserScreen extends JFrame{
         main.setOpaque(false);
 
         CardFilter cardFilter = new CardFilter();
-        List<CardData> UserPosts = cardFilter.getFilteredCards(constants.CSV_PATHS[1]);
+        List<CardData> UserPosts = cardFilter.getFilteredCards(Constants.CSV_PATHS[1]);
         
         JPanel CardPanel = new JPanel();
         CardPanel.setLayout(new BoxLayout(CardPanel, BoxLayout.Y_AXIS));
@@ -47,13 +47,13 @@ public class GroupUserScreen extends JFrame{
 
             CardComponent card = new CardComponent();
             card.setData(cardData.getGroup(), cardData.getInfo(),null, null);
-            card.setMaximumSize(new Dimension(constants.CARD_WIDTH+200, constants.CARD_HEIGHT));
-            card.setPreferredSize(new Dimension(constants.CARD_WIDTH+200, constants.CARD_HEIGHT));
+            card.setMaximumSize(new Dimension(Constants.CARD_WIDTH+200, Constants.CARD_HEIGHT));
+            card.setPreferredSize(new Dimension(Constants.CARD_WIDTH+200, Constants.CARD_HEIGHT));
             // CardPanel.add(card);
 
             btnManage = new ButtonComponent("GERENCIAR");
-            btnManage.setMaximumSize(new Dimension(constants.BUTTON_WIDTH, constants.BUTTON_HEIGHT));
-            btnManage.setPreferredSize(new Dimension(constants.BUTTON_WIDTH, constants.BUTTON_HEIGHT));
+            btnManage.setMaximumSize(new Dimension(Constants.BUTTON_WIDTH, Constants.BUTTON_HEIGHT));
+            btnManage.setPreferredSize(new Dimension(Constants.BUTTON_WIDTH, Constants.BUTTON_HEIGHT));
 
             btnManage.addActionListener(e -> {
                 System.out.println("click "+ cardData.getGroup());
@@ -72,23 +72,23 @@ public class GroupUserScreen extends JFrame{
         ScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         ScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         ScrollPane.setPreferredSize(new Dimension(0, 100));
-        ScrollPane.setSize(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT);
+        ScrollPane.setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         ScrollPane.setBorder(BorderFactory.createTitledBorder("Seus Grupos"));
 
         main.add(ScrollPane);
         main.add(Box.createRigidArea(new Dimension(0, 5)));
 
         btnCreateNewGroup = new ButtonComponent("CRIAR NOVO GRUPO");
-        btnCreateNewGroup.setMaximumSize(new Dimension(constants.BUTTON_WIDTH+200, constants.BUTTON_HEIGHT));
-        btnCreateNewGroup.setPreferredSize(new Dimension(constants.BUTTON_WIDTH+200, constants.BUTTON_HEIGHT));
+        btnCreateNewGroup.setMaximumSize(new Dimension(Constants.BUTTON_WIDTH+200, Constants.BUTTON_HEIGHT));
+        btnCreateNewGroup.setPreferredSize(new Dimension(Constants.BUTTON_WIDTH+200, Constants.BUTTON_HEIGHT));
         main.add(btnCreateNewGroup);
 
         JLayeredPane layered = getLayeredPane();
         add(main, BorderLayout.CENTER);
 
         btnBackButton = new BackButtonComponent();
-        btnBackButton.setSize(constants.BACK_BUTTON_SIZE, constants.BACK_BUTTON_SIZE);
-        btnBackButton.setLocation(constants.SCREEN_WIDTH - (constants.BACK_BUTTON_SIZE * 2), 0);
+        btnBackButton.setSize(Constants.BACK_BUTTON_SIZE, Constants.BACK_BUTTON_SIZE);
+        btnBackButton.setLocation(Constants.SCREEN_WIDTH - (Constants.BACK_BUTTON_SIZE * 2), 0);
 
         layered.add(btnBackButton, JLayeredPane.PALETTE_LAYER);
 

@@ -6,9 +6,9 @@ import java.util.List;
 
 import data.CardData;
 import data.CardFilter;
-import data.constData.constants;
-import design.view.componentes.BackButtonComponent;
-import design.view.componentes.CardComponent;
+import data.Constants;
+import design.view.components.BackButtonComponent;
+import design.view.components.CardComponent;
 
 public class FeedScreen extends JFrame {
 
@@ -17,7 +17,7 @@ public class FeedScreen extends JFrame {
 
     public FeedScreen() {
         setTitle("Feed Screen");
-        setSize(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT);
+        setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         // setLayout(null);
@@ -25,11 +25,11 @@ public class FeedScreen extends JFrame {
         JPanel feedPanel = new JPanel();
         feedPanel.setLayout(new BoxLayout(feedPanel, BoxLayout.Y_AXIS));
         feedPanel.setBorder(BorderFactory.createEmptyBorder(60, 10, 10, 10));
-        feedPanel.setBounds(0, constants.BACK_BUTTON_BOUND_Y, getWidth(), getHeight());
+        feedPanel.setBounds(0, Constants.BACK_BUTTON_BOUND_Y, getWidth(), getHeight());
         feedPanel.setOpaque(false);
 
         CardFilter cardFilter = new CardFilter();
-        List<CardData> Posts = cardFilter.getFilteredCards(constants.CSV_PATHS[0]); // trocar o arquivo CSV conforme necessário
+        List<CardData> Posts = cardFilter.getFilteredCards(Constants.CSV_PATHS[0]); // trocar o arquivo CSV conforme necessário
 
         JPanel CardPanel = new JPanel();
         CardPanel.setLayout(new GridLayout(0, 3, 10, 10)); // 3 colunas, varias linhas
@@ -60,7 +60,7 @@ public class FeedScreen extends JFrame {
         ScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         ScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         ScrollPane.setPreferredSize(new Dimension(0, 200));
-        ScrollPane.setSize(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT - 100);
+        ScrollPane.setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT - 100);
         ScrollPane.setBorder(BorderFactory.createTitledBorder("Feed Geral"));
         feedPanel.add(ScrollPane);
 
@@ -68,8 +68,8 @@ public class FeedScreen extends JFrame {
         add(feedPanel, BorderLayout.CENTER);
 
         btnBackButton = new BackButtonComponent();
-        btnBackButton.setSize(constants.BACK_BUTTON_SIZE, constants.BACK_BUTTON_SIZE);
-        btnBackButton.setLocation(constants.SCREEN_WIDTH - (constants.BACK_BUTTON_SIZE * 2), 0);
+        btnBackButton.setSize(Constants.BACK_BUTTON_SIZE, Constants.BACK_BUTTON_SIZE);
+        btnBackButton.setLocation(Constants.SCREEN_WIDTH - (Constants.BACK_BUTTON_SIZE * 2), 0);
 
         layered.add(btnBackButton, JLayeredPane.PALETTE_LAYER);
     }
