@@ -11,19 +11,20 @@ import java.util.ArrayList;
 
 import design.view.LoginScreen;
 import design.view.RegistrationScreen;
+import com.services.BookService;
 
 public class AppSystem {
     
     private RegistrationScreen regScreen;
     private ArrayList<User> users;
-    private ArrayList<Book> books;
 	private ArrayList<BookClub> bookClubs;
 	private ArrayList<Meeting> meetings;
 	private ArrayList<Poll> polls;
 
+    private BookService bookService;
+
     public AppSystem(RegistrationScreen regScreen) {
         this.users = new ArrayList<User>();
-        this.books = new ArrayList<Book>();
         this.bookClubs = new ArrayList<BookClub>();
         this.meetings = new ArrayList<Meeting>();
         this.polls = new ArrayList<Poll>();
@@ -31,15 +32,14 @@ public class AppSystem {
         initController();
         // Carrega os arrays com os arquivos toda vez que o programa é iniciado
          readUsers();
-         readBooks();
     }
 
     public AppSystem() {
         this.users = new ArrayList<User>();
-        this.books = new ArrayList<Book>();
         this.bookClubs = new ArrayList<BookClub>();
         this.meetings = new ArrayList<Meeting>();
         this.polls = new ArrayList<Poll>();
+        this.bookService = new BookService();
     }
 
 
@@ -309,100 +309,22 @@ public class AppSystem {
     }
 
     // Funções para livros 
+    public ArrayList<Book> readBooks() {
+        return bookService.getBooks();
+    }
+
     public Book findBookByIsbn(String isbn) {
-        for (Book b : books) {
-            if (b.getIsbn().equals(isbn)) {
-                return b;
-            }
-        }
-        return null;
+        return bookService.findBookByIsbn(isbn);
     }
 
-
-
-        public ArrayList<Book> readBooks() {
-        File f = new File("books.txt");
-        
-        // Garante que a lista de usuários está vazia antes de ler
-        books.clear();
-
-        if (!f.exists()) {
-            System.out.println("Books file not found. Creating books file.");
-            return books;
-        }
-
-
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(f))) {
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-                
-                // Esse -1 preserva campos vazios
-                String[] parts = line.split(",", -1);
-                String id = parts[0];
-                String title = parts[1];
-                String author = parts[2];
-                String isbn = parts[3];               
-                String releaseYear = parts[4];
-                String numPages = parts[5];   
-                String genre = parts[6];
-
-                Book b = new Book(
-                    Integer.parseInt(id.trim()),
-                    title, 
-                    author, 
-                    isbn, 
-                    Integer.parseInt(releaseYear.trim()), 
-                    Integer.parseInt(numPages.trim()), 
-                    genre
-                );
-                
-                books.add(b);
-            }
-        } catch (IOException e) {
-            System.out.println("Error at reading books: " + e.getMessage());
-        }
-
-        System.out.println("Total books: " + books.size());
-        return books;
+    public boolean registerBook(String title, String author, String isbn,
+                                int releaseYear, int numPages, String genre) {
+        return bookService.registerBook(title, author, isbn, releaseYear, numPages, genre);
     }
 
-
-
-    public boolean registerBook(String title, String author, String isbn, int releaseYear, 
-        int numPages, String genre) {
-        
-
-        if(findBookByIsbn(isbn) != null) {
-            System.out.println("Book with this ISBN already registered.");
-            return false;
-        }
-        
-        Book newBook = new Book(title, author, isbn, releaseYear, numPages, genre);
-        books.add(newBook);
-        
-
-        try (PrintWriter writer = new PrintWriter(new FileWriter("books.txt", true))) {
-            writer.println(newBook.getId() + "," + title +  "," + author + "," + isbn + "," + releaseYear + "," + numPages + "," + genre);
-        }
-
-         catch (IOException e) {
-            System.out.println("Erro ao salvar livro em CSV" + e.getMessage());
-        }
-
-    System.out.println("Livro registrado com sucesso.");
-
-    return true;
-    }
     public void printBooks() {
-        for (Book b : books) {
-            System.out.println(b);
-        }
+        bookService.printBooks();
     }
-
-
-    
-    
 }
 
 
