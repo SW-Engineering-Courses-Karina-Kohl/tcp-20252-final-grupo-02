@@ -1,4 +1,5 @@
 package com;
+
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 
 import org.tinylog.Logger;
 
+import data.Constants;
 import design.view.LoginScreen;
 import design.view.RegistrationScreen;
 
@@ -175,13 +177,13 @@ public class AppSystem {
 
     public ArrayList<User> readUsers() {
     	
-        File usersFile = new File("src/data/files/Users.csv");
+        File usersFile = new File(Constants.USERS_PATH);
         
         users.clear();
         
         if (!usersFile.exists()) {
         	
-            Logger.info("Arquivo de usuários não encontrado. Criando um novo arquivo...");
+            Logger.info("Arquivo de usuários não encontrado. Criando um novo arquivo");
             
             return users;
             
@@ -239,7 +241,7 @@ public class AppSystem {
         
         if (!(password.equals(passwordConfirmation))) {
         	
-        	Logger.error("As senhas não coincidem!");
+        	Logger.error("As senhas não coincidem");
         	
         	return;
         	
@@ -247,7 +249,7 @@ public class AppSystem {
 
         if (findUserByEmail(email) != null) {
         	
-            Logger.error("Endereço de e-mail já registrado!");
+            Logger.error("Endereço de e-mail já registrado");
             
             return;
             
@@ -256,7 +258,7 @@ public class AppSystem {
         User newUser = new User(name, surname, email, cpf, password);
         users.add(newUser);
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter("src/data/files/Users.csv", true))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(Constants.USERS_PATH, true))) {
         	
             writer.println(newUser.getId() + "," + name + "," + surname + "," + email + "," + cpf + "," + password);
             
@@ -266,7 +268,7 @@ public class AppSystem {
             
         }
 
-        Logger.info("Usuário registrado com sucesso!");
+        Logger.info("Usuário registrado com sucesso");
         
         regScreen.dispose();
     
@@ -287,7 +289,7 @@ public class AppSystem {
     	
         if (!newPassword.equals(passwordConfirmation)) {
         	
-            Logger.error("As senhas não coincidem!");
+            Logger.error("As senhas não coincidem");
             
             return false;
             
@@ -310,15 +312,15 @@ public class AppSystem {
 
         if (!userFound) {
         	
-            Logger.error("Usuário não encontrado!");
+            Logger.error("Usuário não encontrado");
             
             return false;
             
         }
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter("src/data/files/Users.csv"))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(Constants.USERS_PATH))) {
         	
-        	for (User u : users) writer.println(u.toCsvLine());
+        	for (User user : users) writer.println(user.toCsvLine());
                
         } catch (IOException e) {
         	
@@ -346,13 +348,13 @@ public class AppSystem {
     
     public ArrayList<Book> readBooks() {
         
-    	File booksFile = new File("books.txt");
+    	File booksFile = new File(Constants.BOOKS_PATH);
         
         books.clear();
 
         if (!booksFile.exists()) {
         	
-            Logger.info("Arquivo de livros não encontrado. Criando um novo arquivo...");
+            Logger.info("Arquivo de livros não encontrado. Criando um novo arquivo");
             
             return books;
             
@@ -401,7 +403,7 @@ public class AppSystem {
         
         if (findBookByIsbn(isbn) != null) {
         	
-            Logger.error("Livro com o mesmo ISBN informado já cadastrado!");
+            Logger.error("Livro com o mesmo ISBN informado já cadastrado");
             
             return false;
             
@@ -410,7 +412,7 @@ public class AppSystem {
         Book newBook = new Book(title, author, isbn, releaseYear, numPages, genre);
         books.add(newBook);    
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter("books.txt", true))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(Constants.BOOKS_PATH, true))) {
         	
             writer.println(newBook.getId() + "," + title +  "," + author + "," + isbn + "," + releaseYear + "," + numPages + "," + genre);
             
@@ -420,7 +422,7 @@ public class AppSystem {
             
         }
 
-        Logger.info("Livro registrado com sucesso!");
+        Logger.info("Livro registrado com sucesso");
 
         return true;
     

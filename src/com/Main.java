@@ -65,7 +65,7 @@ public class Main {
 
         } catch (FontFormatException | IOException e) {
         	
-            Logger.error("Erro ao carregar fonte: " + e.getMessage());
+            Logger.error("Erro ao carregar arquivo de fonte: " + e.getMessage());
             
         }
         

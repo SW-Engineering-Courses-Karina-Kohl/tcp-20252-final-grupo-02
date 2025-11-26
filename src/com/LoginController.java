@@ -41,8 +41,8 @@ public class LoginController {
         String userInfo = loginScreen.txtUserInfo.getText();
         String password = new String(loginScreen.txtPassword.getPassword());
 
-        if (authenticateUser(userInfo, password)) Logger.info("Login realizado com sucesso!");
-        else Logger.error("Credenciais de login inválidas!");
+        if (authenticateUser(userInfo, password)) Logger.info("Login realizado com sucesso");
+        else Logger.error("Credenciais de login inválidas");
 
     }
 
@@ -73,7 +73,7 @@ public class LoginController {
 
     private boolean authenticateUser(String userInfo, String password) {
 
-    	try (BufferedReader buffer = new BufferedReader(new FileReader("src/data/files/Users.csv"))) {
+    	try (BufferedReader buffer = new BufferedReader(new FileReader(Constants.USERS_PATH))) {
 
     		String line;
         
@@ -102,11 +102,11 @@ public class LoginController {
 
     	} catch (IOException e) {
     	
-    		Logger.error("Erro ao ler o arquivo de usuários!");
+    		Logger.error("Erro ao ler o arquivo de usuários");
     	
     	}
 
-    	JOptionPane.showMessageDialog(loginScreen, "Credenciais inválidas!");
+    	JOptionPane.showMessageDialog(loginScreen, "Credenciais inválidas");
     	
     	return false;
     

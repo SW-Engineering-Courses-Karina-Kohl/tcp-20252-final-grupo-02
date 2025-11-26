@@ -26,7 +26,7 @@ public class HomeScreen extends JFrame {
 
         CardFilter cardFilter = new CardFilter();
 
-        List<CardData> firstCards = cardFilter.getFilteredCards(Constants.CSV_PATHS[0]);
+        List<CardData> firstCards = cardFilter.getFilteredCards(Constants.HOME_CONTENT_PATH);
 
         JPanel firstCardPanel = new JPanel();
         firstCardPanel.setLayout(new GridLayout(0, 2, 10, 10));
@@ -55,7 +55,7 @@ public class HomeScreen extends JFrame {
         mainContainer.add(separator);
         mainContainer.add(Box.createRigidArea(new Dimension(0, 10)));
         
-        List<CardData> secondCards = cardFilter.getFilteredCards(Constants.CSV_PATHS[1]);
+        List<CardData> secondCards = cardFilter.getFilteredCards(Constants.USER_CONTENT_PATH);
 
         JPanel secondCardPanel = new JPanel();
         secondCardPanel.setLayout(new GridLayout(0, 2, 20, 20));

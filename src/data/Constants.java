@@ -23,10 +23,10 @@ public class Constants {
     
     public static final String FONT_PATH = "src/design/font/Excalifont-Regular.otf";
     public static final String LOADING_GIF_PATH = "src/design/view/assets/loading.gif";
-    public static final String[] CSV_PATHS = {
-    		"src/data/files/HomeContent.csv",
-    		"src/data/files/UserContent.csv"
-    		};
+    public static final String USERS_PATH = "src/data/files/Users.csv";
+    public static final String BOOKS_PATH = "src/data/files/Books.csv";
+    public static final String HOME_CONTENT_PATH = "src/data/files/HomeContent.csv";
+    public static final String USER_CONTENT_PATH = "src/data/files/UserContent.csv";
     
     public static final int USERS_ENTRIES_PER_LINE = 5;
 
