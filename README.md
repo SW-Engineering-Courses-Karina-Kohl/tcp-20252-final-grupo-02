@@ -25,5 +25,6 @@ Bookly é um programa desenvolvido com a linguagem de programação Java que per
 - **Documentação:** [_clique aqui para acessar a documentação da biblioteca_](https://tinylog.org/getting-started/)
 - **Exemplos de uso:**
   - **Bibliotecas:** bibliotecas bastante conhecidas e utilizadas da linguagem de programação Java para o desenvolvimento do programa;
+  - **Métodos:** alguns métodos de superclasses (que possuem subclasses); 
   - **Sistema de _logging_:** os métodos que "escrevem" no arquivo de _log_ são reutilizados de forma extensiva no código.
 - **Motivação:** a equipe do projeto entende que a implementação do sistema de _logging_ auxilia de forma substancial na localização e correção de erros ao organizar informações e potenciais alertas e erros em um único arquivo que é gerado durante a execução do programa.
