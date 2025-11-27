@@ -86,15 +86,15 @@ public class CreatorServiceTest {
 
         BookClub bc = bcService.createClub(u1, "Clube 2");
 
-        // Promover Maria manualmente
+    
         Creator c2 = userService.promoteUserToCreator(u2);
 
-        // Maria tenta deletar o clube do Pedro
+        
         boolean ok = creatorService.deleteClub(c2, bc.getId());
 
         assertFalse(ok);
 
-        // Clube deve continuar existindo
+        
         assertEquals(1, bcService.getAllClubs().size());
     }
 
