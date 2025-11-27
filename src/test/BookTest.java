@@ -18,8 +18,7 @@ public class BookTest {
 		int releaseYear = 2014;
 		int numPages = 312;
 		String genre = "Ficção científica";
-
-			
+	
 		Book newBook = new Book(title, author, isbn, releaseYear, numPages, genre);	
 		
 		assertEquals(Book.getNumBooksCreated(), newBook.getId());
@@ -41,8 +40,7 @@ public class BookTest {
 		int releaseYear = 2014;
 		int numPages = 312;
 		String genre = "Ficção científica";
-
-			
+		
 		Book newBook = new Book(title, author, isbn, releaseYear, numPages, genre);	
 		
 		AppSystem appSystem = new AppSystem();

@@ -3,8 +3,6 @@ package com;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.tinylog.Logger;
-
 public class BookPoll extends Poll {
 
     private ArrayList<Book> bookOptions;
@@ -20,9 +18,7 @@ public class BookPoll extends Poll {
     @Override
     public void vote(User user, int bookIndex) {
     	
-        super.registerVote(user, bookIndex);
-        
-        Logger.info("Voto registrado no livro " + bookOptions.get(bookIndex).getTitle() + "!");
+    	super.registerVote(user, bookIndex); 
         
     }
 
@@ -30,6 +26,12 @@ public class BookPoll extends Poll {
     	
         return this.bookOptions;
         
+    }
+    
+    public void addBookOption(Book newBook) {
+    	
+    	this.bookOptions.add(newBook);
+    	
     }
     
 }

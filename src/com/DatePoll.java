@@ -3,8 +3,6 @@ package com;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.tinylog.Logger;
-
 public class DatePoll extends Poll {
 
     private ArrayList<Date> dateOptions;
@@ -22,14 +20,18 @@ public class DatePoll extends Poll {
     	
         super.registerVote(user, dateIndex);
         
-        Logger.info("Voto registrado na data: " + dateOptions.get(dateIndex) + "!");
-        
     }
 
     public ArrayList<Date> getOptions() {
     	
         return this.dateOptions;
         
+    }
+    
+    public void addDateOption(Date newDate) {
+    	
+    	this.dateOptions.add(newDate);
+    	
     }
     
 }

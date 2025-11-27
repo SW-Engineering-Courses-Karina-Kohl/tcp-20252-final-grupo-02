@@ -26,7 +26,6 @@ public class BookClubTest {
 		assertEquals(0, newBookClub.getPolls().size());
 		assertEquals(0, newBookClub.getMeetings().size());
 		
-		
 	}
 
 	@Test

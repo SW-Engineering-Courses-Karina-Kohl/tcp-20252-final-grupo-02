@@ -72,17 +72,23 @@ public abstract class Poll {
 	public abstract void vote(User user, int optionIndex);
 
 	protected void registerVote(User user, int optionIndex) {
+		
+		boolean isVoteValid = true;
        
         if (voters.contains(user)) {
         	
             Logger.error("Usuário já votou");
             
-            return;
+            isVoteValid = false;
             
-        }
+        } else {
+        	
+            votes.add(optionIndex);
+            voters.add(user);
 
-        votes.add(optionIndex);
-        voters.add(user);
+        }
+        
+        if (isVoteValid) Logger.info("Voto registrado com sucesso");
         
     }
 
