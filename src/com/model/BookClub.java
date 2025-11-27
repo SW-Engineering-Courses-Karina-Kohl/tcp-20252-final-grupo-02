@@ -2,6 +2,7 @@ package com.model;
 
 import java.util.ArrayList;
 
+
 public class BookClub {
 	
 	private int id;
@@ -10,6 +11,7 @@ public class BookClub {
 	private ArrayList<User> participants;
 	private ArrayList<Poll> polls;
 	private ArrayList<Meeting> meetings;
+
 	
 	private static int numBookClubsCreated = 0;
 	
@@ -23,6 +25,19 @@ public class BookClub {
 		this.meetings = new ArrayList<Meeting>();
 		
 	}
+
+		public BookClub(int id, Creator creator, String name) {
+		
+		this.id = id;
+		this.creator = creator;
+		this.name = name;
+		this.participants = new ArrayList<User>();
+		this.polls = new ArrayList<Poll>();
+		this.meetings = new ArrayList<Meeting>();
+		
+	}
+
+
 	
 	public int getId() {
 		
@@ -72,12 +87,69 @@ public class BookClub {
 		
 	}
 	
-	/*
+
+		// Converte o objeto para uma String legivel	
+@Override
+	public String toString() {
+
+    String participantsIds = "";
+    for (User u : participants) {
+        if (!participantsIds.isEmpty()) participantsIds += ";";
+        participantsIds += u.getId();
+    }
+
+    String pollsIds = "";
+    for (Poll p : polls) {
+        if (!pollsIds.isEmpty()) pollsIds += ";";
+        pollsIds += p.getId();
+    }
+
+    String meetingsIds = "";
+    for (Meeting m : meetings) {
+        if (!meetingsIds.isEmpty()) meetingsIds += ";";
+        meetingsIds += m.getId();
+    }
+
+    return String.format(
+        "BookClub{id=%d, creatorId=%d, name='%s', participants=[%s], polls=[%s], meetings=[%s]}",
+        id, creator.getId(), name, participantsIds, pollsIds, meetingsIds
+    );
+}
 	
-	public BookClub findBookClub(String name) {
+
+
+	public String toCsvLine() {
+
 		
+		int creatorId = creator.getId();
+
+		// guarda a lista de IDs dos participantes
+		String participantsCsv = "";
+		for (User u : participants) {
+			if (!participantsCsv.isEmpty()) participantsCsv += ";";
+			participantsCsv += u.getId();
+		}
+
+		// guarda a lista de IDs das votações
+		String pollsCsv = "";
+		for (Poll p : polls) {
+			if (!pollsCsv.isEmpty()) pollsCsv += ";";
+			pollsCsv += p.getId();
+		}
+
+		// o mesmo para as meetings
+		String meetingsCsv = "";
+		for (Meeting m : meetings) {
+			if (!meetingsCsv.isEmpty()) meetingsCsv += ";";
+			meetingsCsv += m.getId();
+		}
+
+		return id + "," +
+			creatorId + "," +
+			name + "," +
+			participantsCsv + "," +
+			pollsCsv + "," +
+			meetingsCsv;
 	}
-	
-	*/
 
 }
