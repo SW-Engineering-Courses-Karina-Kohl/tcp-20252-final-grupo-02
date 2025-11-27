@@ -16,7 +16,7 @@ public class ExitScreen extends JFrame {
     private JButton btnBackButton;
 
     public ExitScreen(String group) {
-        setTitle("Exit Screen " + group);
+        setTitle("Exit Screen - " + group);
         setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
