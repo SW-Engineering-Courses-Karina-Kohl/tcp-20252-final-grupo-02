@@ -1,27 +1,46 @@
 package com.service;
 
-import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import com.model.Creator;
-//importar o repositorio de criadores
+import com.model.BookClub;
+import com.repository.BookClubRepository;
+
 public class CreatorService {
 
-    private ArrayList<Creator> creators;
+    private final BookClubRepository bookRepo;
+    private final ArrayList<BookClub> clubs;
 
-
-    public CreatorService() {
-        this.creators = new ArrayList<>(
-            Arrays.asList(
-                new Creator("Alice", "Silva", "111.111.111-11", "alice@example.com", "123"),
-                new Creator("Bruno", "Costa", "222.222.222-22", "bruno@example.com", "123"),
-                new Creator("Carla", "Souza", "333.333.333-33", "carla@example.com", "123")
-            )
-        );
+    public CreatorService(BookClubService bookClubService) {
+        this.bookRepo = new BookClubRepository();
+        this.clubs = bookClubService.getAllClubs();
     }
 
+    public boolean deleteClub(Creator c, int clubId) {
 
+        BookClub target = null;
 
-    
+        for (BookClub bc : c.getCreatedBookClubs()) {
+            if (bc.getId() == clubId) {
+                target = bc;
+                break;
+            }
+        }
+
+        if (target == null) {
+            System.out.println("Esse usuário não tem permissão para deletar o clube.");
+            return false;
+        }
+
+        c.getCreatedBookClubs().remove(target);
+        clubs.remove(target);
+
+        bookRepo.saveAll(clubs);
+
+        return true;
+    }
+
+    public ArrayList<BookClub> getClubsByCreator(Creator c) {
+        return c.getCreatedBookClubs();
+    }
 }

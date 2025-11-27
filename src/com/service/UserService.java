@@ -2,6 +2,8 @@ package com.service;
 
 import java.io.*;
 import java.util.ArrayList;
+
+import com.model.Creator;
 import com.model.User;
 import com.repository.UserRepository;
 import design.view.RegistrationScreen;
@@ -156,5 +158,29 @@ public class UserService {
         }
     return null; 
     }   
+
+        
+    public Creator promoteUserToCreator(User u) {
+
+    if (u instanceof Creator) return (Creator) u;
+
+    Creator c = new Creator(
+        u.getName(),
+        u.getSurname(),
+        u.getCpf(),
+        u.getEmail(),
+        u.getPassword()
+    );
+
+    c.setId(u.getId());
+
+    users.remove(u);
+    users.add(c);
+
+    repo.saveAll(users);
+
+    return c;
+}
+
 
 }

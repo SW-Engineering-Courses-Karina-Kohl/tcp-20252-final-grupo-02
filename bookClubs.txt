@@ -1,1 +1,1 @@
-1,3,Clube de Teste,,,
+3,20,Clube do Pedro,,,
