@@ -9,6 +9,7 @@ public abstract class Poll {
     protected String question;
     protected ArrayList<String> options;     
     protected int[] votes;                   
+	private static int totalPollsCreated = 0;
 
     public Poll(int id, BookClub club, String question, ArrayList<String> options, int[] votes) {
         this.id = id;
@@ -19,7 +20,7 @@ public abstract class Poll {
     }
 
     public Poll(BookClub club, String question, ArrayList<String> options) {
-        this.id = ++id;
+        this.id = ++totalPollsCreated;
         this.bookClub = club;
         this.question = question;
         this.options = options;
