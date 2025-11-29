@@ -1,82 +1,65 @@
 package com;
+
 import java.util.ArrayList;
-import java.util.Date;
 
 public abstract class Poll {
-	
-	private int id;
-	private Date openingDate;
-	private Date closingDate;
-	private boolean status;
-	private ArrayList<Integer> votes;
-	private ArrayList<User> voters;
-	
-	private static int numPollsCreated = 0;
-	
-	public Poll(Date closingDate) {
-		
-		this.id = ++numPollsCreated;
-		this.openingDate = new Date();
-		this.closingDate = closingDate;
-		this.status = true;
-		this.votes = new ArrayList<Integer>();
-		this.voters = new ArrayList<User>();
-		
-	}
-	
-	public int getId() {
-		
-		return this.id;
-		
-	}
-	
-	public Date getOpeningDate() {
-		
-		return this.openingDate;
-		
-	}
-	
-	public Date getClosingDate() {
-		
-		return this.closingDate;
-		
-	}
-	
-	public boolean getStatus() {
-		
-		return this.status;
-		
-	}
-	
-	public ArrayList<Integer> getVotes() {
-		
-		return this.votes;
-		
-	}
-	
-	public ArrayList<User> getVoters() {
-		
-		return this.voters;
-		
-	}
-	
-	public static int getNumPollsCreated() {
-		
-		return numPollsCreated;
-		
-	}
 
-	public abstract void vote(User user, int optionIndex);
+    protected int id;
+    protected BookClub bookClub;
+    protected String question;
+    protected ArrayList<String> options;     
+    protected int[] votes;                   
 
-	protected void registerVote(User user, int optionIndex) {
-       
-        if (voters.contains(user)) {
-            System.out.println("Usuário já votou.");
-            return;
-        }
-
-        votes.add(optionIndex);
-        voters.add(user);
+    public Poll(int id, BookClub club, String question, ArrayList<String> options, int[] votes) {
+        this.id = id;
+        this.bookClub = club;
+        this.question = question;
+        this.options = options;
+        this.votes = votes;
     }
 
+    public Poll(BookClub club, String question, ArrayList<String> options) {
+        this.id = ++id;
+        this.bookClub = club;
+        this.question = question;
+        this.options = options;
+        this.votes = new int[options.size()];
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public BookClub getBookClub() {
+        return bookClub;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public ArrayList<String> getOptions() {
+        return options;
+    }
+
+    public int[] getVotes() {
+        return votes;
+    }
+
+    public String getVotesAsCSV() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < votes.length; i++) {
+            sb.append(votes[i]);
+            if (i < votes.length - 1) sb.append(",");
+        }
+        return sb.toString();
+    }
+
+    public void registerVote(int optionIndex) {
+        if (optionIndex < 0 || optionIndex >= votes.length)
+            return;
+        votes[optionIndex]++;
+    }
+
+    public abstract String getType();
 }

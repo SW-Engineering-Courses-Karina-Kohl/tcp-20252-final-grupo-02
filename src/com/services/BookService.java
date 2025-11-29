@@ -110,4 +110,30 @@ public class BookService {
     public ArrayList<Book> getBooks() {
         return books;
     }
+
+   public void deleteBook(Book book) {
+        books.remove(book);
+        saveAllBooks();
+    }
+
+    public void saveAllBooks() {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
+        for (Book b : books) {
+            writer.println(
+                b.getId() + "," +
+                b.getTitle() + "," +
+                b.getAuthor() + "," +
+                b.getIsbn() + "," +
+                b.getReleaseYear() + "," +
+                b.getNumPages() + "," +
+                b.getGenre()
+                );
+            }
+        } catch (IOException e) {
+            System.out.println("Error rewriting Books.csv: " + e.getMessage());
+        }
+    }
+
 }
+
+

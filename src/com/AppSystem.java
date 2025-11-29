@@ -12,22 +12,24 @@ import java.util.ArrayList;
 import design.view.LoginScreen;
 import design.view.RegistrationScreen;
 import com.services.BookService;
+import com.services.MeetingService;
+import com.services.PollService;
 
 public class AppSystem {
     
     private RegistrationScreen regScreen;
     private ArrayList<User> users;
-	private ArrayList<BookClub> bookClubs;
-	private ArrayList<Meeting> meetings;
-	private ArrayList<Poll> polls;
+	private BookService bookService;
+    private PollService pollService;
+    private MeetingService meetingService;
 
-    private BookService bookService;
 
     public AppSystem(RegistrationScreen regScreen) {
         this.users = new ArrayList<User>();
-        this.bookClubs = new ArrayList<BookClub>();
-        this.meetings = new ArrayList<Meeting>();
-        this.polls = new ArrayList<Poll>();
+        //this.bookClubs = new ArrayList<BookClub>();
+        this.bookService = new BookService();
+        this.meetingService = new MeetingService();
+        this.pollService = new PollService();
         this.regScreen = regScreen;
         initController();
         // Carrega os arrays com os arquivos toda vez que o programa é iniciado
@@ -36,36 +38,14 @@ public class AppSystem {
 
     public AppSystem() {
         this.users = new ArrayList<User>();
-        this.bookClubs = new ArrayList<BookClub>();
-        this.meetings = new ArrayList<Meeting>();
-        this.polls = new ArrayList<Poll>();
+        //this.bookClubs = new ArrayList<BookClub>();
         this.bookService = new BookService();
+        this.pollService = new PollService();
+        this.meetingService = new MeetingService();
+
     }
 
 
-// public ArrayList<Book> getBooks() {
-		
-// 		Logger.info("Lista de livros retornada com sucesso");
-		
-// 		return books;
-		
-// 	}
-	
-// 	public void createBook(Book newBook) {
-		
-// 		books.add(newBook);
-		
-// 		Logger.info("Livro criado com sucesso");
-		
-// 	}
-	
-// 	public void deleteBook(Book book) {
-		
-// 		books.remove(book);
-		
-// 		Logger.info("Livro excluído com sucesso");
-		
-// 	}
 	
 // 	public ArrayList<BookClub> getBookClubs() {
 		
@@ -90,58 +70,7 @@ public class AppSystem {
 // 		Logger.info("Clube do livro excluído com sucesso");
 		
 // 	}
-	
-// 	public ArrayList<Meeting> getMeetings() {
-		
-// 		Logger.info("Lista de encontros retornada com sucesso");
-		
-// 		return meetings;
-		
-// 	}
-	
-// 	public void createMeeting(Meeting newMeeting) {
-		
-// 		meetings.add(newMeeting);
-		
-// 		Logger.info("Encontro criado com sucesso");
-		
-// 	}
-	
-// 	public void deleteMeeting(Meeting meeting) {
-		
-// 		meetings.remove(meeting);
-		
-// 		Logger.info("Encontro excluído com sucesso");
-		
-// 	}
 
-
-
-
-// 	public ArrayList<Poll> getPolls() {
-		
-// 		Logger.info("Lista de votações retornada com sucesso");
-		
-// 		return polls;
-		
-// 	}
-	
-// 	public void createPoll(Poll newPoll) {
-		
-// 		polls.add(newPoll);
-		
-// 		Logger.info("Votação criada com sucesso");
-		
-// 	}
-	
-// 	public void deletePoll(Poll poll) {
-		
-// 		polls.remove(poll);
-		
-// 		Logger.info("Votação excluída com sucesso");
-		
-// 	}
-	
 // 	public ArrayList<User> getUsers() {
 		
 // 		Logger.info("Lista de usuários retornada com sucesso");
@@ -308,8 +237,29 @@ public class AppSystem {
         return true;
     }
 
+    public PollService getPollService() {
+        return pollService;
+    }
+
+    public MeetingService getMeetingService() {
+        return meetingService;
+    }
+    
+
+    public void createBookPoll(BookClub club, String question, ArrayList<String> options) {
+        BookPoll poll = new BookPoll(club, question, options);
+        pollService.addPoll(poll);
+        club.getPolls().add(poll);
+    }
+
+    public void createDatePoll(BookClub club, String question, ArrayList<String> options) {
+        DatePoll poll = new DatePoll(club, question, options);
+        pollService.addPoll(poll);
+        club.getPolls().add(poll);
+    }   
+
     // Chamada de BookService 
-    public ArrayList<Book> readBooks() {
+    public ArrayList<Book> getBooks() {
         return bookService.getBooks();
     }
 
@@ -325,7 +275,13 @@ public class AppSystem {
     public void printBooks() {
         bookService.printBooks();
     }
+
+    public void deleteBook(Book b) {
+        bookService.deleteBook(b);
+    }
+
 }
+
 
 
 
