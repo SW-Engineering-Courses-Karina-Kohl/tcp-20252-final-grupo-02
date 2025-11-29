@@ -2,6 +2,8 @@ package com.service;
 
 import java.util.ArrayList;
 
+import org.tinylog.Logger;
+
 import com.model.User;
 import com.model.Creator;
 import com.model.BookClub;
@@ -27,7 +29,7 @@ public class BookClubService {
             c = (Creator) u;
         } else {
             c = userService.promoteUserToCreator(u);
-            System.out.println("Usuário promovido a criador: " + c.getName());
+            Logger.info("Usuário promovido a criador: " + c.getName());
         }
 
         BookClub newClub = new BookClub(c, name);

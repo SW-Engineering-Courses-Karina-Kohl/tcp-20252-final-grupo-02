@@ -3,7 +3,7 @@ package com.repository;
 import com.model.User;
 import java.io.*;
 import java.util.ArrayList;
-
+import org.tinylog.Logger;
 public class UserRepository {
 
      private static final String PATH = "users.txt";
@@ -13,7 +13,7 @@ public class UserRepository {
             File f = new File(PATH);
 
             if (!f.exists()) {
-                System.out.println("Users file not found. Creating users file.");
+                Logger.info("Users file not found. Creating users file.");
                 return list;
             }
 
@@ -33,10 +33,10 @@ public class UserRepository {
                     list.add(new User(id, name, surname, email, cpf, pass));
                 }
             } catch (IOException e) {
-                System.out.println("Error at reading users: " + e.getMessage());
+                Logger.info("Error at reading users: " + e.getMessage());
             }
 
-            System.out.println("Total users: " + list.size());
+            Logger.info("Total users: " + list.size());
             return list;
         }
 
@@ -48,7 +48,7 @@ public class UserRepository {
                 w.println(u.toCsvLine());
             }
         } catch (IOException e) {
-            System.out.println("Erro ao salvar users.txt: " + e.getMessage());
+            Logger.info("Erro ao salvar users.txt: " + e.getMessage());
         }
     }
 

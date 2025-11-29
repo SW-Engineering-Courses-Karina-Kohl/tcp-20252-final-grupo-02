@@ -2,6 +2,8 @@ package com.service;
 
 import java.util.ArrayList;
 
+import org.tinylog.Logger;
+
 import com.model.Creator;
 import com.model.BookClub;
 import com.repository.BookClubRepository;
@@ -28,7 +30,7 @@ public class CreatorService {
         }
 
         if (target == null) {
-            System.out.println("Esse usuário não tem permissão para deletar o clube.");
+            Logger.info("Esse usuário não tem permissão para deletar o clube.");
             return false;
         }
 

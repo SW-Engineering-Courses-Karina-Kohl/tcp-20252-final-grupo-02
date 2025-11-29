@@ -10,6 +10,8 @@ import com.service.UserService;
 import java.io.*;
 import java.util.ArrayList;
 
+import org.tinylog.Logger;
+
 
 public class BookClubRepository {
          private static final String PATH = "bookClubs.txt";
@@ -20,7 +22,7 @@ public class BookClubRepository {
         File f = new File(PATH);
 
         if (!f.exists()) {
-            System.out.println("Book clubs file not found. Creating bookClubs.txt.");
+            Logger.info("Book clubs file not found. Creating bookClubs.txt.");
             return list;
         }
 
@@ -70,10 +72,10 @@ public class BookClubRepository {
             }
 
         } catch (IOException e) {
-            System.out.println("Error reading bookClubs.txt: " + e.getMessage());
+            Logger.info("Error reading bookClubs.txt: " + e.getMessage());
         }
 
-        System.out.println("Loaded book clubs: " + list.size());
+        Logger.info("Loaded book clubs: " + list.size());
         return list;
     }
 
@@ -85,7 +87,7 @@ public class BookClubRepository {
                 w.println(b.toCsvLine());
             }
         } catch (IOException e) {
-            System.out.println("Erro ao salvar bookClubs.txt: " + e.getMessage());
+            Logger.info("Erro ao salvar bookClubs.txt: " + e.getMessage());
         }
     }
 

@@ -3,6 +3,8 @@ package com.service;
 import java.io.*;
 import java.util.ArrayList;
 
+import org.tinylog.Logger;
+
 import com.model.Creator;
 import com.model.User;
 import com.repository.UserRepository;
@@ -26,17 +28,17 @@ public class UserService {
                             String senha, String confirmacao) {
 
     if (fieldsAreEmpty(nome, sobrenome, email, cpf, senha, confirmacao)) {
-        System.out.println("Há campos vazios.");
+        Logger.info("Há campos vazios.");
         return false;
     }
 
     if (!senha.equals(confirmacao)) {
-        System.out.println("A senha e a confirmação não coincidem.");
+        Logger.info("A senha e a confirmação não coincidem.");
         return false;
     }
 
     if (findUserByEmail(email) != null) {
-        System.out.println("Email já cadastrado.");
+        Logger.info("Email já cadastrado.");
         return false;
     }
 
@@ -84,7 +86,7 @@ public class UserService {
         //Garante que a lista de usuários está vazia antes de ler
         users.clear();
         if (!f.exists()) {
-            System.out.println("Users file not found. Creating users file.");
+            Logger.info("Users file not found. Creating users file.");
             return users;
         }
         try (BufferedReader reader = new BufferedReader(new FileReader(f))) {
@@ -103,22 +105,22 @@ public class UserService {
                 users.add(u);
             }
         } catch (IOException e) {
-            System.out.println("Error at reading users: " + e.getMessage());
+            Logger.info("Error at reading users: " + e.getMessage());
         }
 
-        System.out.println("Total users: " + users.size());
+        Logger.info("Total users: " + users.size());
         return users;
     }
 
     public void printUsers() {
         for (User u : users) {
-            System.out.println(u);
+            Logger.info(u);
         }
     }
 
         public boolean alterPassword(String email, String newPassword, String passwordConfirmation) {
             if (!newPassword.equals(passwordConfirmation)) {
-                System.out.println("A nova senha e a confirmação não coincidem.");
+                Logger.info("A nova senha e a confirmação não coincidem.");
                 return false;
             }
 
@@ -133,7 +135,7 @@ public class UserService {
             }
 
             if (!userFound) {
-                System.out.println("Usuário com o email fornecido não encontrado.");
+                Logger.info("Usuário com o email fornecido não encontrado.");
                 return false;
             }
 
@@ -142,11 +144,11 @@ public class UserService {
                     writer.println(u.toCsvLine());
                 }
             } catch (IOException e) {
-                System.out.println("Erro ao atualizar a senha no arquivo CSV: " + e.getMessage());
+                Logger.info("Erro ao atualizar a senha no arquivo CSV: " + e.getMessage());
                 return false;
             }
 
-            System.out.println("Senha atualizada com sucesso.");
+            Logger.info("Senha atualizada com sucesso.");
             return true;
         }
 
