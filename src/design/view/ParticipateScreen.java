@@ -52,34 +52,43 @@ public class ParticipateScreen extends JFrame {
             card.setMaximumSize(new Dimension(Constants.CARD_WIDTH + 200, Constants.CARD_HEIGHT));
             card.setPreferredSize(new Dimension(Constants.CARD_WIDTH + 200, Constants.CARD_HEIGHT));
             // CardPanel.add(card);
-            
+
             // criar classe separadas para cuidar das validações
             if (cardData.getInfo().equals("Encerrado")) {
                 row.add(card);
                 row.add(Box.createHorizontalGlue());
-                row.add(new JLabel("")); 
+                row.add(new JLabel(""));
                 CardPanel.add(row);
-                continue;
-            }
-                btnExit = new ButtonComponent("SAIR");
-                btnExit.setMaximumSize(new Dimension(Constants.BUTTON_WIDTH, Constants.BUTTON_HEIGHT));
-                btnExit.setPreferredSize(new Dimension(Constants.BUTTON_WIDTH, Constants.BUTTON_HEIGHT));
-                btnExit.addActionListener(e -> {
-                    System.out.println("click " + cardData.getGroup());
-
-                    ParticipateScreen.this.dispose();
-                    ExitScreen exitScreen = new ExitScreen(cardData.getGroup());
-                    exitScreen.setVisible(true);
-                });
-           
 
                 card.setOnCardClick(() -> {
-                    if (cardData.getInfo().equals("Pending Vote")) {
-                        ParticipateScreen.this.dispose();
-                        GroupVoteScreen groupVoteScreen = new GroupVoteScreen(cardData.getGroup());
-                        groupVoteScreen.setVisible(true);
-                    }
+                    ParticipateScreen.this.dispose();
+                    GroupVotingCloseScreen groupCloseScreen = new GroupVotingCloseScreen(cardData.getGroup(), cardData.getInfo());
+                    groupCloseScreen.setVisible(true);
                 });
+                continue;
+            }
+            btnExit = new ButtonComponent("SAIR");
+            btnExit.setMaximumSize(new Dimension(Constants.BUTTON_WIDTH, Constants.BUTTON_HEIGHT));
+            btnExit.setPreferredSize(new Dimension(Constants.BUTTON_WIDTH, Constants.BUTTON_HEIGHT));
+            btnExit.addActionListener(e -> {
+                System.out.println("click " + cardData.getGroup());
+
+                ParticipateScreen.this.dispose();
+                ExitScreen exitScreen = new ExitScreen(cardData.getGroup());
+                exitScreen.setVisible(true);
+            });
+
+            card.setOnCardClick(() -> {
+                if (cardData.getInfo().equals("Pending Vote")) {
+                    ParticipateScreen.this.dispose();
+                    GroupVoteScreen groupVoteScreen = new GroupVoteScreen(cardData.getGroup());
+                    groupVoteScreen.setVisible(true);
+                } else {
+                    ParticipateScreen.this.dispose();
+                    GroupVoteScreen groupCloseScreen = new GroupVoteScreen(cardData.getGroup());
+                    groupCloseScreen.setVisible(true);
+                }
+            });
 
             row.add(card);
             row.add(Box.createHorizontalGlue());

@@ -11,7 +11,7 @@ import design.view.components.TextField;
 public class ExitScreen extends JFrame {
 
     private TextField txtCodeConfirm;
-    private String codeConfirm = "12345"; // gerar um codigo aleatório
+    private String codeConfirm = String.valueOf((int)(Math.random() * 10000)); // gerar um codigo aleatório
     private JButton btnExit;
     private JButton btnBackButton;
 
@@ -46,7 +46,16 @@ public class ExitScreen extends JFrame {
         container.add(txtCodeConfirm);
 
         btnExit = new ButtonComponent("SAIR");
-
+        // transferir isso pra uma classe separada pra validar
+        btnExit.addActionListener(e -> {
+                    String enteredCode = txtCodeConfirm.getText();
+                    if (enteredCode.equals(codeConfirm) && rbYes.isSelected()) {
+                        System.out.println("Saindo do grupo: " + group);
+                        // Lógica para sair do grupo
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Código incorreto ou opção não selecionada.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
+                });
 
         main.add(Box.createVerticalGlue());
         main.add(lblGroupName);

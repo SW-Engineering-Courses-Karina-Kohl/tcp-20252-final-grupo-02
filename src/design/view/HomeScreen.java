@@ -30,7 +30,7 @@ public class HomeScreen extends JFrame {
         // ============================================================
         CardFilter cardFilter = new CardFilter();
 
-        List<CardData> firstCards = cardFilter.getFilteredCards(Constants.CSV_PATHS[0]);
+        List<CardData> firstCards = cardFilter.getFilteredCards(Constants.CSV_PATHS[1]);
 
         JPanel firstCardPanel = new JPanel();
         firstCardPanel.setLayout(new GridLayout(0, 2, 10, 10)); // Uma coluna, varias linhas
@@ -83,7 +83,7 @@ public class HomeScreen extends JFrame {
         buttonsContainer.add(btnEnterGroup);
         buttonsContainer.add(Box.createVerticalGlue());
 
-        List<CardData> secondCards = cardFilter.getFilteredCards(Constants.CSV_PATHS[1]);
+        List<CardData> secondCards = cardFilter.getFilteredCards(Constants.CSV_PATHS[0]);
 
         JPanel secondCardPanel = new JPanel();
         secondCardPanel.setLayout(new GridLayout(0, 2, 20, 20)); // 2 colunas, sem scroll lateral
