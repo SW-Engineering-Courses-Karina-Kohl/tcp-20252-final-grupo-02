@@ -145,8 +145,14 @@ public class User {
 	
 
 	public String toCsvLine() {
-    	return id + "," + name + "," + surname + "," + email + "," + cpf + "," + password;
-	}
+    return getId() + "," +
+           getName() + "," +
+           getSurname() + "," +
+           getEmail() + "," +
+           getCpf() + "," +
+           getPassword() + "," +
+           "USER";
+}
 
 
 }

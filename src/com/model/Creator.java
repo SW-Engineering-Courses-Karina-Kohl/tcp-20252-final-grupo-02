@@ -20,4 +20,16 @@ public class Creator extends User {
 		
 	}
 
+
+
+	@Override
+public String toCsvLine() {
+    return getId() + "," +
+           getName() + "," +
+           getSurname() + "," +
+           getEmail() + "," +
+           getCpf() + "," +
+           getPassword() + "," +
+           "CREATOR";
+}
 }

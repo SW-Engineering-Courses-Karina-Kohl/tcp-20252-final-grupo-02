@@ -19,6 +19,18 @@ public class BookClubService {
         this.repo = new BookClubRepository();
         this.userService = userService;
         this.clubs = repo.loadAll(userService);
+        rebuildCreators(userService);
+    }
+
+    private void rebuildCreators(UserService userService) {
+        for (BookClub bc : clubs) {
+            User u = userService.findById(bc.getCreator().getId());
+            if (u instanceof Creator c) {
+                if (!c.getCreatedBookClubs().contains(bc)) {
+                    c.getCreatedBookClubs().add(bc);
+                }
+            }
+        }
     }
 
     public BookClub createClub(User u, String name) {

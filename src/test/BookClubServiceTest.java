@@ -71,19 +71,24 @@ public class BookClubServiceTest {
     @Test
     public void testMultipleClubsCreation() {
 
-        UserService userService = new UserService();
-        userService.getUsers().clear();
 
-        BookClubService bcService = new BookClubService(userService);
 
-        User u = new User("Pedro", "Alberto", "p@mail", "222", "abc");
-        u.setId(20);
+            UserService userService = new UserService();
+            userService.getUsers().clear();
 
-        userService.getUsers().add(u);
+            Creator c = new Creator("Pedro", "Alberto", "p@mail", "222", "abc");
+            c.setId(20);
+
+            userService.getUsers().add(c);
+
+            BookClubService bcService = new BookClubService(userService);
+
+            
+
 
         // Criar dois clubes
-        BookClub c1 = bcService.createClub(u, "Clube 2");
-        BookClub c2 = bcService.createClub(u, "Clube 3");
+        BookClub c1 = bcService.createClub(c, "Clube 2");
+        BookClub c2 = bcService.createClub(c, "Clube 3");
 
         // Criador automaticamente
         Creator creator = (Creator) userService.findById(20);
