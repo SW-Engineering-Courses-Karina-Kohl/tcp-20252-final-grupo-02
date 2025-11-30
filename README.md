@@ -20,5 +20,8 @@ Confira abaixo algumas funcionalidades do sistema:
 - **Motivação:** a equipe do projeto entende que a implementação do sistema de _logging_ auxilia de forma substancial na localização e correção de erros ao organizar informações e potenciais alertas e erros em um único arquivo de saída.
 
 
-javac -cp ".;src;lib/*" (Get-ChildItem -Recurse -Filter *.java).FullName
+javac -cp ".;src;lib/*" -d bin (Get-ChildItem -Recurse -Filter *.java).FullName
 java -cp ".;bin;lib/*" Main 
+
+jar cfm app.jar manifest/MANIFEST.MF -C bin .
+java -jar app.jar

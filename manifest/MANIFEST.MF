@@ -1,0 +1,2 @@
+Main-Class: Main
+Class-Path: lib/jcalendar-1.4.jar lib/tinylog-api-2.7.0.jar lib/tinylog-impl-2.7.0.jar
