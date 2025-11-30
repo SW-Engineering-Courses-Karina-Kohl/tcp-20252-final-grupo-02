@@ -40,9 +40,11 @@ public class LoginController {
     private void handleRegister() {
         RegistrationScreen registrationScreen = new RegistrationScreen();
         loginScreen.dispose();
-        // registrationScreen.setExtendedState(registrationScreen.MAXIMIZED_BOTH);
+
+        AppSystem app = new AppSystem(registrationScreen);
+        app.initRegistrationController();
         registrationScreen.setVisible(true);
-        AppSystem registerUser = new AppSystem(registrationScreen);
+        
     }
 
     private void handleReset() {

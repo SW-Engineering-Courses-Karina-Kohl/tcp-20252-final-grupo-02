@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import org.tinylog.Logger;
 public class UserRepository {
 
-     private static final String PATH = "users.txt";
+     private static final String PATH = "src/data/files/Users.csv";
 
         public ArrayList<User> loadAll() {
             ArrayList<User> list = new ArrayList<>();

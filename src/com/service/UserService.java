@@ -82,7 +82,7 @@ public class UserService {
 
 
     public ArrayList<User> readUsers() {
-        File f = new File("users.txt");
+        File f = new File("src/data/files/Users.csv");
         //Garante que a lista de usuários está vazia antes de ler
         users.clear();
         if (!f.exists()) {
@@ -139,7 +139,7 @@ public class UserService {
                 return false;
             }
 
-            try (PrintWriter writer = new PrintWriter(new FileWriter("users.txt"))) {
+            try (PrintWriter writer = new PrintWriter(new FileWriter("users.csv"))) {
                 for (User u : users) {
                     writer.println(u.toCsvLine());
                 }

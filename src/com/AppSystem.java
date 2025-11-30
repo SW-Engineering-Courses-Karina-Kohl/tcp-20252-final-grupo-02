@@ -7,6 +7,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import org.tinylog.Logger;
 
 
@@ -68,16 +70,42 @@ public class AppSystem {
     }
 
 
-	/*private void initController() {
-        regScreen.btnBackButton.addActionListener(e -> {
-            System.out.println("click");
+	public void initRegistrationController() {
+
+    // Botão cadastrar
+    regScreen.btnCadastrar.addActionListener(e -> {
+        String nome = regScreen.txtNome.getText();
+        String sobrenome = regScreen.txtSobrenome.getText();
+        String email = regScreen.txtEmail.getText();
+        String cpf = regScreen.txtCpf.getText();
+        String senha = new String(regScreen.txtSenha.getPassword());
+        String confirmar = new String(regScreen.txtConfirmarSenha.getPassword());
+
+        boolean ok = userService.registerUser(nome, sobrenome, email, cpf, senha, confirmar);
+
+        if (ok) {
+            JOptionPane.showMessageDialog(regScreen, "Usuário cadastrado com sucesso!");
             regScreen.dispose();
-            LoginScreen loginScreen = new LoginScreen();
-            LoginController loginController = new LoginController(loginScreen);
+            new LoginScreen().setVisible(true);LoginScreen loginScreen = new LoginScreen();
+            new LoginController(loginScreen);
             loginScreen.setVisible(true);
-        });
-        regScreen.btnCadastrar.addActionListener(e -> UserService.registerUser(regScreen));
-    } */
+
+        } else {
+            JOptionPane.showMessageDialog(regScreen, "Erro ao cadastrar usuário!");
+                }
+    });
+
+    // Botão voltar
+    regScreen.btnBackButton.addActionListener(e -> {
+        regScreen.dispose();
+        
+        LoginScreen loginScreen = new LoginScreen();
+        new LoginController(loginScreen);
+        loginScreen.setVisible(true);
+        
+    });
+}
+
 
 
 
