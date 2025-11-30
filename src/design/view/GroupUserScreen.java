@@ -53,12 +53,21 @@ public class GroupUserScreen extends JFrame{
             card.setPreferredSize(new Dimension(Constants.CARD_WIDTH+200, Constants.CARD_HEIGHT));
             // CardPanel.add(card);
 
+            if (cardData.getInfo().equals("Encerrado")) {
+                row.add(card);
+                row.add(Box.createHorizontalGlue());
+
+                CardPanel.add(row);
+                continue; 
+            }
             btnManage = new ButtonComponent("GERENCIAR");
             btnManage.setMaximumSize(new Dimension(Constants.BUTTON_WIDTH, Constants.BUTTON_HEIGHT));
             btnManage.setPreferredSize(new Dimension(Constants.BUTTON_WIDTH, Constants.BUTTON_HEIGHT));
 
             btnManage.addActionListener(e -> {
-                System.out.println("click "+ cardData.getGroup());
+                GroupUserScreen.this.dispose();
+                GroupManagementScreen groupManagementScreen = new GroupManagementScreen(cardData.getGroup());
+                groupManagementScreen.setVisible(true);
             });
             // CardPanel.add(btnManage);
 
