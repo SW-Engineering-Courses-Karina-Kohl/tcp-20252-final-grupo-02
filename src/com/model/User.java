@@ -11,6 +11,7 @@ public class User {
 	private String cpf;
 	private String password;
 	private ArrayList<BookClub> joinedBookClubs;
+	private ArrayList<BookClub> createdBookClubs;
 
 	
 	private static int numUsersCreated = 0;
@@ -19,7 +20,7 @@ public class User {
     numUsersCreated = n;
 }
 
-	// private static final int MAX_BOOKCLUBS_PER_USER = 20;
+
 
 
 	public User(String name, String surname, String email, String cpf, String password) {
@@ -30,6 +31,7 @@ public class User {
 		this.cpf = cpf;
     	this.password = password;
 		this.joinedBookClubs = new ArrayList<BookClub>();
+		this.createdBookClubs = new ArrayList<BookClub>();
 
 }
 
@@ -43,6 +45,7 @@ public class User {
 		this.cpf = cpf;
 		this.password = password;
 		this.joinedBookClubs = new ArrayList<BookClub>();
+		this.createdBookClubs = new ArrayList<BookClub>();
 	}
 
 	public int getId() {
@@ -53,9 +56,9 @@ public class User {
 	}
 
 	
-	public int setId(int newId) {
+	public void setId(int newId) {
 		
-		return this.id = newId;
+		this.id = newId;
 		
 	}	
 	
@@ -150,9 +153,14 @@ public class User {
            getSurname() + "," +
            getEmail() + "," +
            getCpf() + "," +
-           getPassword() + "," +
-           "USER";
+           getPassword();
 }
+
+	public ArrayList<BookClub> getCreatedBookClubs() {
+		
+		return this.createdBookClubs;
+		
+	}
 
 
 }

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import com.repository.BookClubRepository;
 import com.service.UserService;
 import com.model.BookClub;
-import com.model.Creator;
+import com.model.User;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,12 +31,12 @@ public class BookClubRepositoryTest {
         BookClubRepository repo = new BookClubRepository();
 
 
-        Creator c = new Creator("Teste", "Creator", "111", "c@test", "123");
+        User u  = new User("Teste", "Creator", "111", "c@test", "123");
         
         // O criador precisa estar registrado no sistema de usuarios    
-        us.getUsers().add(c);
+        us.getUsers().add(u);
        
-        BookClub bc = new BookClub(c, "Clube de Teste");
+        BookClub bc = new BookClub(u, "Clube de Teste");
 
         ArrayList<BookClub> lista = new ArrayList<>();
         lista.add(bc);
@@ -47,6 +47,6 @@ public class BookClubRepositoryTest {
 
         assertEquals(1, carregado.size());
         assertEquals("Clube de Teste", carregado.get(0).getName());
-        assertEquals(c.getId(), carregado.get(0).getCreator().getId());
+        assertEquals(u.getId(), carregado.get(0).getCreator().getId());
     }
 }

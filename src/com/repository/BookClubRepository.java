@@ -1,7 +1,7 @@
 package com.repository;
 
 import com.model.BookClub;
-import com.model.Creator;
+
 import com.model.Meeting;
 import com.model.Poll;
 import com.model.User;
@@ -14,7 +14,7 @@ import org.tinylog.Logger;
 
 
 public class BookClubRepository {
-         private static final String PATH = "bookClubs.txt";
+         private static final String PATH = "src/data/files/BookClubs.csv";
 
 
     public ArrayList<BookClub> loadAll(UserService userService) {
@@ -22,7 +22,7 @@ public class BookClubRepository {
         File f = new File(PATH);
 
         if (!f.exists()) {
-            Logger.info("Book clubs file not found. Creating bookClubs.txt.");
+            Logger.info("Book clubs file not found. Creating bookClubs.csv.");
             return list;
         }
 
@@ -35,12 +35,12 @@ public class BookClubRepository {
 
                 // Campos basicos
                 int id = Integer.parseInt(parts[0].trim());
-                 int creatorId = Integer.parseInt(parts[1].trim());
+                int creatorId = Integer.parseInt(parts[1].trim());
                 String name = parts[2];
-               
+            
 
                 // Recuperar o criador
-                Creator creator = (Creator) userService.findById(creatorId);
+                User creator =  userService.findById(creatorId);
 
                 // Cria BookClub base
                 BookClub bc = new BookClub(id, creator, name);
@@ -72,7 +72,7 @@ public class BookClubRepository {
             }
 
         } catch (IOException e) {
-            Logger.info("Error reading bookClubs.txt: " + e.getMessage());
+            Logger.info("Error reading bookClubs.csv: " + e.getMessage());
         }
 
         Logger.info("Loaded book clubs: " + list.size());
@@ -87,7 +87,7 @@ public class BookClubRepository {
                 w.println(b.toCsvLine());
             }
         } catch (IOException e) {
-            Logger.info("Erro ao salvar bookClubs.txt: " + e.getMessage());
+            Logger.info("Erro ao salvar bookClubs.csv: " + e.getMessage());
         }
     }
 

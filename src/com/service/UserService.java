@@ -5,23 +5,22 @@ import java.util.ArrayList;
 
 import org.tinylog.Logger;
 
-import com.model.Creator;
 import com.model.User;
+
 import com.repository.UserRepository;
 import design.view.RegistrationScreen;
+
 
 public class UserService {
 
     private final UserRepository repo;
     private final ArrayList<User> users;
 
-
     public UserService() {
         this.repo = new UserRepository();
         this.users = repo.loadAll();
-        syncIdCounter();   
+        syncIdCounter();
     }
-
 
 
     public boolean registerUser(String nome, String sobrenome, String email, String cpf,
@@ -49,6 +48,11 @@ public class UserService {
     return true;
 }
 
+     public void reloadUsers() {
+        users.clear();
+        users.addAll(repo.loadAll());
+        syncIdCounter();
+    }
    
     public User findUserByEmail(String email) {
         for (User u : users) {
@@ -81,36 +85,7 @@ public class UserService {
 
 
 
-    public ArrayList<User> readUsers() {
-        File f = new File("users.txt");
-        //Garante que a lista de usuários está vazia antes de ler
-        users.clear();
-        if (!f.exists()) {
-            Logger.info("Users file not found. Creating users file.");
-            return users;
-        }
-        try (BufferedReader reader = new BufferedReader(new FileReader(f))) {
-            String line = "";
-            while ((line = reader.readLine()) != null) {                
-                // Esse -1 preserva campos vazios
-                String[] parts = line.split(",", -1);
-                int id = Integer.parseInt(parts[0].trim());
-                String name = parts[1];
-                String surname = parts[2];
-                String email = parts[3];
-                String cpf = parts[4];
-                String password = parts[5];
 
-                User u = new User(id, name, surname, email, cpf, password);
-                users.add(u);
-            }
-        } catch (IOException e) {
-            Logger.info("Error at reading users: " + e.getMessage());
-        }
-
-        Logger.info("Total users: " + users.size());
-        return users;
-    }
 
     public void printUsers() {
         for (User u : users) {
@@ -139,7 +114,7 @@ public class UserService {
                 return false;
             }
 
-            try (PrintWriter writer = new PrintWriter(new FileWriter("users.txt"))) {
+            try (PrintWriter writer = new PrintWriter(new FileWriter("src/data/files/Users.csv"))) {
                 for (User u : users) {
                     writer.println(u.toCsvLine());
                 }
@@ -160,29 +135,5 @@ public class UserService {
         }
     return null; 
     }   
-
-        
-    public Creator promoteUserToCreator(User u) {
-
-    if (u instanceof Creator) return (Creator) u;
-
-    Creator c = new Creator(
-        u.getName(),
-        u.getSurname(),
-        u.getCpf(),
-        u.getEmail(),
-        u.getPassword()
-    );
-
-    c.setId(u.getId());
-
-    users.remove(u);
-    users.add(c);
-
-    repo.saveAll(users);
-
-    return c;
-}
-
 
 }
