@@ -14,6 +14,7 @@ import design.view.components.CardComponent;
 
 import design.view.ExitScreen;
 import design.view.GroupVoteScreen;
+import design.view.GroupVotingCloseScreen;
 
 public class ParticipateScreen extends JFrame {
 
@@ -84,9 +85,11 @@ public class ParticipateScreen extends JFrame {
                     GroupVoteScreen groupVoteScreen = new GroupVoteScreen(cardData.getGroup());
                     groupVoteScreen.setVisible(true);
                 } else {
-                    ParticipateScreen.this.dispose();
-                    GroupVoteScreen groupCloseScreen = new GroupVoteScreen(cardData.getGroup());
-                    groupCloseScreen.setVisible(true);
+                    card.setOnCardClick(() -> {
+                        ParticipateScreen.this.dispose();
+                        GroupVotingCloseScreen groupCloseScreen = new GroupVotingCloseScreen(cardData.getGroup(), cardData.getInfo());
+                        groupCloseScreen.setVisible(true);
+                    });
                 }
             });
 

@@ -11,6 +11,8 @@ import design.view.components.ButtonComponent;
 import data.Constants;
 import design.view.components.CardComponent;
 
+import design.view.GroupCreationScreen;
+
 public class GroupUserScreen extends JFrame{
     
     public JButton btnManage;
@@ -82,6 +84,12 @@ public class GroupUserScreen extends JFrame{
         btnCreateNewGroup.setMaximumSize(new Dimension(Constants.BUTTON_WIDTH+200, Constants.BUTTON_HEIGHT));
         btnCreateNewGroup.setPreferredSize(new Dimension(Constants.BUTTON_WIDTH+200, Constants.BUTTON_HEIGHT));
         main.add(btnCreateNewGroup);
+
+        btnCreateNewGroup.addActionListener(e -> {
+            GroupUserScreen.this.dispose();
+            GroupCreationScreen groupCreationScreen = new GroupCreationScreen();
+            groupCreationScreen.setVisible(true);
+        });
 
         JLayeredPane layered = getLayeredPane();
         add(main, BorderLayout.CENTER);

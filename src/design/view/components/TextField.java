@@ -20,6 +20,7 @@ public class TextField extends JTextField {
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         // setBorder(BorderFactory.createLineBorder(constants.BLACK, 2,true));
         setMaximumSize(new Dimension(Constants.DIMENSION_FIELD_WIDTH, Constants.DIMENSION_FIELD_HEIGHT));
+        setMinimumSize(new Dimension(Constants.DIMENSION_FIELD_WIDTH, Constants.DIMENSION_FIELD_HEIGHT));
         setPreferredSize(new Dimension(Constants.DIMENSION_FIELD_WIDTH, Constants.DIMENSION_FIELD_HEIGHT));
 
         setText(placeholder);
