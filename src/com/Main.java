@@ -1,4 +1,6 @@
 
+package com;
+
 import design.view.LoadingScreen;
 import design.view.LoginScreen;
 
@@ -11,12 +13,13 @@ import java.io.IOException;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import com.LoginController;
 import data.Constants;
+
 
 public class Main {
 
     public static void main(String[] args) {
+
 
         applyCustomFont();
 
@@ -28,20 +31,18 @@ public class Main {
             LoadingScreen loadingScreen = new LoadingScreen();
             loadingScreen.setVisible(true);
 
-            javax.swing.Timer timer = new javax.swing.Timer (2000, e -> {
-                // Depois de 2s, abra a próxima tela
-				loadingScreen.dispose();
-                LoginScreen loginScreen = new LoginScreen();
 
-                LoginController loginController = new LoginController(loginScreen);
-                loginScreen.setVisible(true);
-            });
+    });
+
+
+
+            
+}
+				
+        
+                
 			
-			timer.setRepeats(false); // evita abrir várias telas
-    		timer.start();
-
-        });
-    }
+			
 
     private static void applyCustomFont() {
         try {
@@ -76,3 +77,4 @@ public class Main {
         }
     }
 }
+
