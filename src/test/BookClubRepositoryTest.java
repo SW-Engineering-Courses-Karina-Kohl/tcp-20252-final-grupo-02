@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class BookClubRepositoryTest {
 
-    private static final String TEST_PATH = "bookClubs.txt";
+    private static final String TEST_PATH = "src/data/files/BookClubs.csv";
 
     // Limpa o arquivo antes de cada teste
     private void resetFile() throws IOException {
