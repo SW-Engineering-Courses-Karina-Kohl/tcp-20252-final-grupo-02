@@ -18,3 +18,7 @@ Confira abaixo algumas funcionalidades do sistema:
 - **Documentação:** [_clique aqui para acessar a documentação!_](https://tinylog.org/getting-started/)
 - **Exemplos de uso:**
 - **Motivação:** a equipe do projeto entende que a implementação do sistema de _logging_ auxilia de forma substancial na localização e correção de erros ao organizar informações e potenciais alertas e erros em um único arquivo de saída.
+
+
+javac -cp ".;src;lib/*" (Get-ChildItem -Recurse -Filter *.java).FullName
+java -cp ".;bin;lib/*" Main 

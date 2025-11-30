@@ -1,11 +1,12 @@
-GrupoA,Pending Vote,,Online
-GrupoB,Livro ABC - Edicao 1 (2008),10/02/2026,Online
-GrupoC,Pending Vote,,Presencial
-GrupoA,Livro XYZ - Volume 2 (2012),05/03/2025,Online
-GrupoD,Livro OQW - Revisao Final (2020),22/11/2025,Presencial
-GrupoE,Pending Vote,,Online
-GrupoF,Livro Linguagens - Tomo 3 (1999),15/05/2024,Presencial
-GrupoA,Pending Vote,,Presencial
-GrupoZ,Livro Mundo e Cultura (2015),01/01/2027,Online
-GrupoX,Livro Tecnicas Modernas (2023),12/09/2025,Presencial
-GrupoA,Encerrado,,Presencial
+5,GrupoAraras,Pending Vote,,Online,0
+7,GrupoBiblioteca,Livro ABC - Edição 1 (2008),10/02/2026,Online,12
+12,GrupoCatarse,Pending Vote,,Presencial,0
+19,GrupoDelta,Livro XYZ - Volume 2 (2012),05/03/2025,Online,8
+5,GrupoEstudosOQW,Livro OQW - Revisão Final (2020),22/11/2025,Presencial,15
+7,GrupoExploradores,Pending Vote,,Online,0
+12,GrupoFechado,Encerrado,,Presencial,10
+19,GrupoGramaticus,Livro Linguagens - Tomo 3 (1999),15/05/2024,Presencial,6
+5,GrupoHorizonte,Pending Vote,,Presencial,0
+7,GrupoInsight,Livro Mundo e Cultura (2015),01/01/2027,Online,18
+12,GrupoJornada,Livro Técnicas Modernas (2023),12/09/2025,Presencial,9
+19,GrupoKairós,Encerrado,,Presencial,11

@@ -27,6 +27,9 @@ public class LoginScreen extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
+        Color background = getContentPane().getBackground();
+        System.out.println("Cor da tela: " + background);
+
         JPanel loginPanel = new JPanel();
         loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.Y_AXIS));
         loginPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -56,7 +59,7 @@ public class LoginScreen extends JFrame {
         btnEsqueceuSenha.setFont(new Font("Excalifont", Font.PLAIN, 12));
         btnEsqueceuSenha.setBorderPainted(false); // Remove a borda
         btnEsqueceuSenha.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnEsqueceuSenha.setBackground(Color.WHITE);
+        btnEsqueceuSenha.setBackground(Constants.WHITE);
 
         // --- Adicionando componentes ao Painel Principal ---
         loginPanel.add(Box.createVerticalGlue());

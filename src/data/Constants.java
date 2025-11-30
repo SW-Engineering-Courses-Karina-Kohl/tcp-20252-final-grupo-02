@@ -19,6 +19,7 @@ public class Constants {
     public static final Color BLUE = new Color(165, 216, 255); // #a5d8ff
     public static final Color DARK_BLUE = new Color(129, 170, 201); // #81aac9
     public static final Color BLACK = new Color(50, 50, 50); // #323232
+    public static final Color WHITE = new Color(238, 238, 238); // #eeeeee
 
     // Configurações de tamanho da Janela Principal com base na tela do usuário
     // Utiliza 80% da largura e altura da tela com tookit e dimension
@@ -43,7 +44,8 @@ public class Constants {
     public static final String LOADING_GIF_PATH = "src/design/view/assets/loading.gif";
     public static final String[] CSV_PATHS = {
         "src/data/files/HomeContent.csv",
-        "src/data/files/UserContent.csv"
+        "src/data/files/UserContent.csv",
+        "src/data/files/Pending.csv"
     };
 
     public static final int BUTTON_WIDTH = 150;
