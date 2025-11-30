@@ -87,6 +87,18 @@ public class BookClub {
 		
 	}
 	
+	public void addPoll(Poll p) {
+        if (!polls.contains(p)) {
+            polls.add(p);
+
+            // Tambem adiciona o bookclub na pool
+            if (p.getBookClub() != this) {
+                p.setBookClub(this);
+            }
+        }
+    }
+
+
 
 		// Converte o objeto para uma String legivel	
 @Override

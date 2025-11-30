@@ -17,10 +17,33 @@ public class PollService {
         return polls;
     }
 
-    public void addPoll(Poll poll) {
-        polls.add(poll);
-        savePolls();
+    public Poll createPollForBookClub(
+            BookClub club,
+            String type,
+            String question,
+            ArrayList<String> options
+    ) {
+        int newId;
+        if(polls.isEmpty()) newId = 1;
+        
+        else newId = polls.get(polls.size() - 1).getId() + 1;
+
+        int[] votes = new int[options.size()];
+
+        Poll p;
+        if (type.equalsIgnoreCase("BOOK")) {
+            p = new BookPoll(newId, club, question, options, votes);
+        } else {
+            p = new DatePoll(newId, club, question, options, votes);
+        }
+
+        polls.add(p);         // adiciona no PollService
+        club.addPoll(p);      // adiciona no BookClub
+        savePolls();          
+
+        return p;
     }
+
 
     public void loadPolls(ArrayList<BookClub> clubs) {
         polls.clear();
@@ -67,8 +90,18 @@ public class PollService {
                     p = new DatePoll(id, club, question, options, votes);
                 }
 
+                // Verifica se já existe antes de adicionar
                 polls.add(p);
-                club.getPolls().add(p);
+                boolean exists = false;
+                for (Poll existing : club.getPolls()) {
+                    if (existing.getId() == p.getId()) {
+                        exists = true;
+                        break;
+                    }
+                }
+                if (!exists) {
+                    club.addPoll(p);
+}
             }
 
         } catch (Exception e) {

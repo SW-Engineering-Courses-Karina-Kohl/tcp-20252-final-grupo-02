@@ -35,6 +35,11 @@ public abstract class Poll {
         return bookClub;
     }
 
+    public void setBookClub(BookClub club) {
+        this.bookClub = club;
+    }
+
+
     public String getQuestion() {
         return question;
     }
