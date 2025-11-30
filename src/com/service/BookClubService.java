@@ -33,7 +33,22 @@ public class BookClubService {
         }
     }
 
+
+    boolean clubNameExists(String name) {
+        for (BookClub bc : clubs) {
+            if (bc.getName().equalsIgnoreCase(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    
     public BookClub createClub(User u, String name) {
+        if (clubNameExists(name)) {
+            Logger.info("Já existe um clube com o nome: " + name);
+            return null; 
+        }
 
         Creator c;
 
@@ -54,11 +69,22 @@ public class BookClubService {
         return newClub;
     }
 
+
     public ArrayList<BookClub> getAllClubs() {
         return clubs;
     }
 
+    public ArrayList<BookClub> getClubsForUser(User u) {
+    ArrayList<BookClub> userClubs = new ArrayList<>();
 
+    for (BookClub bc : clubs) {
+        if (bc.getParticipants().contains(u) || bc.getCreator().getId() == u.getId()) {
+            userClubs.add(bc);
+        }
+    }
+
+    return userClubs;
+}
 
 
     
