@@ -66,9 +66,9 @@ public class LoginController {
 
             if (data.length < 5) continue; // linha inválida
 
-            String email = data[2].trim();
-            String cpf   = data[3].trim();
-            String senha = data[4].trim();
+            String email = data[3].trim();
+            String cpf   = data[4].trim();
+            String senha = data[5].trim();
 
             // Permite login por email OU CPF
             if ((emailCpf.equals(email) || emailCpf.equals(cpf)) &&
