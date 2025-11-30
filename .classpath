@@ -9,5 +9,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="lib" path="lib/tinylog-api-2.7.0.jar"/>
 	<classpathentry kind="lib" path="lib/tinylog-impl-2.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/jcalendar-1.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

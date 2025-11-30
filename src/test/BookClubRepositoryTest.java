@@ -34,7 +34,7 @@ public class BookClubRepositoryTest {
         User u  = new User("Teste", "Creator", "111", "c@test", "123");
         
         // O criador precisa estar registrado no sistema de usuarios    
-        us.getUsers().add(u);
+            us.getUsers().add(u);
        
         BookClub bc = new BookClub(u, "Clube de Teste");
 

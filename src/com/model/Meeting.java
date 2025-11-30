@@ -5,7 +5,7 @@ import java.util.Date;
 public class Meeting {
 	
 	private int id;
-	private Creator creator;
+	private User creator;
 	private ArrayList<User> participants;
 	private String type;
 	private Date date;
@@ -31,7 +31,7 @@ public class Meeting {
 		
 	}
 	
-	public Creator getCreator() {
+	public User getCreator() {
 		
 		return this.creator;
 		

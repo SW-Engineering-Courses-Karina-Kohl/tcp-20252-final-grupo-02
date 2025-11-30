@@ -39,7 +39,7 @@ public class UserServiceTest {
         resetFile();
 
         UserService service = new UserService();
-        service.getUsers().clear();
+       
 
         User u = new User("Ana", "Maria", "ana@test", "333", "pw");
         u.setId(99);
@@ -49,4 +49,24 @@ public class UserServiceTest {
         assertEquals(u, service.findById(99));
         assertNull(service.findById(100));
     }
+
+    @Test
+    public void autoIncrementalIdTest() throws IOException {
+        resetFile();
+
+        UserService service = new UserService();
+
+        service.registerUser("Ana", "Maria", "ana@test", "333", "pw", "pw");
+
+        service.registerUser("Bob", "Matheus", "bob@test", "666", "pw", "pw");
+
+        service.registerUser("Roberto", "Carlos", "rc@test", "343", "pw","pw");
+
+        User u = service.findById(3);
+
+        assertNotNull(u);
+        assertEquals(3, u.getId());
+        assertEquals("Roberto", u.getName());
+        assertEquals("Carlos", u.getSurname());
+}
 }
