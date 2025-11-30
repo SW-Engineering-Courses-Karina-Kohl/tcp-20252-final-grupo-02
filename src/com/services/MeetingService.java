@@ -12,7 +12,7 @@ public class MeetingService {
 
     private ArrayList<Meeting> meetings = new ArrayList<>();
     private static final String FILE_NAME = "meetings.xls";
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public ArrayList<Meeting> getMeetings() {
         return meetings;

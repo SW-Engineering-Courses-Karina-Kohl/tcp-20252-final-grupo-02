@@ -137,12 +137,13 @@ public class User {
 	}
 
 	// Converte o objeto para uma String legivel	
+/*
 @Override
 	public String toString() {
 		return String.format("User{id=%d, name='%s', surname='%s', email='%s', cpf='%d'}", id, name, surname, email, cpf);
 
 	}
-	
+	*/
 
 	public String toCsvLine() {
     	return id + "," + name + "," + surname + "," + email + "," + cpf + "," + password;

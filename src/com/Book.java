@@ -37,9 +37,6 @@ public class Book {
 				numBooksCreated = id;
 		
 	}
-	
-
-
 
 	public int getId() {
 		
@@ -145,10 +142,30 @@ public class Book {
 	public String toString() {
 		return String.format("Book{id=%d, title=%s, author=%s, isbn=%s, releaseYear=%d, numpages=%d, genre=%s}", id, title, author, isbn, releaseYear, numPages, genre);
 	}
+@Override
+	public boolean equals(Object other) {
+		
+		if(other == null)
+			return false;
+		if(other.getClass() != this.getClass())
+			return false;
+		
+		Book book = (Book) other;
 	
+		return 
+			title.equals(book.getTitle()) &&
+			author.equals(book.getAuthor()) &&
+			isbn.equals(book.getIsbn()) &&
+			releaseYear == book.getReleaseYear() &&
+			numPages == book.getNumPages() &&
+			genre.equals(book.getGenre());
+	
+}
 
 	public String toCsvLine() {
     	return id + "," + title + "," + author + "," + isbn + "," + releaseYear + "," + numPages + "," + genre;
 	}
+	
+
 
 }

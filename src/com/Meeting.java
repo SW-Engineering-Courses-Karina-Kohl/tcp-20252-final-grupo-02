@@ -16,7 +16,7 @@ public class Meeting {
 	
 	public Meeting(int numMeetingsCreated, BookClub bookClub, String type, Date date, String location) {
 		
-		this.id = ++numMeetingsCreated;
+		this.id = numMeetingsCreated++;
 		this.creator = bookClub.getCreator();
 		this.bookClub = bookClub;
 		this.participants = new ArrayList<User>();
@@ -68,6 +68,39 @@ public class Meeting {
 	public static int getNumMeetingsCreated() {
 		
 		return numMeetingsCreated;
+		
+	}
+	
+	@Override
+	public String toString() {
+		return "Meeting{id= " + id +
+				", creator= " + creator.toString() + 
+				", participants= " + participants.toString() + 
+				", type= " + type + 
+				", date= " + date.toString() + 
+				", location= " + location + 
+				", bookclub= " + bookClub.toString() + "}";
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		
+		
+		if(other == null)
+			return false;
+		if(other.getClass() != this.getClass())
+			return false;
+		
+		Meeting meeting = (Meeting) other;
+	
+		return 
+			id == meeting.getId() &&
+			//creator.equals(meeting.getCreator()) &&
+			//bookClub.equals(meeting.getBookClub()) &&
+			//participants.equals(meeting.getParticipants())&&
+			type.equals(meeting.getType()) &&
+			date.equals(meeting.getDate()) &&
+			location.equals(meeting.getLocation());
 		
 	}
 
