@@ -64,7 +64,7 @@ public class LoginController {
 
             String[] data = line.split(",");
 
-            if (data.length < 5) continue; // linha inválida
+            if (data.length < 6) continue; // linha inválida
 
             String email = data[3].trim();
             String cpf   = data[4].trim();
