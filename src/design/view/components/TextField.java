@@ -1,17 +1,15 @@
 package design.view.components;
 
 import javax.swing.*;
-
-import data.Constants;
-
 import java.awt.*;
+
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import data.Constants;
 
 public class TextField extends JTextField {
 
-	private static final long serialVersionUID = 1L;
-	
+	// private static final long serialVersionUID = 1L;
     private String placeholder;
     private boolean showingPlaceholder = true;
 

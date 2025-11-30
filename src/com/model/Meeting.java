@@ -10,18 +10,19 @@ public class Meeting {
 	private String type;
 	private Date date;
 	private String location;
+	private BookClub bookClub;
 	
 	private static int numMeetingsCreated = 0;
 	
-	public Meeting(Creator creator, String type, Date date, String location) {
+	public Meeting(int numMeetingsCreated, BookClub bookClub, String type, Date date, String location) {
 		
 		this.id = ++numMeetingsCreated;
-		this.creator = creator;
+		this.creator = bookClub.getCreator();
+		this.bookClub = bookClub;
 		this.participants = new ArrayList<User>();
 		this.type = type;
 		this.date = date;
-		this.location = location;
-		
+		this.location = location;		
 	}
 	
 	public int getId() {
@@ -34,6 +35,10 @@ public class Meeting {
 		
 		return this.creator;
 		
+	}
+
+	public BookClub getBookClub() {
+    	return this.bookClub;
 	}
 	
 	public ArrayList<User> getParticipants() {

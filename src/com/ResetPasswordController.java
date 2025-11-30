@@ -1,5 +1,6 @@
 package com;
 
+import design.view.LoginScreen;
 import design.view.ResetPasswordScreen;
 import design.view.ResetPasswordScreen1;
 
@@ -15,6 +16,16 @@ public class ResetPasswordController {
 
     private void initController() {
         resetPasswordScreen.btnVerify.addActionListener(e -> handleVerify());
+        resetPasswordScreen.btnBackButton.addActionListener(e -> {
+            resetPasswordScreen.dispose();
+            LoginScreen loginScreen = new LoginScreen();
+            LoginController loginController = new LoginController(loginScreen);
+            loginScreen.setVisible(true);
+        });
+        resetPasswordScreen1.btnBackButton.addActionListener(e -> {
+            resetPasswordScreen1.dispose();
+            resetPasswordScreen.setVisible(true);
+        });
         resetPasswordScreen1.btnCadastrar.addActionListener(e -> handleCadastrar());   
     }
 

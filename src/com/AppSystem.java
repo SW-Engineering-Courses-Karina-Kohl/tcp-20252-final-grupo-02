@@ -6,15 +6,20 @@ import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+
 import org.tinylog.Logger;
+
 
 import com.model.Book;
 import com.model.BookClub;
+import com.model.BookPoll;
+import com.model.DatePoll;
 import com.model.Meeting;
 import com.model.Poll;
 import com.model.User;
 import com.service.*;
 
+import design.view.LoginScreen;
 import design.view.RegistrationScreen;
 
 public class AppSystem {
@@ -26,16 +31,25 @@ public class AppSystem {
 	private ArrayList<Meeting> meetings;
 	private ArrayList<Poll> polls;
     private UserService userService;
+	private BookService bookService;
+    private PollService pollService;
+    private MeetingService meetingService;
+
+
 
     public AppSystem(RegistrationScreen regScreen) {
         this.users = new ArrayList<User>();
-        this.books = new ArrayList<Book>();
-        this.bookClubs = new ArrayList<BookClub>();
-        this.meetings = new ArrayList<Meeting>();
-        this.polls = new ArrayList<Poll>();
+        //this.bookClubs = new ArrayList<BookClub>();
+        this.bookService = new BookService();
+        this.meetingService = new MeetingService();
+        this.pollService = new PollService();
         this.regScreen = regScreen;
         this.userService = new UserService();
- 
+
+        //initController();
+        // Carrega os arrays com os arquivos toda vez que o programa é iniciado
+
+
     }
 
     public AppSystem() {
@@ -45,143 +59,27 @@ public class AppSystem {
         this.meetings = new ArrayList<Meeting>();
         this.polls = new ArrayList<Poll>();
         this.userService = new UserService();
+
+        //this.bookClubs = new ArrayList<BookClub>();
+        this.bookService = new BookService();
+        this.pollService = new PollService();
+        this.meetingService = new MeetingService();
+
     }
 
 
-public ArrayList<Book> getBooks() {
-		
-		Logger.info("Lista de livros retornada com sucesso");
-		
-		return books;
-		
-	}
-	
-	public void createBook(Book newBook) {
-		
-		books.add(newBook);
-		
-		Logger.info("Livro criado com sucesso");
-		
-	}
-	
-	public void deleteBook(Book book) {
-		
-		books.remove(book);
-		
-		Logger.info("Livro excluído com sucesso");
-		
-	}
-	
-	public ArrayList<BookClub> getBookClubs() {
-		
-		Logger.info("Lista de clubes do livro retornada com sucesso");
-		
-		return bookClubs;
-		
-	}
-	
-	public void createBookClub(BookClub newBookClub) {
-		
-		bookClubs.add(newBookClub);
-		
-		Logger.info("Clube do livro criado com sucesso");
-		
-	}
-	
-	public void deleteBookClub(BookClub bookClub) {
-		
-		bookClubs.remove(bookClub);
-		
-		Logger.info("Clube do livro excluído com sucesso");
-		
-	}
-	
-	public ArrayList<Meeting> getMeetings() {
-		
-		Logger.info("Lista de encontros retornada com sucesso");
-		
-		return meetings;
-		
-	}
-	
-	public void createMeeting(Meeting newMeeting) {
-		
-		meetings.add(newMeeting);
-		
-		Logger.info("Encontro criado com sucesso");
-		
-	}
-	
-	public void deleteMeeting(Meeting meeting) {
-		
-		meetings.remove(meeting);
-		
-		Logger.info("Encontro excluído com sucesso");
-		
-	}
+	/*private void initController() {
+        regScreen.btnBackButton.addActionListener(e -> {
+            System.out.println("click");
+            regScreen.dispose();
+            LoginScreen loginScreen = new LoginScreen();
+            LoginController loginController = new LoginController(loginScreen);
+            loginScreen.setVisible(true);
+        });
+        regScreen.btnCadastrar.addActionListener(e -> UserService.registerUser(regScreen));
+    } */
 
 
-
-
-	public ArrayList<Poll> getPolls() {
-		
-		Logger.info("Lista de votações retornada com sucesso");
-		
-		return polls;
-		
-	}
-	
-	public void createPoll(Poll newPoll) {
-		
-		polls.add(newPoll);
-		
-		Logger.info("Votação criada com sucesso");
-		
-	}
-	
-	public void deletePoll(Poll poll) {
-		
-		polls.remove(poll);
-		
-		Logger.info("Votação excluída com sucesso");
-		
-	}
-	
-	public ArrayList<User> getUsers() {
-		
-		Logger.info("Lista de usuários retornada com sucesso");
-		
-		return users;
-		
-	}
-	
-	public void createUser(User newUser) {
-		
-		users.add(newUser);
-		
-		Logger.info("Usuário criado com sucesso");
-		
-	}
-	
-	public void deleteUser(User user) {
-		
-		users.remove(user);
-		
-		Logger.info("Usuário excluído com sucesso");
-		
-	}
-    
-
-
-
-// Funções para usuário 
-
-
-
-
-    public boolean registerUser(String nome, String sobrenome, String email, String cpf, String senha, String confirmacao) {
-        return userService.registerUser(nome, sobrenome, email, cpf, senha, confirmacao);
-}
 
     public void printUsers() {
         userService.printUsers();
@@ -193,102 +91,51 @@ public ArrayList<Book> getBooks() {
         return userService.alterPassword(email, newPassword, passwordConfirmation);
     }
 
-    // Funções para livros 
+    public PollService getPollService() {
+        return pollService;
+    }
+
+    public MeetingService getMeetingService() {
+        return meetingService;
+    }
+    
+
+    public void createBookPoll(BookClub club, String question, ArrayList<String> options) {
+        BookPoll poll = new BookPoll(club, question, options);
+        pollService.addPoll(poll);
+        club.getPolls().add(poll);
+    }
+
+    public void createDatePoll(BookClub club, String question, ArrayList<String> options) {
+        DatePoll poll = new DatePoll(club, question, options);
+        pollService.addPoll(poll);
+        club.getPolls().add(poll);
+    }   
+
+    // Chamada de BookService 
+    public ArrayList<Book> getBooks() {
+        return bookService.getBooks();
+    }
+
     public Book findBookByIsbn(String isbn) {
-        for (Book b : books) {
-            if (b.getIsbn().equals(isbn)) {
-                return b;
-            }
-        }
-        return null;
+        return bookService.findBookByIsbn(isbn);
     }
 
-
-
-        public ArrayList<Book> readBooks() {
-        File f = new File("books.txt");
-        
-        // Garante que a lista de usuários está vazia antes de ler
-        books.clear();
-
-        if (!f.exists()) {
-            System.out.println("Books file not found. Creating books file.");
-            return books;
-        }
-
-
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(f))) {
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-                
-                // Esse -1 preserva campos vazios
-                String[] parts = line.split(",", -1);
-                String id = parts[0];
-                String title = parts[1];
-                String author = parts[2];
-                String isbn = parts[3];               
-                String releaseYear = parts[4];
-                String numPages = parts[5];   
-                String genre = parts[6];
-
-                Book b = new Book(
-                    Integer.parseInt(id.trim()),
-                    title, 
-                    author, 
-                    isbn, 
-                    Integer.parseInt(releaseYear.trim()), 
-                    Integer.parseInt(numPages.trim()), 
-                    genre
-                );
-                
-                books.add(b);
-            }
-        } catch (IOException e) {
-            System.out.println("Error at reading books: " + e.getMessage());
-        }
-
-        System.out.println("Total books: " + books.size());
-        return books;
+    public boolean registerBook(String title, String author, String isbn,
+                                int releaseYear, int numPages, String genre) {
+        return bookService.registerBook(title, author, isbn, releaseYear, numPages, genre);
     }
 
-
-
-    public boolean registerBook(String title, String author, String isbn, int releaseYear, 
-        int numPages, String genre) {
-        
-
-        if(findBookByIsbn(isbn) != null) {
-            System.out.println("Book with this ISBN already registered.");
-            return false;
-        }
-        
-        Book newBook = new Book(title, author, isbn, releaseYear, numPages, genre);
-        books.add(newBook);
-        
-
-        try (PrintWriter writer = new PrintWriter(new FileWriter("books.txt", true))) {
-            writer.println(newBook.getId() + "," + title +  "," + author + "," + isbn + "," + releaseYear + "," + numPages + "," + genre);
-        }
-
-         catch (IOException e) {
-            System.out.println("Erro ao salvar livro em CSV" + e.getMessage());
-        }
-
-    System.out.println("Livro registrado com sucesso.");
-
-    return true;
-    }
     public void printBooks() {
-        for (Book b : books) {
-            System.out.println(b);
-        }
+        bookService.printBooks();
     }
 
+    public void deleteBook(Book b) {
+        bookService.deleteBook(b);
+    }
 
-    
-    
 }
+
 
 
 

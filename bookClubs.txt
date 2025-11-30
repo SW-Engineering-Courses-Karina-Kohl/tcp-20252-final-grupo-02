@@ -1,1 +1,1 @@
-3,20,Clube 2,,,
+8,1,Clube de Teste,,,

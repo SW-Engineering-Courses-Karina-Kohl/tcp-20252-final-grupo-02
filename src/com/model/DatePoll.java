@@ -1,24 +1,19 @@
 package com.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class DatePoll extends Poll {
 
-    private ArrayList<Date> dateOptions;
+    public DatePoll(BookClub club, String question, ArrayList<String> options) {
+        super(club, question, options);
+    }
 
-     public DatePoll(Date closingDate) {
-        super(closingDate);
-        this.dateOptions = new ArrayList<>();
+    public DatePoll(int id, BookClub club, String question, ArrayList<String> options, int[] votes) {
+        super(id, club, question, options, votes);
     }
 
     @Override
-    public void vote(User user, int optionIndex) {
-        super.registerVote(user, optionIndex);
-        System.out.println("Voto registrado na data: " + dateOptions.get(optionIndex));
-    }
-
-    public ArrayList<Date> getOptions() {
-        return this.dateOptions;
+    public String getType() {
+        return "DATE";
     }
 }
