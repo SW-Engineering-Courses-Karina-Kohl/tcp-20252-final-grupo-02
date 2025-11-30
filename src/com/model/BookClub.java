@@ -6,16 +6,16 @@ import java.util.ArrayList;
 public class BookClub {
 	
 	private int id;
-	private Creator creator;
 	private String name;
 	private ArrayList<User> participants;
 	private ArrayList<Poll> polls;
 	private ArrayList<Meeting> meetings;
+	private User creator;
 
 	
 	private static int numBookClubsCreated = 0;
 	
-	public BookClub(Creator creator, String name) {
+	public BookClub(User creator, String name) {
 		
 		this.id = ++numBookClubsCreated;
 		this.creator = creator;
@@ -26,7 +26,7 @@ public class BookClub {
 		
 	}
 
-		public BookClub(int id, Creator creator, String name) {
+		public BookClub(int id, User creator, String name) {
 		
 		this.id = id;
 		this.creator = creator;
@@ -45,7 +45,7 @@ public class BookClub {
 		
 	}
 	
-	public Creator getCreator() {
+	public User getCreator() {
 		
 		return this.creator;
 		

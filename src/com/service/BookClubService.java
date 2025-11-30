@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.tinylog.Logger;
 
 import com.model.User;
-import com.model.Creator;
 import com.model.BookClub;
 import com.repository.BookClubRepository;
 
@@ -25,11 +24,9 @@ public class BookClubService {
     private void rebuildCreators(UserService userService) {
         for (BookClub bc : clubs) {
             User u = userService.findById(bc.getCreator().getId());
-            if (u instanceof Creator c) {
-                if (!c.getCreatedBookClubs().contains(bc)) {
-                    c.getCreatedBookClubs().add(bc);
+                if (!u.getCreatedBookClubs().contains(bc)) {
+                    u.getCreatedBookClubs().add(bc);
                 }
-            }
         }
     }
 
@@ -50,18 +47,9 @@ public class BookClubService {
             return null; 
         }
 
-        Creator c;
+        BookClub newClub = new BookClub(u, name);
 
-        if (u instanceof Creator) {
-            c = (Creator) u;
-        } else {
-            c = userService.promoteUserToCreator(u);
-            Logger.info("Usuário promovido a criador: " + c.getName());
-        }
-
-        BookClub newClub = new BookClub(c, name);
-
-        c.getCreatedBookClubs().add(newClub);
+        u.getCreatedBookClubs().add(newClub);
 
         clubs.add(newClub);
         repo.saveAll(clubs);

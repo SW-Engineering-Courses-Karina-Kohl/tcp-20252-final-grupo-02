@@ -1,6 +1,6 @@
 package com.repository;
 
-import com.model.Creator;
+
 import com.model.User;
 import java.io.*;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class UserRepository {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     String[] parts = line.split(",", -1);
-                    if (parts.length < 7) continue;
+                    if (parts.length < 6) continue;
 
                     int id         = Integer.parseInt(parts[0].trim());
                     String name    = parts[1];
@@ -30,16 +30,8 @@ public class UserRepository {
                     String email   = parts[3];
                     String cpf     = parts[4];
                     String pass    = parts[5];
-                    String type    = parts[6].trim();
-                    if (type.equalsIgnoreCase("CREATOR")) {
-                        Creator c = new Creator(name, surname, cpf, email, pass);
-                        c.setId(id);
-                        list.add(c);
-                    } 
+                    list.add(new User(id, name, surname, email, cpf, pass));
                     
-                    else {
-                        list.add(new User(id, name, surname, email, cpf, pass));
-                    }
 
                 }
             } catch (IOException e) {
@@ -58,7 +50,7 @@ public class UserRepository {
                 w.println(u.toCsvLine());
             }
         } catch (IOException e) {
-            Logger.info("Erro ao salvar users.txt: " + e.getMessage());
+            Logger.info("Erro ao salvar users.csv: " + e.getMessage());
         }
     }
 
