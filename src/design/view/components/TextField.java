@@ -1,17 +1,15 @@
 package design.view.components;
 
 import javax.swing.*;
-
-import data.Constants;
-
 import java.awt.*;
+
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import data.Constants;
 
 public class TextField extends JTextField {
 
-	private static final long serialVersionUID = 1L;
-	
+	// private static final long serialVersionUID = 1L;
     private String placeholder;
     private boolean showingPlaceholder = true;
 
@@ -22,6 +20,7 @@ public class TextField extends JTextField {
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         // setBorder(BorderFactory.createLineBorder(constants.BLACK, 2,true));
         setMaximumSize(new Dimension(Constants.DIMENSION_FIELD_WIDTH, Constants.DIMENSION_FIELD_HEIGHT));
+        setMinimumSize(new Dimension(Constants.DIMENSION_FIELD_WIDTH, Constants.DIMENSION_FIELD_HEIGHT));
         setPreferredSize(new Dimension(Constants.DIMENSION_FIELD_WIDTH, Constants.DIMENSION_FIELD_HEIGHT));
 
         setText(placeholder);

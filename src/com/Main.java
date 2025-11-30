@@ -1,4 +1,8 @@
+
 package com;
+
+import design.view.LoadingScreen;
+import design.view.LoginScreen;
 
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -6,46 +10,39 @@ import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
 
-
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-
 import data.Constants;
-import design.view.LoadingScreen;
-import design.view.LoginScreen;
+
 
 public class Main {
+
     public static void main(String[] args) {
+
 
         applyCustomFont();
 
-		
-		AppSystem appSystem = new AppSystem();
-
-		appSystem.readBooks();
-		appSystem.readUsers();
-
-
         SwingUtilities.invokeLater(() -> {
-        	
+
+            // FeedScreen feedScreen = new FeedScreen();
+            // feedScreen.setVisible(true);
+
             LoadingScreen loadingScreen = new LoadingScreen();
             loadingScreen.setVisible(true);
 
-            javax.swing.Timer timer = new javax.swing.Timer (2000, e -> {
-                // Depois de 2s, abra a próxima tela
-				loadingScreen.dispose();
-                LoginScreen loginScreen = new LoginScreen();
 
-                LoginController loginController = new LoginController(loginScreen);
-                loginScreen.setVisible(true);
-            });
+    });
+
+
+
+            
+}
+				
+        
+                
 			
-			timer.setRepeats(false); // evita abrir várias telas
-    		timer.start();
-
-        });
-    }
+			
 
     private static void applyCustomFont() {
         try {
@@ -79,6 +76,5 @@ public class Main {
             }
         }
     }
-
 }
 

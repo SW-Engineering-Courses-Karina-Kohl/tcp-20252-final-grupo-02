@@ -2,11 +2,11 @@ package design.view;
 
 import javax.swing.*;
 
-import data.Constants;
-
 import java.awt.*;
 
+import data.Constants;
 import design.view.components.ButtonComponent;
+import design.view.components.BackButtonComponent;
 import design.view.components.TextField;
 
 public class ResetPasswordScreen1 extends JFrame {
@@ -16,16 +16,20 @@ public class ResetPasswordScreen1 extends JFrame {
 	public JTextField txtPassword;
     public JTextField txtConfirmPassword;
     public JButton btnCadastrar;
+    public JButton btnBackButton;
 
     public ResetPasswordScreen1() {
         setTitle("Reset Password Screen");
         setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        // setLayout(null); 
 
         JPanel resetPanel = new JPanel();
         resetPanel.setLayout(new BoxLayout(resetPanel, BoxLayout.Y_AXIS));
         resetPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        resetPanel.setBounds(0,-Constants.BACK_BUTTON_SIZE,getWidth(), getHeight());
+        resetPanel.setOpaque(false);
 
         JLabel lblPassword = new JLabel("DIGITE A NOVA SENHA");
         lblPassword.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -49,7 +53,13 @@ public class ResetPasswordScreen1 extends JFrame {
         resetPanel.add(btnCadastrar);
         resetPanel.add(Box.createVerticalGlue());
 
-        add(resetPanel);
-    }
+        JLayeredPane layered = getLayeredPane();
+        add(resetPanel, BorderLayout.CENTER);
 
+        btnBackButton = new BackButtonComponent();
+        btnBackButton.setSize(Constants.BACK_BUTTON_SIZE, Constants.BACK_BUTTON_SIZE);
+        btnBackButton.setLocation(Constants.BACK_BUTTON_BOUND_X, Constants.BACK_BUTTON_BOUND_Y);
+
+        layered.add(btnBackButton, JLayeredPane.PALETTE_LAYER);
+    }
 }

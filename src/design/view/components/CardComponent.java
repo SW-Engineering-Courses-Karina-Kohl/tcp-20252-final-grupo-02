@@ -1,10 +1,11 @@
 package design.view.components;
 
 import javax.swing.*;
-
-import data.Constants;
-
 import java.awt.*;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import data.Constants;
 
 public class CardComponent extends JPanel {
 	
@@ -14,13 +15,15 @@ public class CardComponent extends JPanel {
     private JLabel lblInfo;
     private JLabel lblDate;
     private JLabel lblFormat;
+    private Runnable onClickAction = null; // ação a ser executada ao clicar no card (tirei da net)
 
     public CardComponent() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(BorderFactory.createEmptyBorder(15, 15, 5, 15));
+        setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         setBackground(Constants.GREEN);
-        setMaximumSize(new Dimension(300, 150));
-        setPreferredSize(new Dimension(300, 150));
+        setMaximumSize(new Dimension(Constants.CARD_WIDTH, Constants.CARD_HEIGHT));
+        setPreferredSize(new Dimension(Constants.CARD_WIDTH, Constants.CARD_HEIGHT));
+        setAlignmentY(CENTER_ALIGNMENT);
         setOpaque(true);
 
         lblGroup = new JLabel("");
@@ -39,6 +42,20 @@ public class CardComponent extends JPanel {
         add(Box.createRigidArea(new Dimension(0, 35)));
         add(lblDate);
         add(lblFormat);
+
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (onClickAction != null) {
+                    onClickAction.run();
+                }
+            }
+        });
+    }
+
+    // Permite definir a ação de clique no card
+    public void setOnCardClick(Runnable action) {
+        this.onClickAction = action;
     }
 
     public void setData(String group, String info, String date, String format) {
@@ -57,5 +74,18 @@ public class CardComponent extends JPanel {
 
         setOpaque(true);
         repaint();
+    }
+
+    public String getGroup() {
+        return lblGroup.getText();
+    }
+    public String getInfo() {
+        return lblInfo.getText();
+    }
+    public String getDate() {
+        return lblDate.getText();
+    }
+    public String getFormat() {
+        return lblFormat.getText();
     }
 }

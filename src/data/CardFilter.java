@@ -15,17 +15,17 @@ public class CardFilter {
             String line;
 
             while ((line = br.readLine()) != null) {
-                // remove espaços ao redor para evitar erros
+
                 String[] data = line.split(",");
 
-                if (data.length < 4) {
-                    continue; // ignora linhas incompletas
+                if (data.length < 6) { // magic number ::)
+                    continue; 
                 }
-                String group = data[0].trim();
-                String info = data[1].trim();
-                String date = data[2].trim();
-                String format = data[3].trim();
-
+                String group = data[1].trim();
+                String info = data[2].trim();
+                String date = data[3].trim();
+                String format = data[4].trim();
+                String participants = data[5].trim();
                 cards.add(new CardData(group, info, date, format));
             }
 
