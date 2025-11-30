@@ -2,12 +2,14 @@ package design.view;
 
 import javax.swing.*;
 import java.awt.*;
+import design.view.AddBookScreen;
 
 import data.Constants;
 import design.view.components.ButtonComponent;
 import design.view.components.BackButtonComponent;
 import design.view.components.TextField;
 import design.view.components.InfoBarComponent;
+import design.view.components.DatePickerComponent;
 
 public class GroupCreationScreen extends JFrame {
 
@@ -19,8 +21,8 @@ public class GroupCreationScreen extends JFrame {
     public TextField txtGroupName;
     public TextField txtBook1;
     public TextField txtBook2;
-    public TextField txtDate1;
-    public TextField txtDate2;
+    public DatePickerComponent txtDate1;
+    public DatePickerComponent txtDate2;
 
     public GroupCreationScreen() {
 
@@ -78,14 +80,14 @@ public class GroupCreationScreen extends JFrame {
 
         datePanel.add(createInfoLabel("INSIRA AS DATAS DE VOTAÇÃO"));
         datePanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        txtDate1 = new TextField("Data Votação 1");
+        txtDate1 = new DatePickerComponent("Data Votação 1");
         txtDate1.setMaximumSize(new Dimension(Constants.DIMENSION_FIELD_WIDTH, Constants.DIMENSION_FIELD_HEIGHT));
         datePanel.add(txtDate1);
 
         datePanel.add(Box.createRigidArea(new Dimension(0, 20)));
         datePanel.add(createInfoLabel("INSIRA AS DATAS DE VOTAÇÃO"));
         datePanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        txtDate2 = new TextField("Data Votação 2");
+        txtDate2 = new DatePickerComponent("Data Votação 2");
         txtDate2.setMaximumSize(new Dimension(Constants.DIMENSION_FIELD_WIDTH, Constants.DIMENSION_FIELD_HEIGHT));
         datePanel.add(txtDate2);
 
@@ -115,6 +117,24 @@ public class GroupCreationScreen extends JFrame {
         btnAddBook = new ButtonComponent("Adicionar Livro");
         btnInitVote = new ButtonComponent("Começar Votação");
 
+        btnInitVote.addActionListener(e -> {
+            if (txtDate1.getDate() == null || txtDate2.getDate() == null || txtBook1.getText().isEmpty() || txtBook2.getText().isEmpty() || txtGroupName.getText().isEmpty() 
+            || (!rbtnOnline.isSelected() && !rbtnPresential.isSelected())) {
+                JOptionPane.showMessageDialog(this, "Por favor, termine de preencher todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }else{
+                // demais validações chamar outra classe
+                System.out.println(txtDate1.getDate());
+                System.out.println(txtDate2.getDate());
+            }
+        });
+
+        btnAddBook.addActionListener(e -> {
+           GroupCreationScreen.this.dispose();
+           AddBookScreen addBookScreen = new AddBookScreen();
+           addBookScreen.setVisible(true);
+        });
+
         group.add(rbtnPresential);
         group.add(rbtnOnline);
 
@@ -132,7 +152,6 @@ public class GroupCreationScreen extends JFrame {
         main.add(containerPanel);
 
         InfoBarComponent infoBar = new InfoBarComponent("", "VARIAVEL", "");
-        // infoBar.setLocation((Constants.SCREEN_WIDTH/2)-infoBar.getWidth() / 2, Constants.SCREEN_HEIGHT - infoBar.getHeight());
 
         main.add(Box.createVerticalGlue());
         main.add(infoBar);

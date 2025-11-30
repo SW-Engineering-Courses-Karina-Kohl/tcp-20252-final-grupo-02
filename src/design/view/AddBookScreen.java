@@ -4,30 +4,28 @@ import javax.swing.*;
 import java.awt.*;
 
 import design.view.components.TextField;
-import design.view.components.PasswordField;
 import design.view.components.ButtonComponent;
 import design.view.components.BackButtonComponent;
 import data.Constants;
 
-public class RegistrationScreen extends JFrame {
+public class AddBookScreen extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	
     public JButton btnCadastrar;
-    public JTextField txtNome;
-    public JTextField txtSobrenome;
-    public JPasswordField txtSenha;
-    public JPasswordField txtConfirmarSenha;
-    public JTextField txtEmail;
-    public JTextField txtCpf;
+    public JTextField txtTitle;
+    public JTextField txtAuthor;
+    public JTextField txtISBN;
+    public JTextField txtYear;
+    public JTextField txtGenre;
+    public JTextField txtPages;
     public JButton btnBackButton;
 
-    public RegistrationScreen() {
-        setTitle("Registration Screen");
+    public AddBookScreen() {
+        setTitle("Add Book Screen");
         setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        // setLayout(new BorderLayout());
 
         JPanel main = new JPanel();
         main.setLayout(new BorderLayout());
@@ -35,77 +33,70 @@ public class RegistrationScreen extends JFrame {
         main.setBounds(0, -Constants.BACK_BUTTON_SIZE, getWidth(), getHeight());
         main.setOpaque(false);
 
-        // painel central que terá os campos
         JPanel center = new JPanel(new GridBagLayout());
         center.setOpaque(false);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.NONE;
 
-        // Linha 0 - Nome (col 0)
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
-        JLabel lblNome = new JLabel("DIGITE SEU PRIMEIRO NOME");
-        center.add(lblNome, gbc);
+        JLabel lblTitle = new JLabel("INFORME O TÍTULO DO LIVRO");
+        center.add(lblTitle, gbc);
 
-        gbc.gridx = 1; // coluna direita (sobrenome)
-        JLabel lblSobrenome = new JLabel("DIGITE SEU SOBRENOME");
-        center.add(lblSobrenome, gbc);
-
-        // Linha 1 - campos
-        txtNome = new TextField("NOME");
-        txtSobrenome = new TextField("SOBRENOME");
+        gbc.gridx = 1; 
+        JLabel lblAuthor = new JLabel("INFORME O AUTOR DO LIVRO");
+        center.add(lblAuthor, gbc);
+   
+        txtTitle = new TextField("TÍTULO");
+        txtAuthor = new TextField("AUTOR");
 
         gbc.gridy = 1;
         gbc.gridx = 0;
         gbc.anchor = GridBagConstraints.WEST;
-        center.add(txtNome, gbc);
+        center.add(txtTitle, gbc);
 
         gbc.gridx = 1;
-        center.add(txtSobrenome, gbc);
+        center.add(txtAuthor, gbc);
 
-        // Linha 2 - Labels email / cpf
         gbc.gridy = 2;
         gbc.gridx = 0;
-        JLabel lblEmail = new JLabel("DIGITE SEU E-MAIL");
-        center.add(lblEmail, gbc);
+        JLabel lblISBN = new JLabel("INFORME O CÓDIGO ISBN");
+        center.add(lblISBN, gbc);
 
         gbc.gridx = 1;
-        JLabel lblCpf = new JLabel("DIGITE SEU CPF");
-        center.add(lblCpf, gbc);
+        JLabel lblYear = new JLabel("INFORME O ANO DE PUBLICAÇÃO");
+        center.add(lblYear, gbc);
 
-        // Linha 3 - campos email / cpf
-        txtEmail = new TextField("E-MAIL");
-        txtCpf = new TextField("CPF");
+        txtISBN = new TextField("ISBN");
+        txtYear = new TextField("AAAA");
 
         gbc.gridy = 3;
         gbc.gridx = 0;
-        center.add(txtEmail, gbc);
+        center.add(txtISBN, gbc);
 
         gbc.gridx = 1;
-        center.add(txtCpf, gbc);
+        center.add(txtYear, gbc);
 
-        // Linha 4 - Labels senha / confirmar
         gbc.gridy = 4;
         gbc.gridx = 0;
-        JLabel lblSenha = new JLabel("DIGITE SUA SENHA");
-        center.add(lblSenha, gbc);
+        JLabel lblGenre = new JLabel("INFORME O GÊNERO DO LIVRO");
+        center.add(lblGenre, gbc);
 
         gbc.gridx = 1;
-        JLabel lblConfirmar = new JLabel("CONFIRME SUA SENHA");
-        center.add(lblConfirmar, gbc);
+        JLabel lblPages = new JLabel("INFORME O NÚMERO DE PÁGINAS");
+        center.add(lblPages, gbc);
 
-        // Linha 5 - campos senha / confirmar
-        txtSenha = new PasswordField("********");
-        txtConfirmarSenha = new PasswordField("********");
+        txtGenre = new TextField("GÊNERO");
+        txtPages = new TextField("NRO PÁGINAS");
 
         gbc.gridy = 5;
         gbc.gridx = 0;
-        center.add(txtSenha, gbc);
+        center.add(txtGenre, gbc);
 
         gbc.gridx = 1;
-        center.add(txtConfirmarSenha, gbc);
+        center.add(txtPages, gbc);
         // botão centralizado embaixo
         btnCadastrar = new ButtonComponent("CADASTRAR");
 
