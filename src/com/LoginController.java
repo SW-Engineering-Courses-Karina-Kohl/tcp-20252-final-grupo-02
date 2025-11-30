@@ -14,11 +14,15 @@ import javax.swing.JOptionPane;
 
 public class LoginController {
     private LoginScreen loginScreen;
+    private com.service.UserService userService;
+
 
     public LoginController(LoginScreen loginScreen) {
         this.loginScreen = loginScreen;
+        this.userService = new com.service.UserService(); // carrega usuários do CSV
         initController();
     }
+
 
     private void initController() {
         loginScreen.btnEntrar.addActionListener(e -> handleLogin());
@@ -56,39 +60,45 @@ public class LoginController {
     }
 
     private boolean authenticateUser(String emailCpf, String senhaDigitada) {
-
     try (BufferedReader br = new BufferedReader(new FileReader("src/data/files/Users.csv"))) {
-
         String line;
         while ((line = br.readLine()) != null) {
-
             String[] data = line.split(",");
-
-            if (data.length < 6) continue; // linha inválida
+            if (data.length < 6) continue;
 
             String email = data[3].trim();
             String cpf   = data[4].trim();
             String senha = data[5].trim();
 
-            // Permite login por email OU CPF
             if ((emailCpf.equals(email) || emailCpf.equals(cpf)) &&
                 senhaDigitada.equals(senha)) {
 
-                //JOptionPane.showMessageDialog(loginScreen, "Login successful!");
+                // usuário autenticado -> obter o objeto User via userService
+                // certifique-se de que userService já carregou os usuários (construtor faz isso)
+                com.model.User loggedUser = userService.findUserByEmail(email);
+                if (loggedUser == null) {
+                    // se o arquivo foi atualizado durante a execução, recarregue
+                    userService.reloadUsers();
+                    loggedUser = userService.findUserByEmail(email);
+                }
+
                 loginScreen.dispose();
+
                 HomeScreen homeScreen = new HomeScreen();
-                HomeController homeController = new HomeController(homeScreen);
+                com.service.BookClubService clubService = new com.service.BookClubService(userService);
+                new HomeController(homeScreen, loggedUser, clubService);
                 homeScreen.setVisible(true);
                 return true;
             }
         }
-
     } catch (IOException e) {
-            System.out.println("Error at reading users: " + e.getMessage());
+        System.out.println("Error at reading users: " + e.getMessage());
     }
 
     JOptionPane.showMessageDialog(loginScreen, "Invalid credentials.");
     return false;
 }
-
 }
+
+
+
