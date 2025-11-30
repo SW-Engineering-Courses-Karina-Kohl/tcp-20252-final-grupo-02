@@ -22,18 +22,6 @@ public class BookServiceTest {
         f.createNewFile();
     }
     
-    private boolean equalsBook(Book book1, Book book2) {
-    	
-    	return 
-    			book1.getTitle().equals(book2.getTitle()) &&
-    			book1.getAuthor().equals(book2.getAuthor()) &&
-    			book1.getIsbn().equals(book2.getIsbn()) &&
-    			book1.getReleaseYear() == book2.getReleaseYear() &&
-    			book1.getNumPages() == book2.getNumPages() &&
-    			book1.getGenre().equals(book2.getGenre());
-    	
-    }
-    
     @Test
     public void testConstructor() throws IOException{
     	
@@ -52,14 +40,9 @@ public class BookServiceTest {
     	bookService1.saveAllBooks();
     	
     	BookService bookService2 = new BookService();
-    	
-    	assertEquals(books.size(), bookService2.getBooks().size());
-    	
-    	for(int i = 0; i < books.size(); i++) {
-    		
-    		assertTrue(equalsBook( books.get(i), bookService2.getBooks().get(i) ) );
-    		
-    	}
+	
+    	assertEquals( books, bookService2.getBooks() );
+
         
         
     }
@@ -84,15 +67,10 @@ public class BookServiceTest {
     	bookService1.saveAllBooks();
     	
     	ArrayList<Book> loadedBooks = bookService2.loadBooks();
-    	
-    	assertEquals(books.size(), bookService2.getBooks().size());
-    	
-    	for(int i = 0; i < books.size(); i++) {
-    		
-    		assertTrue(equalsBook( books.get(i), bookService2.getBooks().get(i) ) );
-    		assertTrue(equalsBook( books.get(i), loadedBooks.get(i) ) );
 
-    	}
+    	assertEquals( books, bookService2.getBooks() );
+    	assertEquals( books, loadedBooks );
+
         
     }
     
@@ -115,19 +93,13 @@ public class BookServiceTest {
         Book bookToDelete = bookService1.getBooks().get(1);
         
         bookService1.deleteBook(bookToDelete);
-    	
-    	assertEquals(books.size(), bookService1.getBooks().size());
-    	
-    	for(int i = 0; i < books.size(); i++) {
     		
-    		assertTrue(equalsBook(books.get(i), bookService1.getBooks().get(i)));
+    	assertEquals( books, bookService1.getBooks() );
 
-    	}
-        
     }
     
     @Test
-    public void findBookByIsbn() throws IOException{
+    public void testFindBookByIsbn() throws IOException{
     	resetFile();
     	
     	ArrayList<Book> books = new ArrayList<>();
@@ -140,9 +112,11 @@ public class BookServiceTest {
         bookService1.registerBook("Dom Casmurro", "Machado de Assis", "9788580700688", 2020, 328, "Realismo");
         bookService1.registerBook("O Pequeno Príncipe", "Machado de Assis", "978-0152465032", 1959, 96, "Infanto-Juvenil");
     	
+    	assertEquals(books.size(), bookService1.getBooks().size());
+        
     	for(int i = 0; i < books.size(); i++) {
     		
-    		assertTrue(equalsBook(books.get(i), bookService1.findBookByIsbn(books.get(i).getIsbn())));
+    		assertEquals( books.get(i), bookService1.findBookByIsbn( books.get(i).getIsbn() ) );
 
     	}
         
