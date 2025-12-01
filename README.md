@@ -1,6 +1,6 @@
 
 <div align="center">
-  <img src="img/logo.png" width="50%"> 
+  <img src="tcp-20252-final-grupo/img/logo.png" width="50%"> 
 </div>
 
 ## Definição
