@@ -73,11 +73,10 @@ public class LoginController {
             if ((emailCpf.equals(email) || emailCpf.equals(cpf)) &&
                 senhaDigitada.equals(senha)) {
 
-                // usuário autenticado -> obter o objeto User via userService
-                // certifique-se de que userService já carregou os usuários (construtor faz isso)
+                
                 com.model.User loggedUser = userService.findUserByEmail(email);
                 if (loggedUser == null) {
-                    // se o arquivo foi atualizado durante a execução, recarregue
+                    
                     userService.reloadUsers();
                     loggedUser = userService.findUserByEmail(email);
                 }

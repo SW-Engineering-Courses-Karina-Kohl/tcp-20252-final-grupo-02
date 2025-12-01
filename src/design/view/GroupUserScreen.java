@@ -97,8 +97,10 @@ public class GroupUserScreen extends JFrame{
 
         btnCreateNewGroup.addActionListener(e -> {
             GroupUserScreen.this.dispose();
-            GroupCreationScreen groupCreationScreen = new GroupCreationScreen();
-            groupCreationScreen.setVisible(true);
+            GroupCreationScreen screen = new GroupCreationScreen();
+            new com.GroupCreationController(screen, loggedUser, clubService);
+            screen.setVisible(true);
+
         });
 
         JLayeredPane layered = getLayeredPane();
@@ -109,6 +111,14 @@ public class GroupUserScreen extends JFrame{
         btnBackButton.setLocation(Constants.SCREEN_WIDTH - (Constants.BACK_BUTTON_SIZE * 2), 0);
 
         layered.add(btnBackButton, JLayeredPane.PALETTE_LAYER);
+
+        btnBackButton.addActionListener(e -> {
+            dispose();
+            HomeScreen home = new HomeScreen();
+            new com.HomeController(home, loggedUser, clubService);
+            home.setVisible(true);
+        });
+
 
     }
 
