@@ -121,4 +121,44 @@ public class ProvServicePollTest {
         assertEquals("Pergunta 1", loaded.getPolls().get(0).getQuestion());
         assertEquals("Pergunta 2", loaded.getPolls().get(1).getQuestion());
     }
+
+    @Test
+    public void testVotingSystem() {
+
+        User creator = new User("Rafael ", "Silva", "rafa@test", "123", "pw");
+        BookClub club = new BookClub(creator, "Sci-Fi");
+
+        PollService pollService = new PollService();
+
+        ArrayList<String> options = new ArrayList<>();
+        options.add("Duna");
+        options.add("Fundação");
+
+        Poll poll = pollService.createPollForBookClub(
+            club, "BOOK", "Qual ler?", options
+        );
+
+        pollService.vote(poll, 0);
+        pollService.vote(poll, 0);
+        pollService.vote(poll, 1);
+
+        assertEquals(2, poll.getVotes()[0]);
+        assertEquals(1, poll.getVotes()[1]);
+
+
+
+        // Simular reabertura do programa 
+        PollService loaded = new PollService();
+
+        ArrayList<BookClub> clubs = new ArrayList<>();
+        clubs.add(club);
+
+        loaded.loadPolls(clubs);
+
+        Poll loadedPoll = club.getPolls().get(0);
+
+        assertEquals(2, loadedPoll.getVotes()[0]);  // Duna
+        assertEquals(1, loadedPoll.getVotes()[1]);  // Fundação
+    }
 }
+
