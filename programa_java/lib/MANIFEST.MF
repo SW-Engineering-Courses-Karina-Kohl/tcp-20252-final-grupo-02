@@ -1,0 +1,2 @@
+Main-Class: com.Main
+Class-Path: lib/tinylog-api-2.7.0.jar lib/tinylog-impl-2.7.0.jar
