@@ -58,7 +58,7 @@ public class BookClubService {
     }
 
 
-    public ArrayList<BookClub> getAllClubs() {
+    public ArrayList<BookClub> getClubs() {
         return clubs;
     }
 
@@ -74,7 +74,31 @@ public class BookClubService {
     return userClubs;
 }
 
+public boolean leaveClub(User user, BookClub club) {
 
+    if (club.getCreator().getId() == user.getId()) {
+        Logger.warn("O criador '{}' não pode sair do clube '{}'.",
+            user.getName(), club.getName());
+        return false;
+    }
+
+    if (!club.getParticipants().contains(user)) {
+        Logger.warn("Usuário '{}' tentou sair do clube '{}', mas não participa.",
+            user.getName(), club.getName());
+        return false;
+    }
+
+    club.getParticipants().remove(user);
+    user.getJoinedBookClubs().remove(club);
+
+    repo.saveAll(clubs);
+    userService.reloadUsers();
+
+    Logger.info("Usuário '{}' saiu do clube '{}'.",
+        user.getName(), club.getName());
+
+    return true;
+}
     
 }
 
