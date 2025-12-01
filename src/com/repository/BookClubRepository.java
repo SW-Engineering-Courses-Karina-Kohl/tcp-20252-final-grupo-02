@@ -7,6 +7,8 @@ import com.model.Poll;
 import com.model.User;
 import com.service.UserService;
 
+import data.Constants;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -14,12 +16,11 @@ import org.tinylog.Logger;
 
 
 public class BookClubRepository {
-         private static final String PATH = "src/data/files/BookClubs.csv";
 
 
     public ArrayList<BookClub> loadAll(UserService userService) {
         ArrayList<BookClub> list = new ArrayList<>();
-        File f = new File(PATH);
+        File f = new File(Constants.CSV_PATHS[3]);
 
         if (!f.exists()) {
             Logger.info("Book clubs file not found. Creating bookClubs.csv.");
@@ -82,7 +83,7 @@ public class BookClubRepository {
   
 
     public void saveAll(ArrayList<BookClub> list) {
-        try (PrintWriter w = new PrintWriter(new FileWriter(PATH))) {
+        try (PrintWriter w = new PrintWriter(new FileWriter(Constants.CSV_PATHS[3]))) {
             for (BookClub b : list) {
                 w.println(b.toCsvLine());
             }

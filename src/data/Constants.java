@@ -45,7 +45,10 @@ public class Constants {
     public static final String[] CSV_PATHS = {
         "src/data/files/HomeContent.csv",
         "src/data/files/UserContent.csv",
-        "src/data/files/Pending.csv"
+        "src/data/files/Pending.csv",
+        "src/data/files/BookClubs.csv",
+        "src/data/files/Books.csv",
+        "src/data/files/Users.csv"
     };
 
     public static final int BUTTON_WIDTH = 150;

@@ -2,6 +2,9 @@ package com.repository;
 
 
 import com.model.User;
+
+import data.Constants;
+
 import java.io.*;
 import java.util.ArrayList;
 import org.tinylog.Logger;
@@ -18,7 +21,7 @@ public class UserRepository {
                 return list;
             }
 
-            try (BufferedReader reader = new BufferedReader(new FileReader(f))) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(Constants.CSV_PATHS[5]))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     String[] parts = line.split(",", -1);
@@ -45,7 +48,7 @@ public class UserRepository {
 
 
     public void saveAll(ArrayList<User> list) {
-        try (PrintWriter w = new PrintWriter(new FileWriter(PATH))) {
+        try (PrintWriter w = new PrintWriter(new FileWriter(Constants.CSV_PATHS[5]))) {
             for (User u : list) {
                 w.println(u.toCsvLine());
             }

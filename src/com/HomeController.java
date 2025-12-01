@@ -1,13 +1,11 @@
 package com;
 
-import javax.swing.JFrame;
-
 import design.view.FeedScreen;
 import design.view.GroupUserScreen;
 import design.view.HomeScreen;
 import design.view.ParticipateScreen;
 
-public class HomeController extends JFrame {
+public class HomeController {
 
     private HomeScreen homeScreen;
     private FeedScreen feedScreen;
@@ -28,6 +26,7 @@ public class HomeController extends JFrame {
     private void openMyGroups() {
         homeScreen.dispose();
         GroupUserScreen groupUserScreen = new GroupUserScreen();
+        GroupUserScreenController groupUserScreenController = new GroupUserScreenController(groupUserScreen);
         groupUserScreen.setVisible(true);
     }
 

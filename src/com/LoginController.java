@@ -75,10 +75,14 @@ public class LoginController {
                 senhaDigitada.equals(senha)) {
 
                 //JOptionPane.showMessageDialog(loginScreen, "Login successful!");
+            	
+            	
+            	
                 loginScreen.dispose();
                 HomeScreen homeScreen = new HomeScreen();
                 HomeController homeController = new HomeController(homeScreen);
                 homeScreen.setVisible(true);
+                
                 return true;
             }
         }

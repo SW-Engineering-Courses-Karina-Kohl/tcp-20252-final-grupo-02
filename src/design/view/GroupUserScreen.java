@@ -1,6 +1,10 @@
 package design.view;
 
 import javax.swing.*;
+
+import com.model.User;
+import com.service.BookClubService;
+
 import java.awt.*;
 import java.util.List;
 

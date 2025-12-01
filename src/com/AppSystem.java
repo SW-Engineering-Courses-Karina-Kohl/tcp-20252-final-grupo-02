@@ -128,17 +128,11 @@ public class AppSystem {
     }
     
 
-    public void createBookPoll(BookClub club, String question, ArrayList<String> options) {
-        BookPoll poll = new BookPoll(club, question, options);
-        pollService.addPoll(poll);
-        club.getPolls().add(poll);
-    }
+    public void createBookPoll(BookClub club, String type, String question, ArrayList<String> options) {
 
-    public void createDatePoll(BookClub club, String question, ArrayList<String> options) {
-        DatePoll poll = new DatePoll(club, question, options);
-        pollService.addPoll(poll);
-        club.getPolls().add(poll);
-    }   
+        pollService.createPollForBookClub(club, type, question, options);
+        
+    }
 
     // Chamada de BookService 
     public ArrayList<Book> getBooks() {

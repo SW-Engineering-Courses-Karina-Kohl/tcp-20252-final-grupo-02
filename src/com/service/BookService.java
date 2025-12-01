@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.ArrayList;
 import com.model.Book;
 
+import data.Constants;
+
 public class BookService {
 
     private final ArrayList<Book> books = new ArrayList<>();
@@ -30,7 +32,7 @@ public class BookService {
             return books;
         }
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(Constants.CSV_PATHS[4]))) {
             String line = "";
 
             while ((line = reader.readLine()) != null) {
@@ -117,7 +119,7 @@ public class BookService {
     }
 
     public void saveAllBooks() {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(Constants.CSV_PATHS[4]))) {
         for (Book b : books) {
             writer.println(
                 b.getId() + "," +
