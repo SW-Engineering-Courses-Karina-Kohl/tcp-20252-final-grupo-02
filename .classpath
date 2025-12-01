@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
@@ -11,6 +12,8 @@
 	<classpathentry kind="lib" path="lib/tinylog-api-2.7.0.jar"/>
 	<classpathentry kind="lib" path="lib/tinylog-impl-2.7.0.jar"/>
 =======
+=======
+>>>>>>> Stashed changes
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="tcp-20252-final-grupo/src"/>
 	<classpathentry kind="lib" path="programa_java/app.jar"/>
@@ -21,6 +24,9 @@
 	<classpathentry kind="lib" path="tcp-20252-final-grupo/lib/tinylog-api-2.7.0.jar"/>
 	<classpathentry kind="lib" path="tcp-20252-final-grupo/lib/tinylog-impl-2.7.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 	<classpathentry kind="output" path="bin"/>
 </classpath>
