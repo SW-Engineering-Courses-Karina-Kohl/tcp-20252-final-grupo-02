@@ -51,7 +51,9 @@ public class ParticipateScreen extends JFrame {
                 btnExit.setPreferredSize(new Dimension(Constants.BUTTON_WIDTH, Constants.BUTTON_HEIGHT));
                 btnExit.addActionListener(e -> {
                     System.out.println("Clique em SAIR do grupo: " + bc.getName());
-        
+                    ParticipateScreen.this.dispose();
+                    ExitScreen exitScreen = new ExitScreen(bc.getName());
+                    exitScreen.setVisible(true);
                 });
 
             
