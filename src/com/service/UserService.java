@@ -9,7 +9,7 @@ import com.model.User;
 
 import com.repository.UserRepository;
 import design.view.RegistrationScreen;
-
+    
 
 public class UserService {
 
