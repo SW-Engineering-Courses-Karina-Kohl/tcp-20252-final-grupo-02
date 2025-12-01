@@ -109,12 +109,6 @@ public class PollService {
         }
     }
 
-    public void vote(Poll poll, int optionIndex) {
-        poll.vote(optionIndex);
-        savePolls();  
-}
-
-
     public void savePolls() {
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_NAME))) {
 

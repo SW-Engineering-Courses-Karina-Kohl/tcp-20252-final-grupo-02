@@ -11,7 +11,7 @@ public class BookClub {
 	private ArrayList<Poll> polls;
 	private ArrayList<Meeting> meetings;
 	private User creator;
-	
+
 	
 	private static int numBookClubsCreated = 0;
 	
@@ -23,8 +23,7 @@ public class BookClub {
 		this.participants = new ArrayList<User>();
 		this.polls = new ArrayList<Poll>();
 		this.meetings = new ArrayList<Meeting>();
-		creator.getCreatedBookClubs().add(this); 
-
+		
 	}
 
 		public BookClub(int id, User creator, String name) {
@@ -35,8 +34,7 @@ public class BookClub {
 		this.participants = new ArrayList<User>();
 		this.polls = new ArrayList<Poll>();
 		this.meetings = new ArrayList<Meeting>();
-		creator.getCreatedBookClubs().add(this); 
-
+		
 	}
 
 
