@@ -19,6 +19,7 @@ public class HomeController {
         this.clubService = clubService;
         initController();
         loadUserGroups();
+        loadGeneralFeed();
     }
 
     private void initController() {
@@ -26,6 +27,12 @@ public class HomeController {
         homeScreen.btnShowMyGroups.addActionListener(e -> showMyGroups());
         homeScreen.btnEnterGroup.addActionListener(e -> enterGroup());
     }
+
+    private void loadGeneralFeed() {
+        java.util.List<com.model.BookClub> allClubs = clubService.getAllClubs();
+        homeScreen.populateGeneralFeed(allClubs, loggedUser);
+    }   
+
 
     private void loadUserGroups() {
         java.util.ArrayList<com.model.BookClub> myClubs = clubService.getClubsForUser(loggedUser);
@@ -41,13 +48,14 @@ public class HomeController {
 
     private void showMyGroups() {
         homeScreen.dispose();
-        ParticipateScreen participateScreen = new ParticipateScreen();
+        ParticipateScreen participateScreen = new ParticipateScreen(loggedUser, clubService); 
         participateScreen.setVisible(true);
     }
 
+
     private void enterGroup() {
         homeScreen.dispose();
-        FeedScreen feedScreen = new FeedScreen();
+        FeedScreen feedScreen = new FeedScreen(loggedUser, clubService); 
         feedScreen.setVisible(true);
     }
 }

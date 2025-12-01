@@ -4,23 +4,28 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-import data.CardData;
-import data.CardFilter;
-import data.Constants;
+import com.HomeController;
+import com.model.BookClub;
+import com.model.User;
+import com.service.BookClubService;
 import design.view.components.BackButtonComponent;
 import design.view.components.CardComponent;
+import data.Constants;
 
 public class FeedScreen extends JFrame {
 
     public JButton btnBackButton;
-    public JButton btnCard;
+    private User loggedUser;
+    private BookClubService clubService;
 
-    public FeedScreen() {
+    public FeedScreen(User loggedUser, BookClubService clubService) {
+        this.loggedUser = loggedUser;
+        this.clubService = clubService;
+
         setTitle("Feed Screen");
         setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        // setLayout(null);
 
         JPanel feedPanel = new JPanel();
         feedPanel.setLayout(new BoxLayout(feedPanel, BoxLayout.Y_AXIS));
@@ -28,41 +33,50 @@ public class FeedScreen extends JFrame {
         feedPanel.setBounds(0, Constants.BACK_BUTTON_BOUND_Y, getWidth(), getHeight());
         feedPanel.setOpaque(false);
 
-        CardFilter cardFilter = new CardFilter();
-        List<CardData> Posts = cardFilter.getFilteredCards(Constants.CSV_PATHS[0]); // trocar o arquivo CSV conforme necessário
+    
+        List<BookClub> availableGroups = clubService.getAllClubs().stream()
+            .filter(club -> !club.getParticipants().contains(loggedUser)
+                    && club.getCreator().getId() != loggedUser.getId())
+            .toList();
 
         JPanel CardPanel = new JPanel();
-        CardPanel.setLayout(new GridLayout(0, 3, 10, 10)); // 3 colunas, varias linhas
+        CardPanel.setLayout(new GridLayout(0, 3, 10, 10)); 
         CardPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
         CardPanel.setOpaque(false);
 
-        for (CardData cardData : Posts) {
+        for (BookClub club : availableGroups) {
             CardComponent card = new CardComponent();
-            card.setData(cardData.getGroup(), cardData.getInfo(), cardData.getDate(), cardData.getformat());
-            CardPanel.add(card);
+            card.setData(club.getName(),
+                    "Membros: " + club.getParticipants().size(),
+                    "", "");
 
-            // Define a ação ao clicar no card (tirei da net)
-            card.setOnCardClick(() -> {
-                // System.out.println("Card clicado: " + card.getGroup());
-                // System.out.println("Info: " + card.getInfo());
-
-                JOptionPane.showConfirmDialog(
-                        null,
-                        "Deseja entrar no grupo " + card.getGroup() + " ?",
+          
+                card.setOnCardClick(() -> {
+                int option = JOptionPane.showConfirmDialog(
+                        this,
+                        "Deseja entrar no grupo " + club.getName() + "?",
                         "Confirmação",
                         JOptionPane.YES_NO_OPTION
                 );
+
+                if (option == JOptionPane.YES_OPTION) {
+                    club.getParticipants().add(loggedUser);
+                    JOptionPane.showMessageDialog(this,
+                            "Você entrou no grupo " + club.getName() + "!");
+                    
+                }
             });
+
+            CardPanel.add(card);
         }
 
-        JScrollPane ScrollPane = new JScrollPane(CardPanel);
-        ScrollPane.getVerticalScrollBar().setUnitIncrement(16); // velocidade de scroll
-        ScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        ScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        ScrollPane.setPreferredSize(new Dimension(0, 200));
-        ScrollPane.setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT - 100);
-        ScrollPane.setBorder(BorderFactory.createTitledBorder("Feed Geral"));
-        feedPanel.add(ScrollPane);
+        JScrollPane scrollPane = new JScrollPane(CardPanel);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setPreferredSize(new Dimension(0, 200));
+        scrollPane.setBorder(BorderFactory.createTitledBorder("Grupos Disponíveis"));
+        feedPanel.add(scrollPane);
 
         JLayeredPane layered = getLayeredPane();
         add(feedPanel, BorderLayout.CENTER);
@@ -70,7 +84,14 @@ public class FeedScreen extends JFrame {
         btnBackButton = new BackButtonComponent();
         btnBackButton.setSize(Constants.BACK_BUTTON_SIZE, Constants.BACK_BUTTON_SIZE);
         btnBackButton.setLocation(Constants.SCREEN_WIDTH - (Constants.BACK_BUTTON_SIZE * 2), 0);
-
         layered.add(btnBackButton, JLayeredPane.PALETTE_LAYER);
+
+        btnBackButton.addActionListener(e -> {
+            this.dispose(); 
+            HomeScreen home = new HomeScreen();
+            new HomeController(home, loggedUser, clubService); // recria o controller para atualizar os grupos
+            home.setVisible(true);
+        });
+
     }
 }

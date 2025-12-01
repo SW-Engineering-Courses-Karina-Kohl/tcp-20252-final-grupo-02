@@ -18,6 +18,7 @@ public class HomeScreen extends JFrame {
     public JButton btnEnterGroup;
     private JPanel firstCardPanel;
     private JScrollPane firstScrollPane;
+    private JPanel secondCardPanel;
 	
     public HomeScreen() {
         setTitle("Home Screen");
@@ -77,7 +78,7 @@ public class HomeScreen extends JFrame {
         buttonsContainer.add(Box.createVerticalGlue());
 
 
-        JPanel secondCardPanel = new JPanel();
+        secondCardPanel = new JPanel();
         secondCardPanel.setLayout(new GridLayout(0, 2, 20, 20)); // 2 colunas, sem scroll lateral
         secondCardPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 
@@ -98,7 +99,7 @@ public class HomeScreen extends JFrame {
     }
 
     // converte BookClub -> CardComponent e popula painel
-public void populateMyGroups(java.util.List<com.model.BookClub> myClubs) {
+    public void populateMyGroups(java.util.List<com.model.BookClub> myClubs) {
     
         for (com.model.BookClub bc : myClubs) {
          design.view.components.CardComponent card = new design.view.components.CardComponent();
@@ -114,7 +115,32 @@ public void populateMyGroups(java.util.List<com.model.BookClub> myClubs) {
         }
         firstCardPanel.revalidate();
         firstCardPanel.repaint();
+        
     }
+
+    public void populateGeneralFeed(java.util.List<com.model.BookClub> allClubs, com.model.User loggedUser) {
+        secondCardPanel.removeAll(); // limpa antes de popular
+
+        for (com.model.BookClub bc : allClubs) {
+            // ignora os grupos do próprio usuário
+            if (bc.getCreator().getId() == loggedUser.getId() || bc.getParticipants().contains(loggedUser)) {
+                continue;
+            }
+
+            design.view.components.CardComponent card = new design.view.components.CardComponent();
+            String groupName = bc.getName();
+            String info = "Membros: " + bc.getParticipants().size();
+            String date = "";   // ou alguma data relevante
+            String format = ""; // ou alguma info de formato
+
+            card.setData(groupName, info, date, format);
+            secondCardPanel.add(card);
+        }
+
+        secondCardPanel.revalidate();
+        secondCardPanel.repaint();
+    }
+
 
 
 }
