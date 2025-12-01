@@ -52,6 +52,18 @@ public abstract class Poll {
         return votes;
     }
 
+    public int getWinner() {
+        if (votes[0] > votes[1]) return 0;   
+        if (votes[1] > votes[0]) return 1;   
+        return -1; // empate
+    }
+    public void vote(int optionIndex) {
+        if (optionIndex < 0 || optionIndex >= votes.length) {
+            throw new IllegalArgumentException("Opção inválida");
+        }
+        votes[optionIndex]++;
+    }
+
     public String getVotesAsCSV() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < votes.length; i++) {

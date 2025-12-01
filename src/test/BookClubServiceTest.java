@@ -57,7 +57,7 @@ public class BookClubServiceTest {
         assertEquals(bc, u.getCreatedBookClubs().get(0));
 
         // Clubes devem ter sido persistidos
-        ArrayList<BookClub> loaded = bcService.getAllClubs();
+        ArrayList<BookClub> loaded = bcService.getClubs();
         assertEquals(1, loaded.size());
         assertEquals("Clube 1", loaded.get(0).getName());
     }
@@ -92,7 +92,7 @@ public class BookClubServiceTest {
         assertEquals(c2, u.getCreatedBookClubs().get(1));
 
         // Serviço deve ter ambos
-        assertEquals(2, bcService.getAllClubs().size());
+        assertEquals(2, bcService.getClubs().size());
     }
 
     @Test
@@ -112,8 +112,8 @@ public class BookClubServiceTest {
         // Carregar novamente do arquivo
         BookClubService bcServiceReloaded = new BookClubService(userService);
 
-        assertEquals(1, bcServiceReloaded.getAllClubs().size());
-        assertEquals("Clube 4", bcServiceReloaded.getAllClubs().get(0).getName());
+        assertEquals(1, bcServiceReloaded.getClubs().size());
+        assertEquals("Clube 4", bcServiceReloaded.getClubs().get(0).getName());
     }
 
     @Test
@@ -162,7 +162,7 @@ public class BookClubServiceTest {
         assertEquals(0, strangerClubs.size());
 
         // Verificar que o serviço mantém os 3 clubes
-        assertEquals(3, bcService.getAllClubs().size());
+        assertEquals(3, bcService.getClubs().size());
 }
 
     @Test
@@ -189,9 +189,42 @@ public class BookClubServiceTest {
         assertEquals(first, u.getCreatedBookClubs().get(0));
 
         // Serviço também deve ter apenas 1 clube
-        assertEquals(1, bcService.getAllClubs().size());
-        assertEquals("Clube", bcService.getAllClubs().get(0).getName());
+        assertEquals(1, bcService.getClubs().size());
+        assertEquals("Clube", bcService.getClubs().get(0).getName());
 }
+
+      @Test
+public void testLeaveClub() throws IOException {
+
+    UserService userService = new UserService();
+    userService.registerUser("Rafael", "Silva", "rafa@test", "123", "pw", "pw");
+    userService.registerUser("Ana", "Souza", "ana@test", "456", "pw", "pw");
+
+    User creator, member;
+    creator = userService.findUserByEmail("rafa@test");
+    member = userService.findUserByEmail("ana@test");
+
+    BookClubService bookClubService = new BookClubService(userService);
+
+    BookClub club = new BookClub(creator, "Sci-Fi Club");
+
+    bookClubService.getClubs().add(club);
+
+    // Adicionar membro ao clube
+    club.getParticipants().add(member);
+    member.getJoinedBookClubs().add(club);
+
+    // Criador nao pode sair do clube
+    bookClubService.leaveClub(creator, club);
+    assertTrue(club.getParticipants().contains(member)); 
+    assertTrue(creator.getCreatedBookClubs().contains(club)); 
+
+    // membro comum pode sair
+    bookClubService.leaveClub(member, club);
+    assertFalse(club.getParticipants().contains(member));
+    assertFalse(member.getJoinedBookClubs().contains(club));
+}
+
 
 
 
