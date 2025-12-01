@@ -18,10 +18,10 @@ public class BookClubService {
         this.repo = new BookClubRepository();
         this.userService = userService;
         this.clubs = repo.loadAll(userService);
-        rebuildCreators();
+        rebuildCreators(userService);
     }
 
-    private void rebuildCreators() {
+    private void rebuildCreators(UserService userService) {
         for (BookClub bc : clubs) {
             User u = userService.findById(bc.getCreator().getId());
                 if (!u.getCreatedBookClubs().contains(bc)) {
@@ -63,11 +63,19 @@ public class BookClubService {
     }
 
     public ArrayList<BookClub> getClubsForUser(User u) {
-    ArrayList<BookClub> userClubs = new ArrayList<>();
+        ArrayList<BookClub> userClubs = new ArrayList<>();
 
-    for (BookClub bc : clubs) {
+        for (BookClub bc : clubs) {
         if (bc.getParticipants().contains(u) || bc.getCreator().getId() == u.getId()) {
             userClubs.add(bc);
+            continue;
+        }
+
+        for (User p: bc.getParticipants()) {
+            if (p.getId() == u.getId()) {
+                userClubs.add(bc);
+                break;
+            }
         }
     }
 

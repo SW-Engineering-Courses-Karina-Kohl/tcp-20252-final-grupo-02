@@ -2,13 +2,9 @@ package design.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
-
-import data.CardData;
-import data.CardFilter;
 import design.view.components.ButtonComponent;
 import data.Constants;
-import design.view.components.CardComponent;
+
 
 public class HomeScreen extends JFrame {
 
@@ -16,6 +12,9 @@ public class HomeScreen extends JFrame {
     public JButton btnMyGroups;
     public JButton btnShowMyGroups;
     public JButton btnEnterGroup;
+    private JPanel firstCardPanel;
+    private JScrollPane firstScrollPane;
+    private JPanel secondCardPanel;
 	
     public HomeScreen() {
         setTitle("Home Screen");
@@ -28,21 +27,12 @@ public class HomeScreen extends JFrame {
         mainContainer.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         // ============================================================
-        CardFilter cardFilter = new CardFilter();
 
-        List<CardData> firstCards = cardFilter.getFilteredCards(Constants.CSV_PATHS[1]);
-
-        JPanel firstCardPanel = new JPanel();
-        firstCardPanel.setLayout(new GridLayout(0, 2, 10, 10)); // Uma coluna, varias linhas
+        firstCardPanel = new JPanel();
+        firstCardPanel.setLayout(new GridLayout(0, 2, 10, 10));// Uma coluna, varias linhas
         firstCardPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 
-        for (CardData cardData : firstCards) {
-            CardComponent card = new CardComponent();
-            card.setData(cardData.getGroup(), cardData.getInfo(), cardData.getDate(), cardData.getformat());
-            firstCardPanel.add(card);
-        }
-
-        JScrollPane firstScrollPane = new JScrollPane(firstCardPanel);
+        firstScrollPane = new JScrollPane(firstCardPanel);
         firstScrollPane.getVerticalScrollBar().setUnitIncrement(16); // velocidade de scroll
         firstScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         firstScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -83,17 +73,10 @@ public class HomeScreen extends JFrame {
         buttonsContainer.add(btnEnterGroup);
         buttonsContainer.add(Box.createVerticalGlue());
 
-        List<CardData> secondCards = cardFilter.getFilteredCards(Constants.CSV_PATHS[0]);
 
-        JPanel secondCardPanel = new JPanel();
+        secondCardPanel = new JPanel();
         secondCardPanel.setLayout(new GridLayout(0, 2, 20, 20)); // 2 colunas, sem scroll lateral
         secondCardPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
-
-        for (CardData cardData : secondCards) {
-            CardComponent card = new CardComponent();
-            card.setData(cardData.getGroup(), cardData.getInfo(), cardData.getDate(), cardData.getformat());
-            secondCardPanel.add(card);
-        }
 
         JScrollPane secondScrollPane = new JScrollPane(secondCardPanel);
         secondScrollPane.getVerticalScrollBar().setUnitIncrement(16); // velocidade de scroll
@@ -110,5 +93,50 @@ public class HomeScreen extends JFrame {
         mainContainer.add(secondContainer);
         add(mainContainer);
     }
+
+    // converte BookClub -> CardComponent e popula painel
+    public void populateMyGroups(java.util.List<com.model.BookClub> myClubs) {
+    
+        for (com.model.BookClub bc : myClubs) {
+         design.view.components.CardComponent card = new design.view.components.CardComponent();
+            // adapte os getters conforme seu CardComponent espera:
+            // por exemplo: card.setData(groupName, info, date, format)
+            String groupName = bc.getName();
+            String info = "Membros: " + bc.getParticipants().size();
+         String date = ""; // se tiver data relevante
+         String format = ""; // qualquer formatação que usar
+
+            card.setData(groupName, info, date, format);
+            firstCardPanel.add(card);
+        }
+        firstCardPanel.revalidate();
+        firstCardPanel.repaint();
+        
+    }
+
+    public void populateGeneralFeed(java.util.List<com.model.BookClub> allClubs, com.model.User loggedUser) {
+        secondCardPanel.removeAll(); // limpa antes de popular
+
+        for (com.model.BookClub bc : allClubs) {
+            // ignora os grupos do próprio usuário
+            if (bc.getCreator().getId() == loggedUser.getId() || bc.getParticipants().contains(loggedUser)) {
+                continue;
+            }
+
+            design.view.components.CardComponent card = new design.view.components.CardComponent();
+            String groupName = bc.getName();
+            String info = "Membros: " + bc.getParticipants().size();
+            String date = "";   // ou alguma data relevante
+            String format = ""; // ou alguma info de formato
+
+            card.setData(groupName, info, date, format);
+            secondCardPanel.add(card);
+        }
+
+        secondCardPanel.revalidate();
+        secondCardPanel.repaint();
+    }
+
+
 
 }

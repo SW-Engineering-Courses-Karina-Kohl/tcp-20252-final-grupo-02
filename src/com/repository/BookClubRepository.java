@@ -2,8 +2,7 @@ package com.repository;
 
 import com.model.BookClub;
 
-import com.model.Meeting;
-import com.model.Poll;
+
 import com.model.User;
 import com.service.UserService;
 

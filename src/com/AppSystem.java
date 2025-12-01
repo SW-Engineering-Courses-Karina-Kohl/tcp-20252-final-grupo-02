@@ -1,24 +1,12 @@
 package com;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.io.IOException;
-import java.io.File;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import org.tinylog.Logger;
 
 
 import com.model.Book;
 import com.model.BookClub;
-import com.model.BookPoll;
-import com.model.DatePoll;
-import com.model.Meeting;
-import com.model.Poll;
-import com.model.User;
 import com.service.*;
 
 import design.view.LoginScreen;
@@ -27,11 +15,6 @@ import design.view.RegistrationScreen;
 public class AppSystem {
     
     private RegistrationScreen regScreen;
-    private ArrayList<User> users;
-    private ArrayList<Book> books;
-	private ArrayList<BookClub> bookClubs;
-	private ArrayList<Meeting> meetings;
-	private ArrayList<Poll> polls;
     private UserService userService;
 	private BookService bookService;
     private PollService pollService;
@@ -40,7 +23,7 @@ public class AppSystem {
 
 
     public AppSystem(RegistrationScreen regScreen) {
-        this.users = new ArrayList<User>();
+        //this.users = new ArrayList<User>();
         //this.bookClubs = new ArrayList<BookClub>();
         this.bookService = new BookService();
         this.meetingService = new MeetingService();
@@ -48,18 +31,10 @@ public class AppSystem {
         this.regScreen = regScreen;
         this.userService = new UserService();
 
-        //initController();
-        // Carrega os arrays com os arquivos toda vez que o programa é iniciado
-
 
     }
 
     public AppSystem() {
-        this.users = new ArrayList<User>();
-        this.books = new ArrayList<Book>();
-        this.bookClubs = new ArrayList<BookClub>();
-        this.meetings = new ArrayList<Meeting>();
-        this.polls = new ArrayList<Poll>();
         this.userService = new UserService();
 
         //this.bookClubs = new ArrayList<BookClub>();
@@ -133,6 +108,12 @@ public class AppSystem {
         pollService.createPollForBookClub(club, type, question, options);
         
     }
+ 
+    public void createDatePoll(BookClub club, String type, String question, ArrayList<String> options) {
+        
+        pollService.createPollForBookClub(club,type, question, options);
+    }
+
 
     // Chamada de BookService 
     public ArrayList<Book> getBooks() {
