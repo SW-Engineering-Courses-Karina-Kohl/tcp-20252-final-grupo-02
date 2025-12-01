@@ -2,13 +2,9 @@ package design.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
-
-import data.CardData;
-import data.CardFilter;
 import design.view.components.ButtonComponent;
 import data.Constants;
-import design.view.components.CardComponent;
+
 
 public class HomeScreen extends JFrame {
 

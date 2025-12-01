@@ -18,7 +18,7 @@ public class CardFilter {
 
                 String[] data = line.split(",");
 
-                if (data.length < 6) { // magic number ::)
+                if (data.length < 6) { 
                     continue; 
                 }
                 String group = data[1].trim();

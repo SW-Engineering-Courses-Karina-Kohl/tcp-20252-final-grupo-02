@@ -6,7 +6,6 @@ import com.service.BookClubService;
 import design.view.GroupCreationScreen;
 
 import javax.swing.*;
-import java.util.ArrayList;
 
 public class GroupCreationController {
 

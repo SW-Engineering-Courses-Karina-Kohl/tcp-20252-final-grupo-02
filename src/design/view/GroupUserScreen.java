@@ -2,29 +2,22 @@ package design.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 
-import data.CardData;
-import data.CardFilter;
 import design.view.components.BackButtonComponent;
 import design.view.components.ButtonComponent;
 import data.Constants;
 import design.view.components.CardComponent;
 
-import design.view.GroupCreationScreen;
 
 public class GroupUserScreen extends JFrame{
     
     public JButton btnManage;
     public JButton btnCreateNewGroup;
     public JButton btnBackButton;
-    private com.model.User loggedUser;
-    private com.service.BookClubService clubService;
+    
 
     public GroupUserScreen(com.model.User loggedUser, com.service.BookClubService clubService){
-        this.loggedUser = loggedUser;
-        this.clubService = clubService;
-
+        
         setTitle("Group User Screen");
         setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,7 +30,6 @@ public class GroupUserScreen extends JFrame{
         main.setBounds(0, 10, getWidth(), getHeight());
         main.setOpaque(false);
 
-        CardFilter cardFilter = new CardFilter();
         java.util.List<com.model.BookClub> userGroups = clubService.getClubsForUser(loggedUser);
     
         JPanel CardPanel = new JPanel();

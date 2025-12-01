@@ -1,6 +1,5 @@
 package com;
 
-import javax.swing.JFrame;
 
 import design.view.FeedScreen;
 import design.view.GroupUserScreen;

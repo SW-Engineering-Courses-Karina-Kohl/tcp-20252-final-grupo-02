@@ -15,13 +15,10 @@ import data.Constants;
 public class FeedScreen extends JFrame {
 
     public JButton btnBackButton;
-    private User loggedUser;
-    private BookClubService clubService;
+    
 
     public FeedScreen(User loggedUser, BookClubService clubService) {
-        this.loggedUser = loggedUser;
-        this.clubService = clubService;
-
+        
         setTitle("Feed Screen");
         setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
