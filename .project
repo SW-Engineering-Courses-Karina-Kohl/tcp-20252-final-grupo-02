@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< Updated upstream
 	<name>Bookly</name>
+=======
+	<name>tcp-20252-final-grupo-02</name>
+>>>>>>> Stashed changes
 	<comment></comment>
 	<projects>
 	</projects>
@@ -14,6 +18,7 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+<<<<<<< Updated upstream
 	<filteredResources>
 		<filter>
 			<id>1762198965541</id>
@@ -25,4 +30,6 @@
 			</matcher>
 		</filter>
 	</filteredResources>
+=======
+>>>>>>> Stashed changes
 </projectDescription>

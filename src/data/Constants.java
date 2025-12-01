@@ -42,5 +42,26 @@ public class Constants {
         LOAGING_HEIGHT = (int) Math.round(SCREEN_WIDTH * 0.4);
         
     }
+<<<<<<< Updated upstream:src/data/Constants.java
     
+=======
+
+    public static final String FONT_PATH = "tcp-20252-final-grupo/src/design/font/Excalifont-Regular.otf";
+    public static final String LOADING_GIF_PATH = "tcp-20252-final-grupo/src/design/view/assets/loading.gif";
+    public static final String[] CSV_PATHS = {
+        "src/data/files/HomeContent.csv",
+        "src/data/files/UserContent.csv",
+        "src/data/files/Pending.csv"
+    };
+
+    public static final int BUTTON_WIDTH = 150;
+    public static final int BUTTON_HEIGHT = 40;
+    public static final int CARD_WIDTH = 300;
+    public static final int CARD_HEIGHT = 150;
+    public static final int DIMENSION_FIELD_WIDTH = 350;
+    public static final int DIMENSION_FIELD_HEIGHT = 40;
+    public static final int BACK_BUTTON_SIZE = 40;
+    public static final int BACK_BUTTON_BOUND_X;
+    public static final int BACK_BUTTON_BOUND_Y = 60;
+>>>>>>> Stashed changes:tcp-20252-final-grupo/src/data/Constants.java
 }
