@@ -39,98 +39,91 @@ public class GroupCreationController {
 
     private void criarGrupo() {
 
-        String name = view.txtGroupName.getText();
-        String b1 = view.txtBook1.getText();
-        String b2 = view.txtBook2.getText();
+    String name = view.txtGroupName.getText();
+    String b1 = view.txtBook1.getText();
+    String b2 = view.txtBook2.getText();
 
-        if (name.isEmpty() || b1.isEmpty() || b2.isEmpty() 
-            || view.txtDate1.getDate() == null 
-            || view.txtDate2.getDate() == null 
-            || (!view.rbtnOnline.isSelected() && !view.rbtnPresential.isSelected())) {
+    if (name.isEmpty() || b1.isEmpty() || b2.isEmpty() 
+        || view.txtDate1.getDate() == null 
+        || view.txtDate2.getDate() == null 
+        || (!view.rbtnOnline.isSelected() && !view.rbtnPresential.isSelected())) {
 
-            JOptionPane.showMessageDialog(view,
-                    "Por favor preencha todos os campos.",
-                    "Erro",
-                    JOptionPane.ERROR_MESSAGE);
-                return;
+        JOptionPane.showMessageDialog(view,
+         "Por favor preencha todos os campos.",
+         "Erro",
+        JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    if (b1.equals(b2)) {
+        JOptionPane.showMessageDialog(view, "Os dois livros não podem ser os mesmos.", "Erro", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    boolean foundBook1 = false;
+    boolean foundBook2 = false;
+
+    try (BufferedReader br = new BufferedReader(new FileReader("src/data/files/Books.csv"))) {
+
+        String linha;
+
+        while ((linha = br.readLine()) != null) {
+            String[] campos = linha.split(",");
+
+            if (campos[0].equals(b1)) {
+                foundBook1 = true;
             }
 
-        BookClub newClub = clubService.createClub(loggedUser, name);
-        
-        if (newClub == null) {
-                JOptionPane.showMessageDialog(view,
-                "Já existe um grupo com esse nome.",
-                "Erro",
-                JOptionPane.ERROR_MESSAGE);
-                return;
-                }
-                if (b1.equals(b2)) {
-    		
-    		        JOptionPane.showMessageDialog(view, "Os dois livros não podem ser os mesmos.", "Erro", JOptionPane.ERROR_MESSAGE);
-    		
-    		        return;
-    		
-    	        }    
-                else {
-    		
-           	    try (BufferedReader br = new BufferedReader(new FileReader("tcp-20252-final-grupo/src/data/files/Books.csv"))) {
-                
-        		    String linha;
-        		    boolean foundBook1 = false, foundBook2 = false;
-
-                    while ((linha = br.readLine()) != null) {
-                	
-                        String[] campos = linha.split(","); // separação por vírgula
-
-                        if (campos[0].equals(b1)) {
-                    	
-                    	    foundBook1 = true;
-                    	
-                        }
-                    
-                        if (campos[0].equals(b2)) {
-                    	
-                            foundBook2 = true;
-                    	
-                        }
-                    
-                    }
-                
-                    if ((foundBook1 == false) || (foundBook2 == false)) {
-               		
-            		    JOptionPane.showMessageDialog(view, "Um dos dois livros não foram encontrados no banco de dados.", "Erro", JOptionPane.ERROR_MESSAGE);
-            		
-            		    return;
-               		
-               	    }
-
-                }
-                catch (IOException ex) {
-                    System.err.println("Erro ao ler o arquivo: " + ex.getMessage());
-                }
-                    
-           	
-           	System.out.println("!!!");
-    
-            ArrayList<String> bookOptions = new ArrayList<>();
-            bookOptions.add(view.txtBook1.getText());
-            bookOptions.add(view.txtBook2.getText());
-            pollService.createPollForBookClub(newClub, "BOOK", "Qual livro ler primeiro?", bookOptions);
-
-    
-            ArrayList<String> dateOptions = new ArrayList<>();
-            dateOptions.add(view.txtDate1.getDate().toString());
-            dateOptions.add(view.txtDate2.getDate().toString());
-            pollService.createPollForBookClub(newClub, "DATE", "Qual data para o encontro?", dateOptions);
-
-
-            JOptionPane.showMessageDialog(view, "Grupo criado com sucesso!");
-
-            view.dispose();
-            new design.view.GroupUserScreen(loggedUser, clubService).setVisible(true);
-        
+            if (campos[0].equals(b2)) {
+                foundBook2 = true;
+            }
         }
+
+    } 
+    catch (IOException ex) {
+        JOptionPane.showMessageDialog(view,
+        "Erro ao ler o banco de dados de livros:\n" + ex.getMessage(),
+        "Erro",
+        JOptionPane.ERROR_MESSAGE);
+        return;
     }
+
+    if (!foundBook1 || !foundBook2) {
+        JOptionPane.showMessageDialog(view,
+        "Um dos dois livros não está no banco de dados.",
+        "Erro",
+        JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    BookClub newClub = clubService.createClub(loggedUser, name);
+
+    if (newClub == null) {
+        JOptionPane.showMessageDialog(view,
+        "Já existe um grupo com esse nome.",
+        "Erro",
+        JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    System.out.println("!!!");
+
+    ArrayList<String> bookOptions = new ArrayList<>();
+    bookOptions.add(view.txtBook1.getText());
+    bookOptions.add(view.txtBook2.getText());
+    pollService.createPollForBookClub(newClub, "BOOK", "Qual livro ler primeiro?", bookOptions);
+
+    ArrayList<String> dateOptions = new ArrayList<>();
+    dateOptions.add(view.txtDate1.getDate().toString());
+    dateOptions.add(view.txtDate2.getDate().toString());
+    pollService.createPollForBookClub(newClub, "DATE", "Qual data para o encontro?", dateOptions);
+
+    JOptionPane.showMessageDialog(view, "Grupo criado com sucesso!");
+
+    view.dispose();
+    new design.view.GroupUserScreen(loggedUser, clubService).setVisible(true);
+}
+
 
     private void voltar() {
         view.dispose();
