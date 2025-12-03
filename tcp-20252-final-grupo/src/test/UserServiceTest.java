@@ -52,6 +52,7 @@ public class UserServiceTest {
 
     @Test
     public void autoIncrementalIdTest() throws IOException {
+    	
         resetFile();
 
         UserService service = new UserService();
@@ -66,7 +67,7 @@ public class UserServiceTest {
 
         assertNotNull(u);
         assertEquals(3, u.getId());
-        assertEquals("Roberto", u.getName());
-        assertEquals("Carlos", u.getSurname());
+        assertEquals("Ana", u.getName());
+        assertEquals("Maria", u.getSurname());
 }
 }
