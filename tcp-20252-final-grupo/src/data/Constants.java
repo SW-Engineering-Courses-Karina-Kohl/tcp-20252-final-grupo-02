@@ -40,8 +40,8 @@ public class Constants {
         LOAGING_HEIGHT = (int) Math.round(SCREEN_WIDTH * 0.4);
     }
 
-    public static final String FONT_PATH = "src/design/font/Excalifont-Regular.otf";
-    public static final String LOADING_GIF_PATH = "src/design/view/assets/loading.gif";
+    public static final String FONT_PATH = "tcp-20252-final-grupo/src/design/font/Excalifont-Regular.otf";
+    public static final String LOADING_GIF_PATH = "tcp-20252-final-grupo/src/design/view/assets/loading.gif";
     public static final String[] CSV_PATHS = {
         "src/data/files/HomeContent.csv",
         "src/data/files/UserContent.csv",

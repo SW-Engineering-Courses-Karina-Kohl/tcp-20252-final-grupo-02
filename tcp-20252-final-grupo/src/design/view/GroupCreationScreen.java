@@ -2,7 +2,9 @@ package design.view;
 
 import javax.swing.*;
 import java.awt.*;
-
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 import data.Constants;
 import design.view.components.ButtonComponent;
@@ -123,16 +125,21 @@ public class GroupCreationScreen extends JFrame {
                 JOptionPane.showMessageDialog(this, "Por favor, termine de preencher todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }else{
-                // demais validações chamar outra classe
-                System.out.println(txtDate1.getDate());
-                System.out.println(txtDate2.getDate());
-            }
+            	
+            	
+            		
+            	}
+	
+            
         });
 
         btnAddBook.addActionListener(e -> {
-           GroupCreationScreen.this.dispose();
-           AddBookScreen addBookScreen = new AddBookScreen(loggedUser, clubService);
-           addBookScreen.setVisible(true);
+        	
+        	GroupCreationScreen.this.dispose();
+        	
+        	AddBookScreen addBookScreen = new AddBookScreen(loggedUser, clubService);
+        	addBookScreen.setVisible(true);
+        	
         });
 
         group.add(rbtnPresential);
