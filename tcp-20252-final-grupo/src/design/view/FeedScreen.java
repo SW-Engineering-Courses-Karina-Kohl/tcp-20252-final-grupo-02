@@ -57,7 +57,7 @@ public class FeedScreen extends JFrame {
                 );
 
                 if (option == JOptionPane.YES_OPTION) {
-                    club.getParticipants().add(loggedUser);
+                    clubService.joinClub(club, loggedUser);
                     JOptionPane.showMessageDialog(this,
                             "Você entrou no grupo " + club.getName() + "!");
                     

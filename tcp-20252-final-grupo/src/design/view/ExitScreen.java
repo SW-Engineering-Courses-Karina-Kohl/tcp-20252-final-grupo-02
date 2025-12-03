@@ -54,13 +54,13 @@ public class ExitScreen extends JFrame {
                     String enteredCode = txtCodeConfirm.getText();
                     if (enteredCode.equals(codeConfirm) && rbYes.isSelected()) {
                         System.out.println("Saindo do grupo: " + group);
-                        // Lógica para sair do grupo
-                        
+                        clubService.leaveClub(group, loggedUser);
+
                         ExitScreen.this.dispose();
-            			
                         HomeScreen homeScreen = new HomeScreen();
-                        HomeController homeScreenController = new HomeController(homeScreen, loggedUser, clubService);
+                        new HomeController(homeScreen, loggedUser, clubService);
                         homeScreen.setVisible(true);
+
                         
                     } else {
                         JOptionPane.showMessageDialog(this, "Código incorreto ou opção não selecionada.", "Erro", JOptionPane.ERROR_MESSAGE);

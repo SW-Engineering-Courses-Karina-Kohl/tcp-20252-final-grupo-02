@@ -45,11 +45,38 @@ public class GroupManagementScreen extends JFrame {
             // System.out.println("Criar nova votação para o grupo: " + groupName);
         });
         btnDeleteGroup.addActionListener(e -> {
-            // Lógica para deletar o grupo
-            GroupManagementScreen.this.dispose();
-            DeleteGroupScreen deleteGroupScreen = new DeleteGroupScreen(groupName, loggedUser, clubService);
-            deleteGroupScreen.setVisible(true);
+
+            int option = JOptionPane.showConfirmDialog(
+                this,
+                "Tem certeza que deseja deletar o grupo \"" + groupName + "\"?",
+                "Confirmar Exclusão",
+                JOptionPane.YES_NO_OPTION
+            );
+
+            if (option == JOptionPane.YES_OPTION) {
+                
+                com.model.BookClub club = clubService.getAllClubs()
+                .stream()
+                .filter(c -> c.getName().equals(groupName))
+                .findFirst()
+                .orElse(null);
+
+                clubService.deleteClub(club);
+
+                JOptionPane.showMessageDialog(
+                this,
+                "Grupo deletado com sucesso!",
+                "Sucesso", 
+                JOptionPane.INFORMATION_MESSAGE
+                );
+
+                dispose();
+                GroupUserScreen gus = new GroupUserScreen(loggedUser, clubService);
+                new GroupUserScreenController(gus, loggedUser, clubService);
+                gus.setVisible(true);
+            }
         });
+
 
         JPanel container = new JPanel();
         container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));

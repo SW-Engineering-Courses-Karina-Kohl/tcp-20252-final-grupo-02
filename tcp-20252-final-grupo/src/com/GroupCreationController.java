@@ -3,7 +3,10 @@ package com;
 import com.model.User;
 import com.model.BookClub;
 import com.service.BookClubService;
+
 import design.view.GroupCreationScreen;
+
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -12,12 +15,14 @@ public class GroupCreationController {
     private GroupCreationScreen view;
     private User loggedUser;
     private BookClubService clubService;
+    
+    
 
     public GroupCreationController(GroupCreationScreen view, User loggedUser, BookClubService clubService) {
         this.view = view;
         this.loggedUser = loggedUser;
         this.clubService = clubService;
-
+        
         initController();
     }
 
@@ -53,7 +58,7 @@ public class GroupCreationController {
                     "Erro",
                     JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        }      
 
         JOptionPane.showMessageDialog(view, "Grupo criado com sucesso!");
 

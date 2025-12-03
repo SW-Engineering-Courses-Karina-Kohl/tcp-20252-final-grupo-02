@@ -56,31 +56,52 @@ public class BookClubService {
 
         return newClub;
     }
+    public void joinClub(BookClub club, User user) {
+        if (!club.getParticipants().contains(user)) {
+            club.getParticipants().add(user);
+            repo.saveAll(clubs); 
+        }
+    }
+    
+    public void deleteClub(BookClub club) {
+        clubs.remove(club);
+        club.getCreator().getCreatedBookClubs().remove(club);
+        repo.saveAll(clubs);
+    }
 
-
+    public void leaveClub(String clubName, User user) {
+        for (BookClub bc : clubs) {
+            if (bc.getName().equals(clubName)) {
+                bc.getParticipants().removeIf(u -> u.getId() == user.getId());
+                repo.saveAll(clubs); 
+                return;
+            }
+        }
+    }   
+    
     public ArrayList<BookClub> getAllClubs() {
         return clubs;
     }
-
+   
     public ArrayList<BookClub> getClubsForUser(User u) {
         ArrayList<BookClub> userClubs = new ArrayList<>();
 
         for (BookClub bc : clubs) {
-        if (bc.getParticipants().contains(u) || bc.getCreator().getId() == u.getId()) {
-            userClubs.add(bc);
-            continue;
-        }
-
-        for (User p: bc.getParticipants()) {
-            if (p.getId() == u.getId()) {
+            if (bc.getParticipants().contains(u) || bc.getCreator().getId() == u.getId()) {
                 userClubs.add(bc);
-                break;
+                continue;
+            }
+
+            for (User p: bc.getParticipants()) {
+                if (p.getId() == u.getId()) {
+                    userClubs.add(bc);
+                    break;
+                }
             }
         }
-    }
 
-    return userClubs;
-}
+        return userClubs;
+    }
 
 
     
