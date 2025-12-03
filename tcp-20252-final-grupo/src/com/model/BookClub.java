@@ -142,14 +142,13 @@ public class BookClub {
 			participantsCsv += u.getId();
 		}
 
-		// guarda a lista de IDs das votações
+	
 		String pollsCsv = "";
 		for (Poll p : polls) {
 			if (!pollsCsv.isEmpty()) pollsCsv += ";";
 			pollsCsv += p.getId();
 		}
 
-		// o mesmo para as meetings
 		String meetingsCsv = "";
 		for (Meeting m : meetings) {
 			if (!meetingsCsv.isEmpty()) meetingsCsv += ";";
