@@ -2,6 +2,7 @@ package design.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.BufferedWriter;
 
 import design.view.components.TextField;
 import design.view.components.ButtonComponent;
@@ -127,6 +128,11 @@ public class AddBookScreen extends JFrame {
 		
 		btnCadastrar.addActionListener(e -> {
 			
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("tcp-20252-final-grupo/src/data/files/Books.csv", true))) {
+	            writer.write(txtTitle.getText() + ", " + txtAuthor.getText() + ", " + txtISBN.getText() + ", " + txtYear.getText() + ", " + txtGenre.getText() + ", " + txtPages.getText() + "\n");
+	        }   catch (IOException ex) {
+	                ex.printStackTrace();
+	            }
 			AddBookScreen.this.dispose();
 			GroupCreationScreen screen = new GroupCreationScreen(loggedUser, clubService);
             new com.GroupCreationController(screen, loggedUser, clubService);
