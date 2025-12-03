@@ -119,19 +119,18 @@ public class AddBookScreen extends JFrame {
 		btnBackButton.addActionListener(e -> {
 			
 			AddBookScreen.this.dispose();
-			
-			GroupCreationScreen groupCreationScreen = new GroupCreationScreen(loggedUser, clubService);
-			groupCreationScreen.setVisible(true);
+            GroupCreationScreen screen = new GroupCreationScreen(loggedUser, clubService);
+            new com.GroupCreationController(screen, loggedUser, clubService);
+            screen.setVisible(true);
 
 		});
 		
 		btnCadastrar.addActionListener(e -> {
 			
 			AddBookScreen.this.dispose();
-			
-			GroupCreationScreen groupCreationScreen = new GroupCreationScreen(loggedUser, clubService);
-			groupCreationScreen.setVisible(true);
-
+			GroupCreationScreen screen = new GroupCreationScreen(loggedUser, clubService);
+            new com.GroupCreationController(screen, loggedUser, clubService);
+            screen.setVisible(true);
 		});
         
     }
