@@ -3,6 +3,7 @@ package com;
 import com.model.User;
 import com.model.BookClub;
 import com.service.BookClubService;
+import com.service.PollService;
 
 import design.view.GroupCreationScreen;
 
@@ -15,7 +16,8 @@ public class GroupCreationController {
     private GroupCreationScreen view;
     private User loggedUser;
     private BookClubService clubService;
-    
+    private PollService pollService = new PollService();
+
     
 
     public GroupCreationController(GroupCreationScreen view, User loggedUser, BookClubService clubService) {
@@ -58,7 +60,20 @@ public class GroupCreationController {
                     "Erro",
                     JOptionPane.ERROR_MESSAGE);
             return;
-        }      
+        } 
+        
+    
+        ArrayList<String> bookOptions = new ArrayList<>();
+        bookOptions.add(view.txtBook1.getText());
+        bookOptions.add(view.txtBook2.getText());
+        pollService.createPollForBookClub(newClub, "BOOK", "Qual livro ler primeiro?", bookOptions);
+
+    
+        ArrayList<String> dateOptions = new ArrayList<>();
+        dateOptions.add(view.txtDate1.getDate().toString());
+        dateOptions.add(view.txtDate2.getDate().toString());
+        pollService.createPollForBookClub(newClub, "DATE", "Qual data para o encontro?", dateOptions);
+
 
         JOptionPane.showMessageDialog(view, "Grupo criado com sucesso!");
 

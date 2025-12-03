@@ -1,0 +1,3 @@
+id;clubId;type;question;options;votes
+1;1;BOOK;Qual livro ler primeiro?;livro 1,livro 2;0,0
+2;1;DATE;Qual data para o encontro?;Tue Dec 02 23:18:21 GMT-03:00 2025,Wed Dec 03 11:18:00 GMT-03:00 2025;0,0
