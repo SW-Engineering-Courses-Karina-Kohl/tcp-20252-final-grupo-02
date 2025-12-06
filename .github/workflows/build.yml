@@ -1,0 +1,59 @@
+name: SonarCloud
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Fazer checkout do código
+        uses: actions/checkout@v3
+
+      - name: Instalar Java 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: "17"
+          distribution: "temurin"
+
+      - name: Instalar JUnit 5 e tinylog
+        run: |
+          mkdir -p lib
+          curl -L -o lib/junit-platform-console-standalone.jar \
+            https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-console-standalone/1.10.2/junit-platform-console-standalone-1.10.2.jar
+          curl -L -o lib/tinylog-api-2.7.0.jar \
+            https://repo1.maven.org/maven2/org/tinylog/tinylog-api/2.7.0/tinylog-api-2.7.0.jar
+          curl -L -o lib/tinylog-impl-2.7.0.jar \
+            https://repo1.maven.org/maven2/org/tinylog/tinylog-impl/2.7.0/tinylog-impl-2.7.0.jar
+
+      - name: Compilar testes
+        run: |
+          mkdir -p bin
+          find src -name "*.java" > sources.txt
+          javac -cp "lib/junit-platform-console-standalone.jar:lib/tinylog-api-2.7.0.jar:lib/tinylog-impl-2.7.0.jar" -d bin @sources.txt
+
+
+
+      - name: Rodar testes
+        run: |
+          java -Dtinylog.configuration=config/tinylog.properties \
+            -jar lib/junit-platform-console-standalone.jar \
+            --class-path "out:src/resources:lib/tinylog-api-2.7.0.jar:lib/tinylog-impl-2.7.0.jar" \
+            --scan-class-path
+
+      - name: Fix GitHub cache deprecation
+        run: |
+          echo "ACTIONS_CACHE_URL=${ACTIONS_CACHE_URL}" >> $GITHUB_ENV
+          echo "ACTIONS_RESULTS_URL=${ACTIONS_RESULTS_URL}" >> $GITHUB_ENV
+          
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_SECRET }}       
