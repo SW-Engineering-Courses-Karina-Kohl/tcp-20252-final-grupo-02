@@ -42,9 +42,9 @@ public class Constants {
         LOAGING_HEIGHT = (int) Math.round(SCREEN_WIDTH * 0.4);
         
     }
-<<<<<<< Updated upstream:src/data/Constants.java
+// <<<<<<< Updated upstream:src/data/Constants.java
     
-=======
+// =======
 
     public static final String FONT_PATH = "tcp-20252-final-grupo/src/design/font/Excalifont-Regular.otf";
     public static final String LOADING_GIF_PATH = "tcp-20252-final-grupo/src/design/view/assets/loading.gif";
@@ -63,5 +63,5 @@ public class Constants {
     public static final int BACK_BUTTON_SIZE = 40;
     public static final int BACK_BUTTON_BOUND_X;
     public static final int BACK_BUTTON_BOUND_Y = 60;
->>>>>>> Stashed changes:tcp-20252-final-grupo/src/data/Constants.java
+// >>>>>>> Stashed changes:tcp-20252-final-grupo/src/data/Constants.java
 }
