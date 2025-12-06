@@ -1,58 +1,19 @@
-name: SonarCloud Scan
-
+name: Build
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
     types: [opened, synchronize, reopened]
-
 jobs:
-  analyze:
-    name: Build & Analyze
+  sonarqube:
+    name: SonarQube
     runs-on: ubuntu-latest
-
     steps:
-      # Checkout
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-
-      # Instala JDK 17
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      # Baixar dependências externas (JUnit + tinylog)
-      - name: Download dependencies
-        run: |
-          mkdir -p lib
-          curl -L -o lib/junit-platform-console-standalone.jar \
-            https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-console-standalone/1.10.2/junit-platform-console-standalone-1.10.2.jar
-          
-          curl -L -o lib/tinylog-api-2.7.0.jar \
-            https://repo.maven.apache.org/maven2/org/tinylog/tinylog-api/2.7.0/tinylog-api-2.7.0.jar
-          
-          curl -L -o lib/tinylog-impl-2.7.0.jar \
-            https://repo.maven.apache.org/maven2/org/tinylog/tinylog-impl/2.7.0/tinylog-impl-2.7.0.jar
-
-      # Compilar código Java
-      - name: Compile Java sources
-        run: |
-          mkdir -p bin
-          javac -cp "lib/junit-platform-console-standalone.jar:lib/tinylog-api-2.7.0.jar:lib/tinylog-impl-2.7.0.jar" \
-                -d bin $(find src -name "*.java")
-
-      # (Opcional) Rodar testes - só se quiser
-      # - name: Run JUnit tests
-      #   run: |
-      #     java -jar lib/junit-platform-console-standalone.jar -cp bin --scan-classpath
-
-      # Adicionar credenciais do SonarCloud
-     - name: SonarCloud Scan
-            uses: SonarSource/sonarcloud-github-action@v2
-            env:
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              SONAR_TOKEN: ${{ secrets.SONAR_SECRET }}       
-
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v6
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
