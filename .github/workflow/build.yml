@@ -1,4 +1,5 @@
-name: Build
+name: SonarCloud
+
 on:
   push:
     branches:
@@ -6,7 +7,6 @@ on:
   pull_request:
     branches:
       - main
-jobs:
 
 jobs:
   build:
@@ -32,11 +32,13 @@ jobs:
           curl -L -o lib/tinylog-impl-2.7.0.jar \
             https://repo1.maven.org/maven2/org/tinylog/tinylog-impl/2.7.0/tinylog-impl-2.7.0.jar
 
-      - name: Compilar código
+      - name: Compilar testes
         run: |
           mkdir -p bin
           find src -name "*.java" > sources.txt
           javac -cp "lib/junit-platform-console-standalone.jar:lib/tinylog-api-2.7.0.jar:lib/tinylog-impl-2.7.0.jar" -d bin @sources.txt
+
+
 
       - name: Rodar testes
         run: |
@@ -44,14 +46,14 @@ jobs:
             -jar lib/junit-platform-console-standalone.jar \
             --class-path "out:src/resources:lib/tinylog-api-2.7.0.jar:lib/tinylog-impl-2.7.0.jar" \
             --scan-class-path
-  sonarqube:
-    name: SonarQube
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v6
+
+      - name: Fix GitHub cache deprecation
+        run: |
+          echo "ACTIONS_CACHE_URL=${ACTIONS_CACHE_URL}" >> $GITHUB_ENV
+          echo "ACTIONS_RESULTS_URL=${ACTIONS_RESULTS_URL}" >> $GITHUB_ENV
+          
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_SECRET }}       
